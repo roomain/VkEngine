@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\capabilities">
+      <UniqueIdentifier>{5149d8a2-73bf-41ca-bcfe-ed3963f089e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\capabilities">
+      <UniqueIdentifier>{d2b8e8e8-a5fc-4c83-878b-ebe5b8d45660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\vkEnumVSstring">
+      <UniqueIdentifier>{1e285699-30d9-4f42-bc70-185e6abdea79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Context">
+      <UniqueIdentifier>{bf42740c-0409-42bb-9eed-45d09d45ccad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="enginecore_globals.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CapabilitiesVisitor.h">
+      <Filter>Fichiers d%27en-tête\capabilities</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanCapabilities.h">
+      <Filter>Fichiers d%27en-tête\capabilities</Filter>
+    </ClInclude>
+    <ClInclude Include="StringToVkEnum.h">
+      <Filter>Fichiers d%27en-tête\vkEnumVSstring</Filter>
+    </ClInclude>
+    <ClInclude Include="VkEnumToString.h">
+      <Filter>Fichiers d%27en-tête\vkEnumVSstring</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginContext.h">
+      <Filter>Fichiers d%27en-tête\Context</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="CapabilitiesVisitor.cpp">
+      <Filter>Fichiers sources\capabilities</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanCapabilities.cpp">
+      <Filter>Fichiers sources\capabilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

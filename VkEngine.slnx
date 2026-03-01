@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="EngineCore/EngineCore.vcxproj" Id="494516eb-db3f-4b40-ae1b-22949e65490b" />
+  <Project Path="Reflection/Reflection.vcxproj" Id="987a3035-3f1e-42d9-85e2-43c1ebd3fafc" />
+</Solution>

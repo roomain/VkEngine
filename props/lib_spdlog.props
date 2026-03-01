@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <SPDLOG_DIR Condition="exists('D:\libraries\spdlog')">D:\libraries\spdlog</SPDLOG_DIR>
+    <SPDLOG_DIR Condition="exists('C:\libraries\spdlog')">C:\libraries\spdlog</SPDLOG_DIR>
+    <SPDLOG_SLN_DIR>$(SPDLOG_DIR)\VS2026</SPDLOG_SLN_DIR>
+    <SPDLOG_INC>$(SPDLOG_DIR)\include</SPDLOG_INC>
+    <SPDLOG_LIB>$(SPDLOG_SLN_DIR)\$(Configuration)</SPDLOG_LIB>
+  </PropertyGroup>  
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SPDLOG_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SPDLOG_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command></Command>
+    </PostBuildEvent>    
+    <PreBuildEvent>
+      <Command>copy /Y $(SPDLOG_LIB)\*.dll $(OutDir) </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="SPDLOG_DIR">
+      <Value>$(SPDLOG_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SPDLOG_SLN_DIR">
+      <Value>$(SPDLOG_SLN_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SPDLOG_INC">
+      <Value>$(SPDLOG_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SPDLOG_LIB">
+      <Value>$(SPDLOG_LIB)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
