@@ -13,5 +13,7 @@
 #include "string_tools/string_utils.h"
 #include "VulkanCapabilities.h"
 #include "VkEnumToString.h"
+#include "VulkanInitializers.h"
+#include "VulkanShaderInitializers.h"
 
 #endif //PCH_H

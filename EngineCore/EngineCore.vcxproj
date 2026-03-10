@@ -68,12 +68,18 @@
     <Import Project="..\props\vulkan.props" />
     <Import Project="..\props\common.props" />
     <Import Project="..\props\VMA.props" />
+    <Import Project="..\props\boost.props" />
+    <Import Project="..\props\asyncplusplus.props" />
+    <Import Project="..\props\glm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\vulkan.props" />
     <Import Project="..\props\common.props" />
     <Import Project="..\props\VMA.props" />
+    <Import Project="..\props\boost.props" />
+    <Import Project="..\props\asyncplusplus.props" />
+    <Import Project="..\props\glm.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -147,14 +153,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ArrayPool.h" />
     <ClInclude Include="CapabilitiesVisitor.h" />
-    <ClInclude Include="EnginContext.h" />
+    <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="VkParallelWorker.h" />
     <ClInclude Include="enginecore_globals.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ScopedLink.h" />
     <ClInclude Include="StringToVkEnum.h" />
+    <ClInclude Include="Transformation.h" />
     <ClInclude Include="VkEnumToString.h" />
     <ClInclude Include="VulkanCapabilities.h" />
+    <ClInclude Include="VulkanInitializers.h" />
+    <ClInclude Include="VulkanShaderInitializers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CapabilitiesVisitor.cpp" />

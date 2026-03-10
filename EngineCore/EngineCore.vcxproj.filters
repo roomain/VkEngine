@@ -25,6 +25,18 @@
     <Filter Include="Fichiers d%27en-tête\Context">
       <UniqueIdentifier>{bf42740c-0409-42bb-9eed-45d09d45ccad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\initializers">
+      <UniqueIdentifier>{ea7d5a45-7e22-425d-8d29-830d0599b76b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\worker">
+      <UniqueIdentifier>{1b93335c-2836-4293-9560-a7ec716c6e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine classes">
+      <UniqueIdentifier>{aa0a5c84-1992-4da7-9193-619b51d32e67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine classes">
+      <UniqueIdentifier>{b12517ee-4fec-4adb-a154-bd3f02a15219}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -48,7 +60,25 @@
     <ClInclude Include="VkEnumToString.h">
       <Filter>Fichiers d%27en-tête\vkEnumVSstring</Filter>
     </ClInclude>
-    <ClInclude Include="EnginContext.h">
+    <ClInclude Include="Transformation.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanInitializers.h">
+      <Filter>Fichiers d%27en-tête\initializers</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanShaderInitializers.h">
+      <Filter>Fichiers d%27en-tête\initializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayPool.h">
+      <Filter>Fichiers d%27en-tête\worker</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopedLink.h">
+      <Filter>Fichiers d%27en-tête\worker</Filter>
+    </ClInclude>
+    <ClInclude Include="VkParallelWorker.h">
+      <Filter>Fichiers d%27en-tête\worker</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceContext.h">
       <Filter>Fichiers d%27en-tête\Context</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <ASYNCPP_DIR Condition="exists('D:\Libraries\asyncplusplus')">D:\Libraries\asyncplusplus</ASYNCPP_DIR>
+    <ASYNCPP_DIR Condition="exists('C:\libraries\asyncplusplus')">C:\libraries\asyncplusplus</ASYNCPP_DIR>
+    <ASYNCPP_LIB>$(ASYNCPP_DIR)\VS2026\$(Configuration)</ASYNCPP_LIB>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ASYNCPP_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(ASYNCPP_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>async++.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command></Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="ASYNCPP_VERSION">
+      <Value>$(ASYNCPP_VERSION)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ASYNCPP_DIR">
+      <Value>$(ASYNCPP_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ASYNCPP_LIB">
+      <Value>$(ASYNCPP_LIB)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
