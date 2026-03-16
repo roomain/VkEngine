@@ -117,7 +117,15 @@ struct ReflectionVisitor
 		}
 		else if constexpr (is_std_array_v<Type>)
 		{
-			//
+			if (m_data.size() < a_value.size())
+			{
+				// log
+			}
+
+			for (auto& contained : m_data)
+			{
+				// todo
+			}
 		}
 		else
 		{

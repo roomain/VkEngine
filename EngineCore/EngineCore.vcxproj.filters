@@ -37,6 +37,18 @@
     <Filter Include="Fichiers sources\Engine classes">
       <UniqueIdentifier>{b12517ee-4fec-4adb-a154-bd3f02a15219}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\exception">
+      <UniqueIdentifier>{5e697ef9-0a67-441d-87a7-ce2fdb727ea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Managers">
+      <UniqueIdentifier>{109d1947-7ae8-4fd1-8a87-c10625f13835}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Managers">
+      <UniqueIdentifier>{b11dcd68-37ed-433a-beaa-ed174c2a239a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\exception">
+      <UniqueIdentifier>{7caa437a-739f-45a2-9c4f-a8e654cb1de1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -75,11 +87,35 @@
     <ClInclude Include="ScopedLink.h">
       <Filter>Fichiers d%27en-tête\worker</Filter>
     </ClInclude>
-    <ClInclude Include="VkParallelWorker.h">
+    <ClInclude Include="EngineParallelWorker.h">
       <Filter>Fichiers d%27en-tête\worker</Filter>
     </ClInclude>
     <ClInclude Include="DeviceContext.h">
       <Filter>Fichiers d%27en-tête\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineApplication.h">
+      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDevice.h">
+      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
+    </ClInclude>
+    <ClInclude Include="QueuesManager.h">
+      <Filter>Fichiers d%27en-tête\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineRenderer.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSwapChain.h">
+      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineExceptions.h">
+      <Filter>Fichiers d%27en-tête\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineLog.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="VulkanBufferInitializers.h">
+      <Filter>Fichiers d%27en-tête\initializers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +130,24 @@
     </ClCompile>
     <ClCompile Include="VulkanCapabilities.cpp">
       <Filter>Fichiers sources\capabilities</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineApplication.cpp">
+      <Filter>Fichiers sources\Engine classes</Filter>
+    </ClCompile>
+    <ClCompile Include="QueuesManager.cpp">
+      <Filter>Fichiers sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineRenderer.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSwapChain.cpp">
+      <Filter>Fichiers sources\Engine classes</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineExceptions.cpp">
+      <Filter>Fichiers sources\exception</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineLog.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

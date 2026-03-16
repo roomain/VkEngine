@@ -1,6 +1,6 @@
 #pragma once
 /***********************************************
-* @headerfile VkParallelWorker.h
+* @headerfile EngineParallelWorker.h
 * @date 01 / 03 / 2026
 * @author Roomain
 ************************************************/
@@ -20,25 +20,26 @@ using ContextFun = std::function<void(const DeviceContext&, VkQueue&)>;
 /*@brief Use to do vulkan work in parallel
 * using common device and memory
 */
-template<typename Size>
-class VkParallelWorker
+template<size_t Size>
+class EngineParallelWorker
 {
-	friend class Engine;
+	friend class EngineDevice;
 
-protected:
+private:
 	DeviceContext m_DeviceCtx;				/*!< vulkan device context*/
 	ArrayPool<VkQueue, Size> m_queue;		/*!< working queues*/
 	boost::asio::thread_pool m_workerPool;	/*!< thread pool*/
 
-public:
-	VkParallelWorker() = delete;
-	NOT_COPIABLE(VkParallelWorker)
-
-	explicit VkParallelWorker(const DeviceContext& a_ctx, std::array<VkQueue, Size> a_data) :
-		m_DeviceCtx{ a_ctx } m_queue{ a_data }, m_workerPool(Size)
+	explicit EngineParallelWorker(const DeviceContext& a_ctx, std::array<VkQueue, Size> a_data) :
+		m_DeviceCtx{ a_ctx } m_queue { a_data }, m_workerPool(Size)
 	{
 		// nothing to do
 	}
+
+public:
+	EngineParallelWorker() = delete;
+	NOT_COPIABLE(EngineParallelWorker)
+
 
 	void postTask(ContextFun& a_fun)
 	{

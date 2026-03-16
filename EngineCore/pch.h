@@ -15,5 +15,8 @@
 #include "VkEnumToString.h"
 #include "VulkanInitializers.h"
 #include "VulkanShaderInitializers.h"
+#include "VulkanBufferInitializers.h"
+#include "EngineLog.h"
+#include "EngineExceptions.h"
 
 #endif //PCH_H

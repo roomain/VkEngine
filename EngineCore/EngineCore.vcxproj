@@ -69,7 +69,6 @@
     <Import Project="..\props\common.props" />
     <Import Project="..\props\VMA.props" />
     <Import Project="..\props\boost.props" />
-    <Import Project="..\props\asyncplusplus.props" />
     <Import Project="..\props\glm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -78,7 +77,6 @@
     <Import Project="..\props\common.props" />
     <Import Project="..\props\VMA.props" />
     <Import Project="..\props\boost.props" />
-    <Import Project="..\props\asyncplusplus.props" />
     <Import Project="..\props\glm.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -120,12 +118,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ENGINECORE_EXPORTS;_DEBUG;ENGINECORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENGINECORE_EXPORTS;SPDLOG_SHARED_LIB;FMT_SHARED;SPDLOG_COMPILED_LIB;_DEBUG;ENGINECORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,12 +139,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ENGINECORE_EXPORTS;NDEBUG;ENGINECORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENGINECORE_EXPORTS;SPDLOG_SHARED_LIB;FMT_SHARED;SPDLOG_COMPILED_LIB;NDEBUG;ENGINECORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp23</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -156,14 +158,22 @@
     <ClInclude Include="ArrayPool.h" />
     <ClInclude Include="CapabilitiesVisitor.h" />
     <ClInclude Include="DeviceContext.h" />
-    <ClInclude Include="VkParallelWorker.h" />
+    <ClInclude Include="EngineApplication.h" />
+    <ClInclude Include="EngineDevice.h" />
+    <ClInclude Include="EngineExceptions.h" />
+    <ClInclude Include="EngineLog.h" />
+    <ClInclude Include="EngineParallelWorker.h" />
     <ClInclude Include="enginecore_globals.h" />
+    <ClInclude Include="EngineRenderer.h" />
+    <ClInclude Include="EngineSwapChain.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="QueuesManager.h" />
     <ClInclude Include="ScopedLink.h" />
     <ClInclude Include="StringToVkEnum.h" />
     <ClInclude Include="Transformation.h" />
     <ClInclude Include="VkEnumToString.h" />
+    <ClInclude Include="VulkanBufferInitializers.h" />
     <ClInclude Include="VulkanCapabilities.h" />
     <ClInclude Include="VulkanInitializers.h" />
     <ClInclude Include="VulkanShaderInitializers.h" />
@@ -171,12 +181,18 @@
   <ItemGroup>
     <ClCompile Include="CapabilitiesVisitor.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="EngineApplication.cpp" />
+    <ClCompile Include="EngineExceptions.cpp" />
+    <ClCompile Include="EngineLog.cpp" />
+    <ClCompile Include="EngineRenderer.cpp" />
+    <ClCompile Include="EngineSwapChain.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="QueuesManager.cpp" />
     <ClCompile Include="VulkanCapabilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
