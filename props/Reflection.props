@@ -4,16 +4,16 @@
   <PropertyGroup Label="UserMacros">
     <VKENGINE_DIR Condition="exists('D:\ProjetsGit\VkEngine')">D:\ProjetsGit\VkEngine</VKENGINE_DIR>
     <VKENGINE_DIR Condition="exists('C:\ProjetsGit\VkEngine')">C:\ProjetsGit\VkEngine</VKENGINE_DIR>
-    <REFLECTION_DIR>$(VKENGINE_DIR)\Reflection</REFLECTION_DIR>
+    <REFLECTIVE_DIR>$(VKENGINE_DIR)\Reflective\Reflective</REFLECTIVE_DIR>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(REFLECTION_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(REFLECTIVE_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Reflection.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Reflective.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command></Command>
@@ -23,8 +23,8 @@
     <BuildMacro Include="VKENGINE_DIR">
       <Value>$(VKENGINE_DIR)</Value>
     </BuildMacro>
-    <BuildMacro Include="REFLECTION_DIR">
-      <Value>$(REFLECTION_DIR)</Value>
+    <BuildMacro Include="REFLECTIVE_DIR">
+      <Value>$(REFLECTIVE_DIR)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

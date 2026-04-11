@@ -3,7 +3,7 @@
 #include "EngineApplication.h"
 #include "EngineRenderer.h"
 #include "EngineDevice.h"
-#include "ReflectionReader.h"
+#include "Reflective.h"
 #include "EngineParameters.h"
 
 EngineApplication::EngineApplication(const EngineApplicationParameters& a_appParameters)
@@ -14,13 +14,12 @@ EngineApplication::EngineApplication(const EngineApplicationParameters& a_appPar
 		EngineApplication::ENGINE_VERSION);
 	auto instanceInfo = initInstanceCreateInfo(&appInfo);
 
-	ReflectionReader::setLogCallback(static_cast<LogCallback>(&EngineLog::reflectLog));
-	if (ReflectionReader::instance().loadFile(a_appParameters.parametersFilename))
+	Reflective::setLogCallback(static_cast<LogCallback>(&EngineLog::reflectLog));
+	if (Reflective::instance().loadFile(a_appParameters.parametersFilename))
 	{
-		if (ReflectionReader::instance().hasProfile(a_appParameters.parametersProfile))
+		if (Reflective::instance().hasProfile(a_appParameters.parametersProfile))
 		{
 			EngineParameters parameters;
-			ReflectionReader::instance().deserialize("EngineParameters", parameters);
 			instanceInfo.enabledLayerCount = static_cast<uint32_t>(parameters.layers.size());
 			auto tempLayers = vStringToChar(parameters.layers);
 			instanceInfo.ppEnabledLayerNames = tempLayers.data();
