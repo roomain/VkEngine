@@ -69,6 +69,8 @@ public:
 	{
 		return m_queues[a_index];
 	}
+	inline VkQueue* data() { return m_queues; }
+	inline const VkQueue* data()const { return m_queues; }
 	inline std::array<VkQueue, Size>& get() { return m_queues; }
 	inline operator std::array<VkQueue, Size>& () { return m_queues; }
 	inline operator const std::array<VkQueue, Size>& ()const { return m_queues; }

@@ -49,6 +49,15 @@
     <Filter Include="Fichiers sources\exception">
       <UniqueIdentifier>{7caa437a-739f-45a2-9c4f-a8e654cb1de1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\memory">
+      <UniqueIdentifier>{ef0f5d1f-651b-4e58-b26d-554382966110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\memory">
+      <UniqueIdentifier>{cdbe1af5-4411-4cdb-84f4-f83458c927b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\parameters">
+      <UniqueIdentifier>{0342ad0b-be8c-4cd0-af3d-26d06d853c32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -80,9 +89,6 @@
     </ClInclude>
     <ClInclude Include="VulkanShaderInitializers.h">
       <Filter>Fichiers d%27en-tête\initializers</Filter>
-    </ClInclude>
-    <ClInclude Include="ArrayPool.h">
-      <Filter>Fichiers d%27en-tête\worker</Filter>
     </ClInclude>
     <ClInclude Include="ScopedLink.h">
       <Filter>Fichiers d%27en-tête\worker</Filter>
@@ -117,6 +123,18 @@
     <ClInclude Include="VulkanBufferInitializers.h">
       <Filter>Fichiers d%27en-tête\initializers</Filter>
     </ClInclude>
+    <ClInclude Include="vmaMemoryCallbacks.h">
+      <Filter>Fichiers d%27en-tête\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="vmaMemoryAllocator.cpp">
+      <Filter>Fichiers sources\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="vmaMemoryAllocator.h">
+      <Filter>Fichiers d%27en-tête\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineParameters.h">
+      <Filter>Fichiers d%27en-tête\parameters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -148,6 +166,12 @@
     </ClCompile>
     <ClCompile Include="EngineLog.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDevice.cpp">
+      <Filter>Fichiers sources\Engine classes</Filter>
+    </ClCompile>
+    <ClCompile Include="vmaMemoryCallbacks.cpp">
+      <Filter>Fichiers sources\memory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

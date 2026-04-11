@@ -77,7 +77,6 @@ void EngineSwapChain::createImageBuffers()
 	for (const VkImage img : images)
 	{
 		VkImageView imageView = VK_NULL_HANDLE;
-
 		const ImageViewParameters parameters
 		{
 			.colorFormat = m_swapchainCI.imageFormat,
@@ -92,19 +91,14 @@ void EngineSwapChain::createImageBuffers()
 				.layerCount = 1
 			}
 		};
-
 		VkImageViewCreateInfo colorAttachmentView = imageViewCreateInfo(parameters);
-
-
 		VK_CHECK_EXCEPT(vkCreateImageView(m_deviceCtx.m_vkDevice, &colorAttachmentView, nullptr, &imageView))
-
 		m_frames.emplace_back(SwapChainFrame{
 				img,
 				imageView
 			});
 	}
 }
-
 
 void EngineSwapChain::releaseSwapchain(VkSwapchainKHR a_oldSwapChain)
 {
@@ -152,4 +146,39 @@ void EngineSwapChain::createSwapChain(const uint32_t a_width, const uint32_t a_h
 		releaseSwapchain(oldSwapChain);
 	}
 	createImageBuffers();
+}
+
+void EngineSwapChain::resize(const uint32_t a_width, const uint32_t a_height)
+{
+	createSwapChain(a_width, a_height);
+}
+
+EngineSwapChain::EngineSwapChain(const DeviceContext& a_ctx, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height) :
+	m_deviceCtx{ a_ctx }, m_surface{ a_surface }
+{
+	createSwapChain(a_width, a_height);
+}
+
+uint32_t EngineSwapChain::frameCount()const
+{
+	return static_cast<uint32_t>(m_frames.size());
+}
+
+const EngineSwapChain::SwapChainFrame& EngineSwapChain::acquireNextImage(VkSemaphore a_presentCompleteSemaphore, VkFence a_fence, uint32_t& a_imageIndex)const
+{
+	VK_CHECK_LOG(vkAcquireNextImageKHR(m_deviceCtx.m_vkDevice, m_swapChain, UINT64_MAX, a_presentCompleteSemaphore, a_fence, &a_imageIndex))
+	return m_frames[a_imageIndex];
+}
+
+void EngineSwapChain::present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, VkSemaphore a_waitSemaphore)const
+{
+	auto presentCI = presentationKHR(1, &a_waitSemaphore, 1, &m_swapChain, &a_imageIndex);
+	VK_CHECK_LOG(vkQueuePresentKHR(a_presentationQueue, &presentCI))
+}
+
+void EngineSwapChain::present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, std::vector<VkSemaphore>& a_waitSemaphore)const
+{
+	auto presentCI = presentationKHR(static_cast<uint32_t>(a_waitSemaphore.size()),
+		a_waitSemaphore.data(), 1, &m_swapChain, &a_imageIndex);
+	VK_CHECK_LOG(vkQueuePresentKHR(a_presentationQueue, &presentCI))
 }

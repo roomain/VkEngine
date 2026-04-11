@@ -8,9 +8,11 @@ void getVulkanInstanceCapabilities(VulkanCapabilities& a_VkCap)
 	enumerate(&vkEnumerateInstanceLayerProperties, a_VkCap.layers);
 }
 
-void getVulkanCapabilities(const VkInstance& a_instance, VulkanCapabilities& a_VkCap)
+void getVulkanCapabilities(VulkanCapabilities& a_VkCap, const VkInstance a_instance)
 {
-	a_VkCap.instance = a_instance;
+	if(a_VkCap.instance == VK_NULL_HANDLE)
+		a_VkCap.instance = a_instance;
+
 	if (a_VkCap.extensions.empty())
 		enumerate(&vkEnumerateInstanceExtensionProperties, a_VkCap.extensions, nullptr);
 

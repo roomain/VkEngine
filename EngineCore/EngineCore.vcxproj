@@ -70,6 +70,7 @@
     <Import Project="..\props\VMA.props" />
     <Import Project="..\props\boost.props" />
     <Import Project="..\props\glm.props" />
+    <Import Project="..\props\Reflection.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -78,6 +79,7 @@
     <Import Project="..\props\VMA.props" />
     <Import Project="..\props\boost.props" />
     <Import Project="..\props\glm.props" />
+    <Import Project="..\props\Reflection.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -155,9 +157,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayPool.h" />
     <ClInclude Include="CapabilitiesVisitor.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="EngineParameters.h" />
     <ClInclude Include="EngineApplication.h" />
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="EngineExceptions.h" />
@@ -173,6 +175,9 @@
     <ClInclude Include="StringToVkEnum.h" />
     <ClInclude Include="Transformation.h" />
     <ClInclude Include="VkEnumToString.h" />
+    <ClInclude Include="vmaMemoryAllocator.cpp" />
+    <ClInclude Include="vmaMemoryAllocator.h" />
+    <ClInclude Include="vmaMemoryCallbacks.h" />
     <ClInclude Include="VulkanBufferInitializers.h" />
     <ClInclude Include="VulkanCapabilities.h" />
     <ClInclude Include="VulkanInitializers.h" />
@@ -182,6 +187,7 @@
     <ClCompile Include="CapabilitiesVisitor.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="EngineApplication.cpp" />
+    <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="EngineExceptions.cpp" />
     <ClCompile Include="EngineLog.cpp" />
     <ClCompile Include="EngineRenderer.cpp" />
@@ -193,6 +199,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="QueuesManager.cpp" />
+    <ClCompile Include="vmaMemoryCallbacks.cpp" />
     <ClCompile Include="VulkanCapabilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

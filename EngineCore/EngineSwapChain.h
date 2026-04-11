@@ -7,6 +7,7 @@
 #include <vector>
 #include <vulkan/vulkan.hpp>
 #include "DeviceContext.h"
+#include "notCopiable.h"
 
 class EngineSwapChain
 {
@@ -36,7 +37,16 @@ private:
 	void releaseSwapchain(VkSwapchainKHR a_oldSwapChain);
 	void createSwapChain(const uint32_t a_width, const uint32_t a_height);
 
+	EngineSwapChain(const DeviceContext& a_ctx, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height);
+
 public:
+	EngineSwapChain() = delete;
+	NOT_COPIABLE(EngineSwapChain)
 	void resize(const uint32_t a_width, const uint32_t a_height);
+	[[nodiscard]] uint32_t frameCount()const;
+
+	const SwapChainFrame& acquireNextImage(VkSemaphore a_presentCompleteSemaphore, VkFence a_fence, uint32_t& a_imageIndex)const;
+	void present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, VkSemaphore a_waitSemaphore)const;
+	void present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, std::vector<VkSemaphore>& a_waitSemaphore)const;
 };
 

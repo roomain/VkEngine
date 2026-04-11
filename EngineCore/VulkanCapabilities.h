@@ -30,6 +30,6 @@ struct VulkanCapabilities : BaseVulkanCapabilities
 };
 
 void getVulkanInstanceCapabilities(VulkanCapabilities& a_VkCap);
-void getVulkanCapabilities(const VkInstance& a_instance, VulkanCapabilities& a_VkCap);
+void getVulkanCapabilities(VulkanCapabilities& a_VkCap, const VkInstance a_instance = VK_NULL_HANDLE);
 void getDeviceCapabilities(const VkPhysicalDevice& a_physDev, VulkanDeviceCapabilities& a_devCap);
 void getQueueFamiliesCapabilities(const VkPhysicalDevice& a_physDev, std::vector<VkQueueFamilyProperties>& a_queueFamilies);

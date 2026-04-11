@@ -6,8 +6,11 @@
 ************************************************/
 #include <string>
 #include <format>
+#include <source_location>
+#include <vulkan/vulkan.hpp>
 #include <boost/log/trivial.hpp>
 #include "VkEnumToString.h"
+
 
 /*@brief Log configuration*/
 class EngineLog
@@ -55,8 +58,15 @@ public:
 	{
 		BOOST_LOG_TRIVIAL(fatal) << std::format(fmt, std::forward<Args>(data)...);
 	}
+
+	static void reflectLog(const std::source_location& a_loc, const std::string_view message);
+
+	static VkBool32 vulkanDebug(VkDebugUtilsMessageSeverityFlagBitsEXT a_messageSeverity,
+		VkDebugUtilsMessageTypeFlagsEXT /*a_messageTypes*/,
+		const VkDebugUtilsMessengerCallbackDataEXT* a_pCallbackData,
+		void*);
 };
 
 #define VK_CHECK_LOG(vkCall) \
 if (const VkResult result = vkCall; result != VK_SUCCESS) \
-	EngineLog::warning(#vkCall##": " + to_string(result));
+	EngineLog::warning("{}: {}", #vkCall, to_string(result));

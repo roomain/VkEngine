@@ -6,15 +6,47 @@
 ************************************************/
 #include <vector>
 #include <memory>
+#include <optional>
 #include <functional>
 #include <vulkan/vulkan.hpp>
 #include <vma/vk_mem_alloc.h>
 #include <boost/asio/thread_pool.hpp>
-#include "ArrayPool.h"
+#include <boost/asio/post.hpp>
 #include "notCopiable.h"
 #include "DeviceContext.h"
+#include "QueuesManager.h"
+#include "ScopedLink.h"
 
 using ContextFun = std::function<void(const DeviceContext&, VkQueue&)>;
+
+template<size_t Size>
+class QueuePoolArray : public ManagedQueueArray<Size>
+{
+private:
+	std::array<bool, Size> m_inUse;	/*!< use flag*/
+
+public:
+	QueuePoolArray() = delete;
+	NOT_COPIABLE(QueuePoolArray)
+	explicit QueuePoolArray(ManagedQueueArray<Size>&& a_managed) : ManagedQueueArray<Size>(a_managed)
+	{
+		for (auto& inUse : m_inUse)
+			inUse = false;
+	}
+
+	std::optional<ScopedLink<VkQueue>> next()
+	{
+		int index = 0;
+		for (auto& isUsed : m_inUse)
+		{
+            if (!isUsed)
+				return std::make_optional<ScopedLink<VkQueue>>(this->m_queues[index], isUsed);
+
+			++index;
+		}
+		return std::optional<ScopedLink<VkQueue>>();
+	}
+};
 
 
 /*@brief Use to do vulkan work in parallel
@@ -27,11 +59,11 @@ class EngineParallelWorker
 
 private:
 	DeviceContext m_DeviceCtx;				/*!< vulkan device context*/
-	ArrayPool<VkQueue, Size> m_queue;		/*!< working queues*/
+	QueuePoolArray<Size> m_queue;			/*!< working queues*/
 	boost::asio::thread_pool m_workerPool;	/*!< thread pool*/
 
-	explicit EngineParallelWorker(const DeviceContext& a_ctx, std::array<VkQueue, Size> a_data) :
-		m_DeviceCtx{ a_ctx } m_queue { a_data }, m_workerPool(Size)
+	explicit EngineParallelWorker(const DeviceContext& a_ctx, ManagedQueueArray<Size>&& a_data) :
+		m_DeviceCtx{ a_ctx }, m_queue { a_data }, m_workerPool(Size)
 	{
 		// nothing to do
 	}

@@ -33,3 +33,31 @@ void EngineLog::initLog()
 	);
 	boost::log::add_common_attributes();
 }
+
+VkBool32 EngineLog::vulkanDebug(VkDebugUtilsMessageSeverityFlagBitsEXT a_messageSeverity,
+	VkDebugUtilsMessageTypeFlagsEXT /*a_messageTypes*/,
+	const VkDebugUtilsMessengerCallbackDataEXT* a_pCallbackData,
+	void*)
+{
+	switch (a_messageSeverity)
+	{
+	case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
+	case VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
+		EngineLog::info("vulkan info: {} ", a_pCallbackData->pMessage);
+		break;
+	case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
+		EngineLog::warning("vulkan warning: {} ", a_pCallbackData->pMessage);
+		break;
+	case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
+		EngineLog::error("vulkan error: {} ", a_pCallbackData->pMessage);
+		break;
+	default:
+		break;
+	}
+	return true;
+}
+
+void EngineLog::reflectLog(const std::source_location& a_loc, const std::string_view message)
+{
+	EngineLog::info("File {} - line {}: {}", a_loc.file_name(), a_loc.line(), message);
+}
