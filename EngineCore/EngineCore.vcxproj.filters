@@ -58,6 +58,9 @@
     <Filter Include="Fichiers d%27en-tête\parameters">
       <UniqueIdentifier>{0342ad0b-be8c-4cd0-af3d-26d06d853c32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\parameters">
+      <UniqueIdentifier>{c1ba0fe2-7e88-40d1-9737-a1cf1a11d761}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -135,6 +138,9 @@
     <ClInclude Include="EngineParameters.h">
       <Filter>Fichiers d%27en-tête\parameters</Filter>
     </ClInclude>
+    <ClInclude Include="CheckParameters.h">
+      <Filter>Fichiers d%27en-tête\parameters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -172,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="vmaMemoryCallbacks.cpp">
       <Filter>Fichiers sources\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckParameters.cpp">
+      <Filter>Fichiers sources\parameters</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

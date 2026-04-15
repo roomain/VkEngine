@@ -5,6 +5,7 @@
 #include "EngineDevice.h"
 #include "Reflective.h"
 #include "EngineParameters.h"
+#include "CheckParameters.h"
 
 EngineApplication::EngineApplication(const EngineApplicationParameters& a_appParameters)
 {
@@ -62,10 +63,10 @@ EngineApplication::~EngineApplication()
 
 EngineDevicePtr EngineApplication::createDevice(const DeviceParameters& a_parameters)
 {
-	//
+	//return new EngineDevice(const uint32_t a_devIndex, const DeviceContext & a_ctx)
 }
 
 EngineRendererPtr EngineApplication::createRenderer(const RendererParameters& a_parameters)
 {
-	//
+	//return new EngineRenderer()
 }

@@ -134,6 +134,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)Reflective\script
+python reflective.py $(ProjectDir) -q
+</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -155,9 +160,15 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)Reflective\script
+python reflective.py $(ProjectDir) -q
+</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CapabilitiesVisitor.h" />
+    <ClInclude Include="CheckParameters.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="EngineParameters.h" />
     <ClInclude Include="EngineApplication.h" />
@@ -185,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CapabilitiesVisitor.cpp" />
+    <ClCompile Include="CheckParameters.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="EngineApplication.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
