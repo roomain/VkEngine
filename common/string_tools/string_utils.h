@@ -4,6 +4,8 @@
 * @author Roomain
 ************************************************/
 #pragma once
+#include <string>
+#include <string_view>
 #include <chrono>
 #include <ranges>
 #include <sstream>
@@ -69,21 +71,23 @@ inline void trimRight(std::string& a_toTrim)
     a_second.cbegin(), a_second.cend(), char_equals);
 }
 
-constexpr void split(const std::string& a_entry, const char a_separator, std::vector<std::string>& a_splitted)
+constexpr std::vector<std::string> split(const std::string_view a_entry, const char a_separator)
 {
-    std::string temp = a_entry;
-    while(!temp.empty())
+    std::vector<std::string> splitted;
+    std::string temp (a_entry);
+    while (!temp.empty())
     {
-        if(auto iter = std::ranges::find(temp, a_separator); iter != temp.cend())
+        if (auto iter = std::ranges::find(temp, a_separator); iter != temp.cend())
         {
             const size_t index = iter - temp.cbegin();
-            a_splitted.emplace_back(temp.substr(0, iter - temp.cbegin()));
+            splitted.emplace_back(temp.substr(0, iter - temp.cbegin()));
             temp = temp.substr(index + 1, temp.size() - index - 1);
         }
         else
         {
-            a_splitted.emplace_back(temp);
+            splitted.emplace_back(temp);
             temp = "";
         }
     }
+    return splitted;
 }

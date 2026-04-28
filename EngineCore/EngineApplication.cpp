@@ -61,9 +61,15 @@ EngineApplication::~EngineApplication()
 		vkDestroyInstance(m_capabilities.instance, nullptr);
 }
 
-EngineDevicePtr EngineApplication::createDevice(const DeviceParameters& a_parameters)
+std::vector<uint32_t> EngineApplication::suitableDevices(const DeviceParameters& a_parameters, const VkSurfaceKHR* a_surface)const
 {
-	//return new EngineDevice(const uint32_t a_devIndex, const DeviceContext & a_ctx)
+	return findSuitableDevices(a_parameters, m_capabilities, a_surface);
+}
+
+EngineDevicePtr EngineApplication::createDevice(const DeviceParameters& a_parameters, const uint32_t a_deviceIndex)
+{
+	//
+	//return new EngineDevice(chosenDev, const DeviceContext & a_ctx)
 }
 
 EngineRendererPtr EngineApplication::createRenderer(const RendererParameters& a_parameters)

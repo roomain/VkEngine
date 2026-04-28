@@ -19,6 +19,7 @@
 
 using ContextFun = std::function<void(const DeviceContext&, VkQueue&)>;
 
+/*@brief extension used to manage used queues in command threads*/
 template<size_t Size>
 class QueuePoolArray : public ManagedQueueArray<Size>
 {

@@ -77,6 +77,7 @@ public:
 };
 
 /*@brief provide management of vulkan device queue*/
+/*each queue in ManagedQueue/ManagedQueueArray can be reused*/
 class QueuesManager
 {
 private:

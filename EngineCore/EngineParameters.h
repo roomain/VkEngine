@@ -6,7 +6,10 @@
 ************************************************/
 #include <vector>
 #include <string>
+#include <vulkan/vulkan.hpp>
+#include "string_utils.h"
 #include "Reflective_macros.h"
+#include "ReflectiveException.h"
 #include "EngineParameters.generated.h"
 
 REFLECT_CLASS
@@ -16,7 +19,6 @@ struct BaseParameters
 	std::vector<std::string> layers;
 	REFLECT_DEFINE(BaseParameters);
 };
-REFLECT_IMPL(BaseParameters)
 
 REFLECT_CLASS
 struct EngineParameters : BaseParameters
@@ -24,7 +26,6 @@ struct EngineParameters : BaseParameters
 	bool debugging = false;
 	REFLECT_DEFINE(EngineParameters);
 };
-REFLECT_IMPL(EngineParameters)
 
 
 
@@ -89,13 +90,76 @@ struct DeviceFeatures
     bool inheritedQueries = false;
     REFLECT_DEFINE(DeviceFeatures);
 };
-REFLECT_IMPL(DeviceFeatures)
+
+constexpr VkQueueFlagBits operator | (const VkQueueFlagBits a_first, const VkQueueFlagBits a_second)
+{
+    return static_cast<VkQueueFlagBits>(static_cast<unsigned int>(a_first) | static_cast<unsigned int>(a_second));
+}
+
+template<>
+VkQueueFlagBits convert<VkQueueFlagBits, std::string_view>(const std::string_view& a_data)
+{
+    VkQueueFlagBits flag = static_cast<VkQueueFlagBits>(0);
+    auto splitted = split(a_data, '|');
+    for (const auto& data : splitted)
+    {
+        if ("VK_QUEUE_GRAPHICS_BIT" == data)
+        {
+            flag = flag | VK_QUEUE_GRAPHICS_BIT;
+        }
+        else if ("VK_QUEUE_COMPUTE_BIT" == data)
+        {
+            flag = flag | VK_QUEUE_COMPUTE_BIT;
+        }
+        else if("VK_QUEUE_TRANSFER_BIT" == data)
+        {
+            flag = flag | VK_QUEUE_TRANSFER_BIT;
+        }
+        else if("VK_QUEUE_SPARSE_BINDING_BIT" == data)
+        {
+            flag = flag | VK_QUEUE_SPARSE_BINDING_BIT;
+        }
+        else if("VK_QUEUE_PROTECTED_BIT" == data)
+        {
+            flag = flag | VK_QUEUE_PROTECTED_BIT;
+        }
+        else if("VK_QUEUE_VIDEO_DECODE_BIT_KHR" == data)
+        {
+            flag = flag | VK_QUEUE_VIDEO_DECODE_BIT_KHR;
+        }
+        else if("VK_QUEUE_VIDEO_ENCODE_BIT_KHR" == data)
+        {
+            flag = flag | VK_QUEUE_VIDEO_ENCODE_BIT_KHR;
+        }
+        else if("VK_QUEUE_OPTICAL_FLOW_BIT_NV" == data)
+        {
+            flag = flag | VK_QUEUE_OPTICAL_FLOW_BIT_NV;
+        }
+        else if("VK_QUEUE_DATA_GRAPH_BIT_ARM" == data)
+        {
+            flag = flag | VK_QUEUE_DATA_GRAPH_BIT_ARM;
+        }
+        else
+        {
+            throw ReflectiveException::unsupportedData<VkQueueFlagBits>(std::source_location::current(), data);
+        }
+    }
+    return flag;
+}
+
+REFLECT_CLASS
+struct QueuesParameters
+{
+    VkQueueFlagBits flags = static_cast<VkQueueFlagBits>(0);
+    uint32_t count = 1;
+    REFLECT_DEFINE(QueuesParameters);
+};
 
 
 REFLECT_CLASS
 struct DeviceParameters : BaseParameters
 {
     DeviceFeatures features;
+    std::vector<QueuesParameters> queues;
 	REFLECT_DEFINE(DeviceParameters);
 };
-REFLECT_IMPL(DeviceParameters)

@@ -13,7 +13,7 @@ struct VkPhysicalDeviceFeatures;
 
 /*@brief functions used to check vulkan devices compatibilities*/
 template<typename T, typename U, typename V = T>
-constexpr bool contains(const std::vector<T>& a_desired, const std::vector<U>& a_available,
+[[nodiscard]] constexpr bool contains(const std::vector<T>& a_desired, const std::vector<U>& a_available,
     V U::* a_internPtr)
 {
     for (const auto& desired : a_desired)
@@ -29,10 +29,12 @@ constexpr bool contains(const std::vector<T>& a_desired, const std::vector<U>& a
     return true;
 }
 
-constexpr bool check(const bool a_desired, const bool a_available)
+[[nodiscard]] constexpr bool check(const bool a_desired, const bool a_available)
 {
     return !a_desired || a_available;
 }
 
-bool checkFeatures(const DeviceFeatures& a_desired, const VkPhysicalDeviceFeatures& a_available);
-std::vector<int> findSuitableDevice(const DeviceParameters& a_dev, const VulkanCapabilities& a_capabilities);
+//[[nodiscard]] bool checkQueue(const VkQueueFamilyProperties& a_family, const VkQueueFlags a_expectedFlag = 0, const uint32t)
+
+[[nodiscard]] bool checkFeatures(const DeviceFeatures& a_desired, const VkPhysicalDeviceFeatures& a_available);
+[[nodiscard]] std::vector<uint32_t> findSuitableDevices(const DeviceParameters& a_dev, const VulkanCapabilities& a_capabilities, const VkSurfaceKHR* a_surface);

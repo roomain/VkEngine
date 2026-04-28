@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <functional>
 #include <vulkan/vulkan.hpp>
 #include "VulkanCapabilities.h"
 
@@ -18,7 +19,6 @@ using EngineRendererPtr = std::shared_ptr<EngineRenderer>;
 
 struct DeviceParameters;
 struct RendererParameters;
-
 
 struct EngineApplicationParameters
 {
@@ -44,11 +44,12 @@ public:
 	EngineApplication() = delete;
 	explicit EngineApplication(const EngineApplicationParameters& a_appParameters);
 	~EngineApplication();
-
+	[[nodiscard]] inline const VulkanCapabilities& capabilities()const noexcept { return m_capabilities; }
 #pragma region devices
-	EngineDevicePtr createDevice(const DeviceParameters& a_parameters);
-	EngineRendererPtr createRenderer(const RendererParameters& a_parameters);
-	// todo
+	[[nodiscard]] std::vector<uint32_t> suitableDevices(const DeviceParameters& a_parameters, const VkSurfaceKHR* a_surface = VK_NULL_HANDLE)const;
+	[[nodiscard]] EngineDevicePtr createDevice(const DeviceParameters& a_parameters, const uint32_t a_deviceIndex);
+	[[nodiscard]] EngineRendererPtr createRenderer(const RendererParameters& a_parameters);
+	// todo save device
 #pragma endregion //devices
 };
 

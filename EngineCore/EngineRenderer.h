@@ -7,7 +7,7 @@
 #include <memory>
 
 
-/*@brief Renderer: for specific surface, share device*/
+/*@brief Renderer: for specific surface, shared device*/
 class EngineRenderer
 {
 private:
