@@ -92,6 +92,7 @@ private:
 	void release(const int a_familyIndex, const size_t& a_count);
 
 public:
+	// to rework ctor to create stats from device creation
 	QueuesManager(const VkDevice a_dev, const VkPhysicalDevice& a_physDev);
 	QueuesManager() = delete;
 	NOT_COPIABLE(QueuesManager);

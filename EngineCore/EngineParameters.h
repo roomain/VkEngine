@@ -152,6 +152,7 @@ struct QueuesParameters
 {
     VkQueueFlagBits flags = static_cast<VkQueueFlagBits>(0);
     uint32_t count = 1;
+    float priority = 1;
     REFLECT_DEFINE(QueuesParameters);
 };
 

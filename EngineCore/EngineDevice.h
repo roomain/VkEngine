@@ -13,7 +13,7 @@
 class EngineDevice
 {
 	friend class EngineApplication;
-private:
+protected:
 	uint32_t m_deviceIndex;		/*!< device index in instance*/
 	DeviceContext m_deviceCtx;	/*!< device context: device handle + instance handle + memory */
 	QueuesManager m_queuesMng;	/*!< queue manager */

@@ -141,6 +141,9 @@
     <ClInclude Include="CheckParameters.h">
       <Filter>Fichiers d%27en-tête\parameters</Filter>
     </ClInclude>
+    <ClInclude Include="EngineBuffer.h">
+      <Filter>Fichiers d%27en-tête\memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="CheckParameters.cpp">
       <Filter>Fichiers sources\parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineBuffer.cpp">
+      <Filter>Fichiers sources\memory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

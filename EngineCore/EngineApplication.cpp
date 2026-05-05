@@ -6,6 +6,8 @@
 #include "Reflective.h"
 #include "EngineParameters.h"
 #include "CheckParameters.h"
+#include "VulkanBufferInitializers.h"
+
 
 EngineApplication::EngineApplication(const EngineApplicationParameters& a_appParameters)
 {
@@ -68,8 +70,27 @@ std::vector<uint32_t> EngineApplication::suitableDevices(const DeviceParameters&
 
 EngineDevicePtr EngineApplication::createDevice(const DeviceParameters& a_parameters, const uint32_t a_deviceIndex)
 {
-	//
-	//return new EngineDevice(chosenDev, const DeviceContext & a_ctx)
+	DeviceContext ctx
+	{
+		.m_vkInstance = m_capabilities.instance,
+		.m_vkPhysDevice = m_capabilities.devices[a_deviceIndex].physDevice
+	};
+
+	std::vector<VkDeviceQueueCreateInfo> queueCreateInfo;
+	//m_capabilities.devices[a_deviceIndex]
+
+	VkPhysicalDeviceFeatures features = convert(a_parameters.features);
+	VkDeviceCreateInfo createInfo = initDeviceCreateInfo(queueCreateInfo, &features, 0);
+	auto tempExtension = vStringToChar(a_parameters.extensions);
+	auto tempLayers = vStringToChar(a_parameters.layers);
+
+	createInfo.ppEnabledExtensionNames = tempExtension.data();
+	createInfo.enabledExtensionCount = static_cast<uint32_t>(a_parameters.extensions.size());
+	createInfo.ppEnabledLayerNames = tempLayers.data();
+	createInfo.enabledLayerCount = static_cast<uint32_t>(a_parameters.layers.size());
+
+	vkCreateDevice(m_capabilities.devices[a_deviceIndex].physDevice, &createInfo, nullptr, &ctx.m_vkDevice);
+	return EngineDevicePtr(new EngineDevice(a_deviceIndex, ctx));
 }
 
 EngineRendererPtr EngineApplication::createRenderer(const RendererParameters& a_parameters)

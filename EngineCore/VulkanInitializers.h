@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <vulkan/vulkan.h>
+#include "EngineParameters.h"
 
 [[nodiscard]] constexpr VkDebugReportCallbackCreateInfoEXT initDebugCallbackCreateInfo()
 {
@@ -193,4 +194,65 @@ struct FrameBufferParameters
 	return VkRayTracingPipelineCreateInfoKHR{
 	.sType = VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR,
 	.pNext = nullptr };
+}
+
+[[nodiscard]] constexpr VkPhysicalDeviceFeatures convert(const DeviceFeatures& a_feature)
+{
+	return VkPhysicalDeviceFeatures{
+		a_feature.robustBufferAccess,
+		a_feature.fullDrawIndexUint32,
+		a_feature.imageCubeArray,
+		a_feature.independentBlend,
+		a_feature.geometryShader,
+		a_feature.tessellationShader,
+		a_feature.sampleRateShading,
+		a_feature.dualSrcBlend,
+		a_feature.logicOp,
+		a_feature.multiDrawIndirect,
+		a_feature.drawIndirectFirstInstance,
+		a_feature.depthClamp,
+		a_feature.depthBiasClamp,
+		a_feature.fillModeNonSolid,
+		a_feature.depthBounds,
+		a_feature.wideLines,
+		a_feature.largePoints,
+		a_feature.alphaToOne,
+		a_feature.multiViewport,
+		a_feature.samplerAnisotropy,
+		a_feature.textureCompressionETC2,
+		a_feature.textureCompressionASTC_LDR,
+		a_feature.textureCompressionBC,
+		a_feature.occlusionQueryPrecise,
+		a_feature.pipelineStatisticsQuery,
+		a_feature.vertexPipelineStoresAndAtomics,
+		a_feature.fragmentStoresAndAtomics,
+		a_feature.shaderTessellationAndGeometryPointSize,
+		a_feature.shaderImageGatherExtended,
+		a_feature.shaderStorageImageExtendedFormats,
+		a_feature.shaderStorageImageMultisample,
+		a_feature.shaderStorageImageReadWithoutFormat,
+		a_feature.shaderStorageImageWriteWithoutFormat,
+		a_feature.shaderUniformBufferArrayDynamicIndexing,
+		a_feature.shaderSampledImageArrayDynamicIndexing,
+		a_feature.shaderStorageBufferArrayDynamicIndexing,
+		a_feature.shaderStorageImageArrayDynamicIndexing,
+		a_feature.shaderClipDistance,
+		a_feature.shaderCullDistance,
+		a_feature.shaderFloat64,
+		a_feature.shaderInt64,
+		a_feature.shaderInt16,
+		a_feature.shaderResourceResidency,
+		a_feature.shaderResourceMinLod,
+		a_feature.sparseBinding,
+		a_feature.sparseResidencyBuffer,
+		a_feature.sparseResidencyImage2D,
+		a_feature.sparseResidencyImage3D,
+		a_feature.sparseResidency2Samples,
+		a_feature.sparseResidency4Samples,
+		a_feature.sparseResidency8Samples,
+		a_feature.sparseResidency16Samples,
+		a_feature.sparseResidencyAliased,
+		a_feature.variableMultisampleRate,
+		a_feature.inheritedQueries
+	};
 }
