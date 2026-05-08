@@ -40,8 +40,9 @@ void EngineDevice::createMemoryAllocator(DeviceContext& a_ctx)
 	VK_CHECK_EXCEPT(vmaCreateAllocator(&vmaInfo, &a_ctx.m_memAllocator))
 }
 
-EngineDevice::EngineDevice(const uint32_t a_devIndex, const DeviceContext& a_ctx) :
-	m_deviceIndex{ a_devIndex }, m_deviceCtx{ a_ctx }, m_queuesMng{ a_ctx.m_vkDevice, a_ctx.m_vkPhysDevice }
+EngineDevice::EngineDevice(const DeviceConfiguration& a_parameters, const DeviceContext& a_ctx) :
+	m_deviceIndex{ a_parameters.deviceIndex }, m_deviceCtx{ a_ctx }, 
+	m_queuesMng{ a_ctx.m_vkDevice, a_ctx.m_vkPhysDevice, a_parameters.queues }
 {
 	if (m_deviceCtx.m_memAllocator == VK_NULL_HANDLE)
 		createMemoryAllocator(m_deviceCtx);

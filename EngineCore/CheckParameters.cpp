@@ -2,7 +2,6 @@
 #include <ranges>
 #include "CheckParameters.h"
 #include "VulkanCapabilities.h"
-#include "EngineParameters.h"
 
 bool checkFeatures(const DeviceFeatures& a_desired, const VkPhysicalDeviceFeatures& a_available)
 {
@@ -64,21 +63,22 @@ bool checkFeatures(const DeviceFeatures& a_desired, const VkPhysicalDeviceFeatur
 	return bCheck;
 }
 
-std::vector<uint32_t> findSuitableDevices(const DeviceParameters& a_dev, const VulkanCapabilities& a_capabilities, const VkSurfaceKHR* a_surface)
+std::vector<DeviceConfiguration> findSuitableDevices(const DeviceParameters& a_devParameters, const VulkanCapabilities& a_capabilities, const VkSurfaceKHR* a_surface)
 {
-	std::vector<uint32_t> deviceIndices;
+	std::vector<DeviceConfiguration> deviceConfigurations;
 	uint32_t a_deviceIndex = 0;
 	for (const auto& device : a_capabilities.devices)
 	{
-		if (contains(a_dev.extensions, device.extensions, &VkExtensionProperties::extensionName)
-			&& contains(a_dev.layers, device.layers, &VkLayerProperties::layerName)
-			&& checkFeatures(a_dev.features, device.features))
+		if (contains(a_devParameters.extensions, device.extensions, &VkExtensionProperties::extensionName)
+			&& contains(a_devParameters.layers, device.layers, &VkLayerProperties::layerName)
+			&& checkFeatures(a_devParameters.features, device.features))
 		{
+			DeviceConfiguration configuration{ .deviceIndex = a_deviceIndex };
 			bool bIsOk = true;
-			for (const auto& queueParam : a_dev.queues)
+			for (const auto& queueParam : a_devParameters.queues)
 			{
 				uint32_t familyIndex = 0;
-				if (!std::ranges::any_of(device.queueFamilies, [&queueParam, a_surface, &device, &familyIndex](const VkQueueFamilyProperties& a_prop)
+				if (!std::ranges::any_of(device.queueFamilies, [&queueParam, a_surface, &device, &familyIndex, &configuration](const VkQueueFamilyProperties& a_prop)
 					{
 						bool bOk = ((a_prop.queueFlags & queueParam.flags) == queueParam.flags) && (a_prop.queueCount >= queueParam.count);
 						if ((queueParam.flags & VK_QUEUE_GRAPHICS_BIT) && bOk)
@@ -86,6 +86,18 @@ std::vector<uint32_t> findSuitableDevices(const DeviceParameters& a_dev, const V
 							VkBool32 supported = false;
 							VK_CHECK_LOG(vkGetPhysicalDeviceSurfaceSupportKHR(device.physDevice, familyIndex, *a_surface, &supported))
 							bOk &= static_cast<bool>(supported);
+						}
+
+						if (bOk)
+						{
+							configuration.queues.emplace_back(
+								QueueConfiguration{
+									familyIndex,
+									static_cast<VkQueueFlags>(queueParam.flags),
+									queueParam.count,
+									queueParam.priority
+								}
+							);
 						}
 						familyIndex++;
 						return bOk;
@@ -96,10 +108,15 @@ std::vector<uint32_t> findSuitableDevices(const DeviceParameters& a_dev, const V
 				}
 			}
 			
-			if(bIsOk)
-				deviceIndices.emplace_back(a_deviceIndex);
+			if (bIsOk)
+			{
+				configuration.extensions = a_devParameters.extensions;
+				configuration.layers = a_devParameters.layers;
+				configuration.features = convert(a_devParameters.features);
+				deviceConfigurations.emplace_back(configuration);
+			}
 		}
 		++a_deviceIndex;
 	}
-	return deviceIndices;
+	return deviceConfigurations;
 }

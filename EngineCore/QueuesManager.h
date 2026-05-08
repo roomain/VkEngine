@@ -11,6 +11,8 @@
 #include "notCopiable.h"
 #include "EngineExceptions.h"
 
+struct QueueConfiguration;
+
 /*@brief release managed data signal*/
 using ReleaseManaged = boost::signals2::signal<void(int, const size_t&)>;
 using ReleaseCallback = std::function<void(int, const size_t&)>;
@@ -81,9 +83,11 @@ public:
 class QueuesManager
 {
 private:
-	struct QueueFamilyStatistics : VkQueueFamilyProperties
+	struct QueueFamilyStatistics
 	{
-		uint32_t inUse = 0;           /*!< number of ManagedType in use*/
+		VkQueueFlags queueFlags;/*!< queue family flags*/
+		uint32_t queueCount;    /*!< queue count*/
+		uint32_t inUse = 0;     /*!< number of ManagedType in use*/
 	};
 
 	VkDevice m_logicalDevice;								/*!< logical device*/
@@ -93,7 +97,7 @@ private:
 
 public:
 	// to rework ctor to create stats from device creation
-	QueuesManager(const VkDevice a_dev, const VkPhysicalDevice& a_physDev);
+	QueuesManager(const VkDevice a_dev, const VkPhysicalDevice& a_physDev, const std::vector<QueueConfiguration>& a_usedQueues);
 	QueuesManager() = delete;
 	NOT_COPIABLE(QueuesManager);
 

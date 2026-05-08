@@ -5,6 +5,7 @@
 * @author Roomain
 ************************************************/
 #include <vector>
+#include <vulkan/vulkan.hpp>
 
 struct DeviceParameters;
 struct VulkanCapabilities;
@@ -37,4 +38,25 @@ template<typename T, typename U, typename V = T>
 //[[nodiscard]] bool checkQueue(const VkQueueFamilyProperties& a_family, const VkQueueFlags a_expectedFlag = 0, const uint32t)
 
 [[nodiscard]] bool checkFeatures(const DeviceFeatures& a_desired, const VkPhysicalDeviceFeatures& a_available);
-[[nodiscard]] std::vector<uint32_t> findSuitableDevices(const DeviceParameters& a_dev, const VulkanCapabilities& a_capabilities, const VkSurfaceKHR* a_surface);
+
+
+/*@brief queue configuration corresponding to queue parameters*/
+struct QueueConfiguration
+{
+    uint32_t familyIndex;   /*!< queue family index*/
+    VkQueueFlags flags;     /*!< queue family flags*/
+    uint32_t queueCount;    /*!< queue count*/
+    float priority;         /*!< queue priority*/
+};
+
+/*@brief device configuration corresponding to device parameters*/
+struct DeviceConfiguration
+{
+    uint32_t deviceIndex;                   /*!< device index*/
+    std::vector<std::string> extensions;    /*!< device layers*/
+    std::vector<std::string> layers;        /*!< device extension*/
+    VkPhysicalDeviceFeatures features;      /*!< device features*/
+    std::vector<QueueConfiguration> queues; /*!< queues configuration*/
+};
+
+[[nodiscard]] std::vector<DeviceConfiguration> findSuitableDevices(const DeviceParameters& a_devParameters, const VulkanCapabilities& a_capabilities, const VkSurfaceKHR* a_surface);

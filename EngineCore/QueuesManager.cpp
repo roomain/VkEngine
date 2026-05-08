@@ -6,17 +6,11 @@ void QueuesManager::release(const int a_familyIndex, const size_t& a_count)
 	m_stats[a_familyIndex].inUse -= static_cast<uint32_t>(a_count);
 }
 
-QueuesManager::QueuesManager(const VkDevice a_dev, const VkPhysicalDevice& a_physDev) :
+QueuesManager::QueuesManager(const VkDevice a_dev, const VkPhysicalDevice& a_physDev, const std::vector<QueueConfiguration>& a_usedQueues) :
 	m_logicalDevice{ a_dev }
 {
-	std::vector<VkQueueFamilyProperties> queueFamilies;
-	getQueueFamiliesCapabilities(a_physDev, queueFamilies);
-	int index = 0;
-	for (const auto& prop : queueFamilies)
-	{
-		m_stats.emplace(index, QueueFamilyStatistics{ prop });
-		++index;
-	}
+	for (const auto& prop : a_usedQueues)
+		m_stats.emplace(prop.familyIndex, QueueFamilyStatistics{ prop.flags, prop.queueCount });
 }
 
 ManagedQueue QueuesManager::createQueue(VkQueueFlags a_flag)

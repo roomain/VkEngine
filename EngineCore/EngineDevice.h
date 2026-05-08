@@ -9,6 +9,8 @@
 #include "notCopiable.h"
 #include "EngineParallelWorker.h"
 
+struct DeviceConfiguration;
+
 /*@brief Base class of device created by EngineApplication*/
 class EngineDevice
 {
@@ -21,13 +23,14 @@ protected:
 	/*@brief create memory allocator for DeviceContext*/
 	static void createMemoryAllocator(DeviceContext& a_ctx);
 
-	explicit EngineDevice(const uint32_t a_devIndex, const DeviceContext& a_ctx);
+	explicit EngineDevice(const DeviceConfiguration& a_parameters, const DeviceContext& a_ctx);
 
 public:
 	EngineDevice() = delete;
 	NOT_COPIABLE(EngineDevice)
 
-	const DeviceContext& deviceContext()const { return m_deviceCtx; }
+	[[nodiscard]] const DeviceContext& deviceContext()const { return m_deviceCtx; }
+	[[nodiscard]] constexpr uint32_t deviceIndex()const { return m_deviceIndex; }
 
 	template<size_t Size>
 	EngineParallelWorker<Size> createParallelWorker(VkQueueFlags a_flag)

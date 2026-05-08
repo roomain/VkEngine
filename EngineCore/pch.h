@@ -18,5 +18,7 @@
 #include "VulkanBufferInitializers.h"
 #include "EngineLog.h"
 #include "EngineExceptions.h"
+#include "EngineParameters.h"
+#include "CheckParameters.h"
 
 #endif //PCH_H
