@@ -25,6 +25,6 @@ public:
 	NOT_COPIABLE(EngineRenderer)
 	virtual ~EngineRenderer();
 	void resize(const uint32_t a_width, const uint32_t a_height);
-	// todo
+	[[nodiscard]] EngineDevicePtr device()const { return m_device; }
 };
 

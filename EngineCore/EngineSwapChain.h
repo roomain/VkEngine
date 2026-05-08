@@ -35,11 +35,10 @@ private:
 	static [[nodiscard]] VkExtent2D getImageExtent(const VkSurfaceCapabilitiesKHR& a_surfCaps, const uint32_t a_width, const uint32_t a_height);
 	void createImageBuffers();
 	void releaseSwapchain(VkSwapchainKHR a_oldSwapChain);
-	void createSwapChain(const uint32_t a_width, const uint32_t a_height);
-
-	EngineSwapChain(const DeviceContext& a_ctx, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height);
+	void createSwapChain(const uint32_t a_width, const uint32_t a_height);	
 
 public:
+	EngineSwapChain(const DeviceContext& a_ctx, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height);
 	EngineSwapChain() = delete;
 	NOT_COPIABLE(EngineSwapChain)
 	void resize(const uint32_t a_width, const uint32_t a_height);
