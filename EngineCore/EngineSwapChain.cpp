@@ -153,10 +153,10 @@ void EngineSwapChain::resize(const uint32_t a_width, const uint32_t a_height)
 	createSwapChain(a_width, a_height);
 }
 
-EngineSwapChain::EngineSwapChain(const DeviceContext& a_ctx, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height) :
-	m_deviceCtx{ a_ctx }, m_surface{ a_surface }
+EngineSwapChain::EngineSwapChain(const DeviceContext& a_ctx, const SurfaceConfiguration& a_surfConf) :
+	m_deviceCtx{ a_ctx }, m_surface{ a_surfConf.surface }
 {
-	createSwapChain(a_width, a_height);
+	createSwapChain(a_surfConf.width, a_surfConf.height);
 }
 
 uint32_t EngineSwapChain::frameCount()const

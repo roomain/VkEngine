@@ -71,11 +71,11 @@ std::vector<DeviceConfiguration> EngineApplication::suitableDevices(const Device
 	return findSuitableDevices(a_parameters, m_capabilities, a_surface);
 }
 
-EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_parameters)
+EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_configuration)
 {
-	if (auto iter = std::ranges::find_if(m_deviceInstance, [&a_parameters](const auto& device)
+	if (auto iter = std::ranges::find_if(m_deviceInstance, [&a_configuration](const auto& device)
 		{
-			return device->deviceIndex() == a_parameters.deviceIndex;
+			return device->deviceIndex() == a_configuration.deviceIndex;
 		}); iter != m_deviceInstance.cend())
 	{
 		return *iter;
@@ -85,34 +85,34 @@ EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_par
 		DeviceContext ctx
 		{
 			.m_vkInstance = m_capabilities.instance,
-			.m_vkPhysDevice = m_capabilities.devices[a_parameters.deviceIndex].physDevice
+			.m_vkPhysDevice = m_capabilities.devices[a_configuration.deviceIndex].physDevice
 		};
 
 		std::vector<VkDeviceQueueCreateInfo> queueCreateInfo;
 		std::vector<std::vector<float>> priorities;
-		for (const auto& queueConf : a_parameters.queues)
+		for (const auto& queueConf : a_configuration.queues)
 		{
 			priorities.emplace_back(std::vector<float>(queueConf.queueCount, queueConf.priority));
 			queueCreateInfo.emplace_back(initQueueCreateInfo(queueConf.familyIndex, 
 				queueConf.queueCount, priorities.back(), queueConf.flags));
 		}
 
-		VkDeviceCreateInfo createInfo = initDeviceCreateInfo(queueCreateInfo, &a_parameters.features, 0);
-		auto tempExtension = vStringToChar(a_parameters.extensions);
-		auto tempLayers = vStringToChar(a_parameters.layers);
+		VkDeviceCreateInfo createInfo = initDeviceCreateInfo(queueCreateInfo, &a_configuration.features, 0);
+		auto tempExtension = vStringToChar(a_configuration.extensions);
+		auto tempLayers = vStringToChar(a_configuration.layers);
 
 		createInfo.ppEnabledExtensionNames = tempExtension.data();
-		createInfo.enabledExtensionCount = static_cast<uint32_t>(a_parameters.extensions.size());
+		createInfo.enabledExtensionCount = static_cast<uint32_t>(a_configuration.extensions.size());
 		createInfo.ppEnabledLayerNames = tempLayers.data();
-		createInfo.enabledLayerCount = static_cast<uint32_t>(a_parameters.layers.size());
-		vkCreateDevice(m_capabilities.devices[a_parameters.deviceIndex].physDevice, &createInfo, nullptr, &ctx.m_vkDevice);
-		EngineDevicePtr newDevice (new EngineDevice(a_parameters, ctx));
+		createInfo.enabledLayerCount = static_cast<uint32_t>(a_configuration.layers.size());
+		vkCreateDevice(m_capabilities.devices[a_configuration.deviceIndex].physDevice, &createInfo, nullptr, &ctx.m_vkDevice);
+		EngineDevicePtr newDevice (new EngineDevice(a_configuration, ctx));
 		m_deviceInstance.emplace_back(newDevice);
 		return newDevice;
 	}
 }
 
-EngineRendererPtr EngineApplication::createRenderer(const DeviceConfiguration& a_parameters, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height)
+EngineRendererPtr EngineApplication::createRenderer(const RendererConfiguration& a_configuration)
 {
-	return EngineRendererPtr(new EngineRenderer(createDevice(a_parameters), a_surface, a_width, a_height));
+	return EngineRendererPtr(new EngineRenderer(createDevice(a_configuration.deviceConf), a_configuration.surfaceConf));
 }

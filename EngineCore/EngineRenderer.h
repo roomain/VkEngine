@@ -8,6 +8,8 @@
 #include <vector>
 #include "EngineSwapChain.h"
 
+struct SurfaceConfiguration;
+
 class EngineDevice;
 using EngineDevicePtr = std::shared_ptr<EngineDevice>;
 
@@ -19,7 +21,7 @@ private:
 	EngineDevicePtr m_device;		/*!< device used by renderer*/
 	EngineSwapChain m_swapChain;	/*!< swapchain*/
 
-	EngineRenderer(EngineDevicePtr a_device, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height);
+	EngineRenderer(EngineDevicePtr a_device, const SurfaceConfiguration& a_surfConf);
 
 public:
 	NOT_COPIABLE(EngineRenderer)

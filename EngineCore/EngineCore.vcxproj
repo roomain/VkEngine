@@ -181,6 +181,7 @@ python reflective.py $(ProjectDir) -q
     <ClInclude Include="EngineRenderer.h" />
     <ClInclude Include="EngineSwapChain.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="InternalConfiguration.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="QueuesManager.h" />
     <ClInclude Include="ScopedLink.h" />

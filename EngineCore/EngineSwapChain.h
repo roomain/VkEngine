@@ -8,6 +8,7 @@
 #include <vulkan/vulkan.hpp>
 #include "DeviceContext.h"
 #include "notCopiable.h"
+#include "internalConfiguration.h"
 
 class EngineSwapChain
 {
@@ -38,7 +39,7 @@ private:
 	void createSwapChain(const uint32_t a_width, const uint32_t a_height);	
 
 public:
-	EngineSwapChain(const DeviceContext& a_ctx, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height);
+	EngineSwapChain(const DeviceContext& a_ctx, const SurfaceConfiguration& a_surfConf);
 	EngineSwapChain() = delete;
 	NOT_COPIABLE(EngineSwapChain)
 	void resize(const uint32_t a_width, const uint32_t a_height);

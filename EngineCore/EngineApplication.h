@@ -10,7 +10,7 @@
 #include <functional>
 #include <vulkan/vulkan.hpp>
 #include "VulkanCapabilities.h"
-
+#include "InternalConfiguration.h"
 
 class EngineDevice;
 using EngineDevicePtr = std::shared_ptr<EngineDevice>;
@@ -49,7 +49,7 @@ public:
 #pragma region devices
 	[[nodiscard]] std::vector<DeviceConfiguration> suitableDevices(const DeviceParameters& a_parameters, const VkSurfaceKHR* a_surface = VK_NULL_HANDLE)const;
 	[[nodiscard]] EngineDevicePtr createDevice(const DeviceConfiguration& a_parameters);
-	[[nodiscard]] EngineRendererPtr createRenderer(const DeviceConfiguration& a_parameters, VkSurfaceKHR a_surface, const uint32_t a_width, const uint32_t a_height);
+	[[nodiscard]] EngineRendererPtr createRenderer(const RendererConfiguration& a_parameter);
 	// todo save device
 #pragma endregion //devices
 };
