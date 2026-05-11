@@ -4,5 +4,6 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="EngineCore/EngineCore.vcxproj" Id="494516eb-db3f-4b40-ae1b-22949e65490b" />
+  <Project Path="EngineExample/EngineExample.vcxproj" Id="e12bd178-35b7-4834-89de-11bdbeb830fe" />
   <Project Path="Reflective/Reflective/Reflective.vcxproj" Id="c632d8d7-44b4-4edf-b3a8-76dfb6cd0b80" />
 </Solution>

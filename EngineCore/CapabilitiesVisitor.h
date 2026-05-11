@@ -83,7 +83,7 @@ protected:
 	virtual void beginNode(const char* a_title) = 0;
 	virtual void endNode() = 0;
 
-	/*@brief to display multiple data for single capavity*/
+	/*@brief to display multiple data for single capability*/
 	virtual void benginDataArray(const char* a_title) = 0;
 	virtual void endDataArray() = 0;
 

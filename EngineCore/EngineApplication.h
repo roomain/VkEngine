@@ -11,6 +11,10 @@
 #include <vulkan/vulkan.hpp>
 #include "VulkanCapabilities.h"
 #include "InternalConfiguration.h"
+#include "enginecore_globals.h"
+
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 
 class EngineDevice;
 using EngineDevicePtr = std::shared_ptr<EngineDevice>;
@@ -30,7 +34,7 @@ struct EngineApplicationParameters
 };
 
 /*@brief entry point of engine*/
-class EngineApplication
+class ENGINECORE_EXPORT EngineApplication
 {
 private:
 	static constexpr uint32_t ENGINE_VERSION = 1;
@@ -54,3 +58,4 @@ public:
 #pragma endregion //devices
 };
 
+#pragma warning(pop)

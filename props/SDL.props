@@ -15,8 +15,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SDL_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">SDL3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CopyFileToFolders>
       <DestinationFileName>SDL3.dll</DestinationFileName>
