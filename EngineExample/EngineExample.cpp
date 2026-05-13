@@ -6,6 +6,7 @@
 #include <memory>
 #include "events.h"
 #include "EngineApplication.h"
+#include "capabilitiesVisitorImpl.h"
 
 SDL_Window* g_window = nullptr;
 SDL_Renderer* g_renderer = nullptr;
@@ -31,8 +32,14 @@ int main(int argc, char* argv[])
     }
 
     g_window = SDL_CreateWindow("EngineExample", g_width, g_height, SDL_WINDOW_VULKAN | SDL_WINDOW_RESIZABLE);
+    
+
+    CapabilitiesConsoleVisitorImpl visitor;
+    visitor.visit(EngineApplication::hostCapabilities());
+
     g_appEngine = std::make_shared<EngineApplication>(g_appParam);
     auto& caps = g_appEngine->capabilities();
+
 
     SDL_Event event;
     bool quit = false;

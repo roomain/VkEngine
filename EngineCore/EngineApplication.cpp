@@ -7,7 +7,23 @@
 #include "Reflective.h"
 #include "CheckParameters.h"
 
+VulkanCapabilities EngineApplication::hostCapabilities()
+{
+	VulkanCapabilities capabilities;
+	auto appInfo = initApplicationInfo("Host capabilities",
+		EngineApplication::ENGINE_NAME,
+		0,
+		EngineApplication::ENGINE_VERSION);
+	auto instanceInfo = initInstanceCreateInfo(&appInfo);
 
+	instanceInfo.enabledLayerCount = 0;
+	instanceInfo.enabledExtensionCount = 0;
+	VkInstance instance;
+	VK_CHECK_EXCEPT(vkCreateInstance(&instanceInfo, nullptr, &instance))
+	getVulkanCapabilities(capabilities, instance);
+	vkDestroyInstance(instance, nullptr);
+	return capabilities;
+}
 
 EngineApplication::EngineApplication(const EngineApplicationParameters& a_appParameters)
 {

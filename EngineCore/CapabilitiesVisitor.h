@@ -65,7 +65,6 @@ private:
 		return std::format("{} {}", formalizedSize, unit).c_str();
 	}
 
-	void visit(const VulkanCapabilities& a_cap);
 	void visit(const VulkanDeviceCapabilities& a_cap);
 	void visit(const std::vector<VkExtensionProperties>& a_ext);
 	void visit(const std::vector<VkLayerProperties>& a_layers);
@@ -77,6 +76,7 @@ private:
 
 public:
 	virtual ~CapabilitiesVisitor() = default;
+	void visit(const VulkanCapabilities& a_cap);
 
 protected:
 	/*@brief to display data in a tree structure*/

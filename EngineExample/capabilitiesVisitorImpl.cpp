@@ -1,61 +1,176 @@
-#include "capabilitiesVisitorImpl.h"
+#include <iostream>
+#include "CapabilitiesVisitorImpl.h"
 
-void CapabilitiesVisitorImpl::beginNode(const char* a_title)
+void CapabilitiesConsoleVisitorImpl::setupTabs()const
 {
-	// todo
+	int index = 0;
+	while (index < m_tabCount)
+	{
+		++index;
+		std::cout << "\t";
+	}
 }
 
-void CapabilitiesVisitorImpl::endNode()
+void CapabilitiesConsoleVisitorImpl::beginNode(const char* a_title)
 {
-	// todo
+	std::cout << "\n";
+	setupTabs();
+	std::cout << "* " << a_title << "\n";
+	m_tabCount++;
 }
 
-void CapabilitiesVisitorImpl::benginDataArray(const char* a_title)
+void CapabilitiesConsoleVisitorImpl::endNode()
 {
-	// todo
+	m_tabCount--;
 }
 
-void CapabilitiesVisitorImpl::endDataArray()
+void CapabilitiesConsoleVisitorImpl::benginDataArray(const char* a_title)
 {
-	// todo
+	setupTabs();
+	std::cout << "+ " << a_title << "\n";
+	setupTabs();
+	std::cout << "**************************************************\n";
+	m_isArray = true;
 }
 
-void CapabilitiesVisitorImpl::visitData(const char* a_title, const bool a_value)
+void CapabilitiesConsoleVisitorImpl::endDataArray()
 {
-	// todo
+	setupTabs();
+	std::cout << "**************************************************\n\n";
+	m_isArray = false;
 }
 
-void CapabilitiesVisitorImpl::visitData(const char* a_title, const int32_t a_value)
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const bool a_value)
 {
-	// todo
+	setupTabs();
+	std::cout << std::boolalpha;
+	if (m_isArray)
+	{
+		std::cout << a_title << " : " << a_value << "\n";
+		setupTabs();
+		std::cout << "-------------------------------------------------\n";
+	}
+	else
+	{
+		std::cout << "- " << a_title << ": " << a_value << "\n";
+	}
 }
 
-void CapabilitiesVisitorImpl::visitData(const char* a_title, const uint32_t a_value)
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const int32_t a_value)
 {
-	// todo
+	setupTabs();
+	if (m_isArray)
+	{
+		std::cout << a_title << " : " << a_value << "\n";
+		setupTabs();
+		std::cout << "-------------------------------------------------\n";
+	}
+	else
+	{
+		std::cout << "- " << a_title << ": " << a_value << "\n";
+	}
 }
 
-void CapabilitiesVisitorImpl::visitData(const char* a_title, const float a_value)
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const uint32_t a_value)
 {
-	// todo
+	setupTabs();
+	if (m_isArray)
+	{
+		std::cout << a_title << " : " << a_value << "\n";
+		setupTabs();
+		std::cout << "-------------------------------------------------\n";
+	}
+	else
+	{
+		std::cout << "- " << a_title << ": " << a_value << "\n";
+	}
 }
 
-void CapabilitiesVisitorImpl::visitData(const char* a_title, const double& a_value)
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const float a_value)
 {
-	// todo
+	setupTabs();
+	if (m_isArray)
+	{
+		std::cout << a_title << " : " << a_value << "\n";
+		setupTabs();
+		std::cout << "-------------------------------------------------\n";
+	}
+	else
+	{
+		std::cout << "- " << a_title << ": " << a_value << "\n";
+	}
 }
 
-void CapabilitiesVisitorImpl::visitData(const char* a_title, const char* a_value)
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const double& a_value)
 {
-	// todo
+	setupTabs();
+	if (m_isArray)
+	{
+		std::cout << a_title << " : " << a_value << "\n";
+		setupTabs();
+		std::cout << "-------------------------------------------------\n";
+	}
+	else
+	{
+		std::cout << "- " << a_title << ": " << a_value << "\n";
+	}
 }
 
-void CapabilitiesVisitorImpl::visitData(const char* a_title, const std::string_view& a_value)
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const char* a_value)
 {
-	// todo
+	setupTabs();
+	if (m_isArray)
+	{
+		std::cout << a_title << " : " << a_value << "\n";
+		setupTabs();
+		std::cout << "-------------------------------------------------\n";
+	}
+	else
+	{
+		std::cout << "- " << a_title << ": " << a_value << "\n";
+	}
 }
 
-void CapabilitiesVisitorImpl::visitData(const char* a_title, const std::vector<std::string>& a_value)
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const std::string_view& a_value)
 {
-	// todo
+	setupTabs();
+	if (m_isArray)
+	{
+		std::cout << a_title << " : " << a_value << "\n";
+		setupTabs();
+		std::cout << "-------------------------------------------------\n";
+	}
+	else
+	{
+		std::cout << "- " << a_title << ": " << a_value << "\n";
+	}
+}
+
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const std::vector<std::string>& a_value)
+{
+	setupTabs();
+	if (m_isArray)
+	{
+		std::cout << a_title << " : " << "[\n";
+		for (const auto& val : a_value)
+		{
+			setupTabs();
+			std::cout << "\t" << val << "\n";
+		}
+		setupTabs();
+		std::cout << "\t]\n";
+		setupTabs();
+		std::cout << "-------------------------------------------------\n";
+	}
+	else
+	{
+		std::cout << "- " << a_title << ": " << "[\n";
+		for (const auto& val : a_value)
+		{
+			setupTabs();
+			std::cout << "\t" << val << "\n";
+		}
+		setupTabs();
+		std::cout << "\t]\n";
+	}
 }

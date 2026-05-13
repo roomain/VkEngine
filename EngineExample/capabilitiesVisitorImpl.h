@@ -6,8 +6,12 @@
 ************************************************/
 #include "CapabilitiesVisitor.h"
 
-class CapabilitiesVisitorImpl : public CapabilitiesVisitor
+class CapabilitiesConsoleVisitorImpl : public CapabilitiesVisitor
 {
+private:
+	bool m_isArray = false;
+	int m_tabCount = 0;
+	void setupTabs()const;
 public:
 	void beginNode(const char* a_title) override;
 	void endNode() override;

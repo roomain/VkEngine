@@ -17,7 +17,7 @@ private:
 	VkDeviceSize m_activeSize = 0;
 
 	void releaseBuffer();
-	EngineDynamicBuffer(const DeviceContext& a_ctxt) : m_devCtx{ a_ctxt } {}
+	explicit EngineDynamicBuffer(const DeviceContext& a_ctxt) : m_devCtx{ a_ctxt } {}
 public:
 	~EngineDynamicBuffer();
 	[[nodiscard]] constexpr VkBuffer buffer()const { return m_buffer; }

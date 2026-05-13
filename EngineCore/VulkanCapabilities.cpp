@@ -19,6 +19,9 @@ void getVulkanCapabilities(VulkanCapabilities& a_VkCap, const VkInstance a_insta
 	if (a_VkCap.layers.empty())
 		enumerate(&vkEnumerateInstanceLayerProperties, a_VkCap.layers);
 
+	if (a_VkCap.instance == VK_NULL_HANDLE)
+		return;
+
 	std::vector<VkPhysicalDevice> vDevices;
 	enumerate(&vkEnumeratePhysicalDevices, vDevices, a_VkCap.instance);
 	for (const auto& physDev : vDevices)
@@ -35,6 +38,7 @@ void getDeviceCapabilities(const VkPhysicalDevice& a_physDev, VulkanDeviceCapabi
 	vkGetPhysicalDeviceFeatures(a_devCap.physDevice, &a_devCap.features);
 
 	vkGetPhysicalDeviceMemoryProperties(a_devCap.physDevice, &a_devCap.memoryProperties);
+	getQueueFamiliesCapabilities(a_physDev, a_devCap.queueFamilies);
 }
 
 void getQueueFamiliesCapabilities(const VkPhysicalDevice& a_physDev, std::vector<VkQueueFamilyProperties>& a_queueFamilies)

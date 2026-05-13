@@ -56,6 +56,7 @@ public:
 	[[nodiscard]] EngineRendererPtr createRenderer(const RendererConfiguration& a_parameter);
 	// todo save device
 #pragma endregion //devices
+	static VulkanCapabilities hostCapabilities();
 };
 
 #pragma warning(pop)
