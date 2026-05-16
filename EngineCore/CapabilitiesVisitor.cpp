@@ -78,11 +78,14 @@ void CapabilitiesVisitor::visit(const VulkanDeviceCapabilities& a_cap)
 {
 	beginNode(a_cap.properties.deviceName);
 	
+    visit(a_cap.extensions);
+    visit(a_cap.layers);
+
 	benginDataArray("Properties");
 	visit(a_cap.properties);
 	endDataArray();
 
-    benginDataArray("Properties");
+    benginDataArray("features");
     visit(a_cap.features);
     endDataArray();
 
