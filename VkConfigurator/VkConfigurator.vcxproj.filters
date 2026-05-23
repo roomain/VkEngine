@@ -52,12 +52,24 @@
     <ClCompile Include="VulkanTreeItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CapabilityExplorer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigurationEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VulkanTreeModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="VulkanTableModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CapabilityExplorer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ConfigurationEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -84,5 +96,13 @@
     <Image Include="resources\vulkanConfIcon.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="CapabilityExplorer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ConfigurationEditor.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

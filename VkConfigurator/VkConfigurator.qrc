@@ -7,5 +7,6 @@
         <file>resources/queue.png</file>
         <file>resources/queueList.png</file>
         <file>resources/vulkanConfIcon.png</file>
+        <file>resources/profile.png</file>
     </qresource>
 </RCC>

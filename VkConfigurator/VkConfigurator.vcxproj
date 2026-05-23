@@ -56,6 +56,7 @@
     <Import Project="..\props\vulkan.props" />
     <Import Project="..\props\Reflection.props" />
     <Import Project="..\props\engineCore.props" />
+    <Import Project="..\props\boost.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -63,6 +64,7 @@
     <Import Project="..\props\vulkan.props" />
     <Import Project="..\props\Reflection.props" />
     <Import Project="..\props\engineCore.props" />
+    <Import Project="..\props\boost.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
@@ -110,11 +112,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CapabilityExplorer.cpp" />
+    <ClCompile Include="ConfigurationEditor.cpp" />
     <ClCompile Include="VkCapabiltyVisitorImpl.cpp" />
     <ClCompile Include="VulkanTableModel.cpp" />
     <ClCompile Include="VulkanTreeItem.cpp" />
     <ClCompile Include="VulkanTreeModel.cpp" />
     <QtRcc Include="VkConfigurator.qrc" />
+    <QtUic Include="CapabilityExplorer.ui" />
+    <QtUic Include="ConfigurationEditor.ui" />
     <QtUic Include="VkConfigurator.ui" />
     <QtMoc Include="VkConfigurator.h" />
     <ClCompile Include="VkConfigurator.cpp" />
@@ -124,6 +130,8 @@
     <QtMoc Include="VulkanTreeModel.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="CapabilityExplorer.h" />
+    <QtMoc Include="ConfigurationEditor.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="VkCapabiltyVisitorImpl.h" />
     <ClInclude Include="VulkanTreeItem.h" />

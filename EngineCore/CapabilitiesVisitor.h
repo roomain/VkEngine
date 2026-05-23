@@ -36,12 +36,12 @@ private:
 		static constexpr double kilo = 1024;
 		static constexpr double mega = 1024 * kilo;
 		static constexpr double giga = 1024 * mega;
-
-		if (a_computedSize = static_cast<double>(a_size) / giga; a_computedSize > 0.01)
+		a_computedSize = static_cast<double>(a_size) / giga;
+		if (a_computedSize > 0.01)
 		{
 			a_unit = "Go";
 		}
-		else if (a_computedSize = static_cast<double>(a_size) / giga; a_computedSize > 0.01)
+		else if (a_computedSize > 0.01)
 		{
 			a_unit = "Mo";
 		}

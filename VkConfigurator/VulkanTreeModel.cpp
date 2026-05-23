@@ -36,7 +36,7 @@ QModelIndex VulkanTreeModel::parent(const QModelIndex& child) const
 
 int VulkanTreeModel::rowCount(const QModelIndex& parent) const
 {
-	VulkanTreeItem* item = reinterpret_cast<VulkanTreeItem*>(parent.internalPointer());
+	auto item = reinterpret_cast<VulkanTreeItem*>(parent.internalPointer());
 	if (item)
 		return item->count();
 	else
@@ -51,7 +51,7 @@ int VulkanTreeModel::columnCount(const QModelIndex& parent) const
 
 QVariant VulkanTreeModel::data(const QModelIndex& index, int role) const
 {
-	VulkanTreeItem* item = reinterpret_cast<VulkanTreeItem*>(index.internalPointer());
+	auto item = reinterpret_cast<VulkanTreeItem*>(index.internalPointer());
 	if (item)
 	{
 		switch (role)

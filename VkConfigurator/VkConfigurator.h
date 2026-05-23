@@ -2,7 +2,6 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_VkConfigurator.h"
-#include "VkCapabiltyVisitorImpl.h"
 
 class VkConfigurator : public QMainWindow
 {
@@ -14,12 +13,5 @@ public:
 
 private:
     Ui::VkConfiguratorClass ui;
-    VkCapabiltyVisitorImpl m_visitor;
-
-private slots:
-    void onOpenFile();
-    void onSaveFile();
-    void onSaveAsFile();
-    void onCapabilitySelected(const QModelIndex& current);
 };
 

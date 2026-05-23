@@ -37,10 +37,6 @@ QVariant VulkanTableModel::data(const QModelIndex& index, int role) const
 		else
 		{
 			return m_table[index.row()].second.m_display;
-			//if (m_table[index.row()].second.m_link.isEmpty())
-			//	return m_table[index.row()].second.m_display;
-			//else
-			//	return QString("<a href='%1'>%2</a>").arg(m_table[index.row()].second.m_link).arg(m_table[index.row()].second.m_display.toString());
 		}
 		break;
 	case Qt::ToolTipRole:
@@ -54,6 +50,13 @@ QVariant VulkanTableModel::data(const QModelIndex& index, int role) const
 			{
 				return QString("<a href='https://docs.vulkan.org/refpages/latest/refpages/source/%1'>%2</a>").arg(m_table[index.row()].second.m_link).arg(m_table[index.row()].second.m_display.toString());
 			}
+		}
+		break;
+
+	case Qt::UserRole:
+		if (index.column() == 1)
+		{
+			return m_table[index.row()].second.m_link;
 		}
 		break;
 	default:
