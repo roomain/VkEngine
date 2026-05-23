@@ -27,6 +27,8 @@ VulkanCapabilities EngineApplication::hostCapabilities()
 
 EngineApplication::EngineApplication(const EngineApplicationParameters& a_appParameters)
 {
+	// loading modules
+
 	auto appInfo = initApplicationInfo(a_appParameters.appName, 
 		EngineApplication::ENGINE_NAME, 
 		a_appParameters.appVersion,
@@ -39,11 +41,13 @@ EngineApplication::EngineApplication(const EngineApplicationParameters& a_appPar
 		if (Reflective::instance().hasProfile(a_appParameters.parametersProfile))
 		{
 			EngineParameters parameters;
-			instanceInfo.enabledLayerCount = static_cast<uint32_t>(parameters.layers.size());
-			auto tempLayers = vStringToChar(parameters.layers);
+			auto cleanedLayers = removeDoubloon(parameters.layers);
+			instanceInfo.enabledLayerCount = static_cast<uint32_t>(cleanedLayers.size());
+			auto tempLayers = vStringToChar(cleanedLayers);
 			instanceInfo.ppEnabledLayerNames = tempLayers.data();
-			instanceInfo.enabledExtensionCount = static_cast<uint32_t>(parameters.extensions.size());
-			auto tempExt = vStringToChar(parameters.extensions);
+			auto cleanedExtensions = removeDoubloon(parameters.extensions);
+			instanceInfo.enabledExtensionCount = static_cast<uint32_t>(cleanedExtensions.size());
+			auto tempExt = vStringToChar(cleanedExtensions);
 			instanceInfo.ppEnabledExtensionNames = tempExt.data();
 			VK_CHECK_EXCEPT(vkCreateInstance(&instanceInfo, nullptr, &m_capabilities.instance))
 			getVulkanCapabilities(m_capabilities);
@@ -114,13 +118,20 @@ EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_con
 		}
 
 		VkDeviceCreateInfo createInfo = initDeviceCreateInfo(queueCreateInfo, &a_configuration.features, 0);
-		auto tempExtension = vStringToChar(a_configuration.extensions);
-		auto tempLayers = vStringToChar(a_configuration.layers);
+		auto cleanedExtensions = removeDoubloon(a_configuration.extensions);
+		auto tempExtension = vStringToChar(cleanedExtensions);
+		auto cleanedLayers = removeDoubloon(a_configuration.layers);
+		auto tempLayers = vStringToChar(cleanedLayers);
 
 		createInfo.ppEnabledExtensionNames = tempExtension.data();
-		createInfo.enabledExtensionCount = static_cast<uint32_t>(a_configuration.extensions.size());
+		createInfo.enabledExtensionCount = static_cast<uint32_t>(cleanedExtensions.size());
 		createInfo.ppEnabledLayerNames = tempLayers.data();
-		createInfo.enabledLayerCount = static_cast<uint32_t>(a_configuration.layers.size());
+		createInfo.enabledLayerCount = static_cast<uint32_t>(cleanedLayers.size());
+
+		// parameter of extensions
+
+		// todo
+
 		vkCreateDevice(m_capabilities.devices[a_configuration.deviceIndex].physDevice, &createInfo, nullptr, &ctx.m_vkDevice);
 		EngineDevicePtr newDevice (new EngineDevice(a_configuration, ctx));
 		m_deviceInstance.emplace_back(newDevice);

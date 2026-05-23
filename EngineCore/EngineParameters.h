@@ -164,3 +164,16 @@ struct DeviceParameters : BaseParameters
     std::vector<QueuesParameters> queues;
 	REFLECT_DEFINE(DeviceParameters);
 };
+
+/*@brief tool to remove doubloon*/
+template<typename Type>
+std::vector<Type> removeDoubloon(const std::vector<Type>& a_data)
+{
+    std::vector<Type> cleaned;
+    for (const auto& data : a_data)
+    {
+        if (auto iter = std::ranges::find(cleaned, data); iter == cleaned.cend())
+            cleaned.emplace_back(data);
+    }
+    return cleaned;
+}
