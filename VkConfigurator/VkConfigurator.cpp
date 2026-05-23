@@ -1,5 +1,6 @@
 #include "VkConfigurator.h"
 #include "VulkanTreeModel.h"
+#include "VulkanTreeItem.h"
 #include "VkCapabiltyVisitorImpl.h"
 #include "EngineApplication.h"
 
@@ -13,6 +14,7 @@ VkConfigurator::VkConfigurator(QWidget *parent)
 
     m_visitor.visit(EngineApplication::hostCapabilities());
     ui.tvVulkanArchi->setModel(m_visitor.createModel());
+	ui.tvVulkanArchi->expandAll();
 
     QObject::connect(ui.actionOpen, &QAction::triggered, this, &VkConfigurator::onOpenFile);
     QObject::connect(ui.actionSave, &QAction::triggered, this, &VkConfigurator::onSaveFile);

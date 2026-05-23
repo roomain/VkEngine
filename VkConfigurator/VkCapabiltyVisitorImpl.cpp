@@ -1,5 +1,7 @@
 #include "VkCapabiltyVisitorImpl.h"
 #include "VulkanTreeModel.h"
+#include "VulkanTreeItem.h"
+#include "VulkanTableModel.h"
 
 VkCapabiltyVisitorImpl::~VkCapabiltyVisitorImpl()
 {
@@ -15,7 +17,30 @@ void VkCapabiltyVisitorImpl::beginNode(const char* a_title)
 	}
 	else
 	{
-		m_current = new VulkanTreeItem(a_title, QIcon(), m_current);
+		QIcon icon;
+		QString temp(a_title);
+		if (temp == "Extensions")
+		{
+			icon = QIcon(":/VkConfigurator/resources/extension.png");
+		}
+		else if (temp == "Layers")
+		{
+			icon = QIcon(":/VkConfigurator/resources/layer.png");
+		}
+		else if (temp == "Queue family")
+		{
+			icon = QIcon(":/VkConfigurator/resources/queueList.png");
+		}
+		else if (temp.contains("Queue family"))
+		{
+			icon = QIcon(":/VkConfigurator/resources/queue.png");
+		}
+		else if (m_current)
+		{
+			if(m_current->displayRole().toString() == "Devices")
+				icon = QIcon(":/VkConfigurator/resources/device.png");
+		}
+		m_current = new VulkanTreeItem(a_title, icon, m_current);
 	}
 
 }
@@ -39,7 +64,7 @@ void VkCapabiltyVisitorImpl::visitData(const char* a_title, const bool a_value)
 {
 	if (m_current)
 	{
-		m_current->data().addData(a_title, a_value);
+		m_current->data().addData(a_title, VulkanTableModel::Data{ a_value });
 	}
 }
 
@@ -47,7 +72,7 @@ void VkCapabiltyVisitorImpl::visitData(const char* a_title, const int32_t a_valu
 {
 	if (m_current)
 	{
-		m_current->data().addData(a_title, a_value);
+		m_current->data().addData(a_title, VulkanTableModel::Data{ a_value });
 	}
 }
 
@@ -55,7 +80,7 @@ void VkCapabiltyVisitorImpl::visitData(const char* a_title, const uint32_t a_val
 {
 	if (m_current)
 	{
-		m_current->data().addData(a_title, a_value);
+		m_current->data().addData(a_title, VulkanTableModel::Data{ a_value });
 	}
 }
 
@@ -63,7 +88,7 @@ void VkCapabiltyVisitorImpl::visitData(const char* a_title, const float a_value)
 {
 	if (m_current)
 	{
-		m_current->data().addData(a_title, a_value);
+		m_current->data().addData(a_title, VulkanTableModel::Data{ a_value });
 	}
 }
 
@@ -71,7 +96,7 @@ void VkCapabiltyVisitorImpl::visitData(const char* a_title, const double& a_valu
 {
 	if (m_current)
 	{
-		m_current->data().addData(a_title, a_value);
+		m_current->data().addData(a_title, VulkanTableModel::Data{ a_value });
 	}
 }
 
@@ -79,7 +104,7 @@ void VkCapabiltyVisitorImpl::visitData(const char* a_title, const char* a_value)
 {
 	if (m_current)
 	{
-		m_current->data().addData(a_title, QString(a_value));
+		m_current->data().addData(a_title, VulkanTableModel::Data{ QString(a_value) });
 	}
 }
 
@@ -87,16 +112,18 @@ void VkCapabiltyVisitorImpl::visitData(const char* a_title, const std::string_vi
 {
 	if (m_current)
 	{
-		m_current->data().addData(a_title, QString::fromStdString(std::string(a_value)));
+		m_current->data().addData(a_title, VulkanTableModel::Data{ QString::fromStdString(std::string(a_value)) });
 	}
 }
 
 void VkCapabiltyVisitorImpl::visitData(const char* a_title, const std::vector<std::string>& a_value)
 {
 	int index = 0;
+	bool isExtension = std::string(a_title).compare("Extensions") == 0;
 	for (auto& value : a_value)
 	{
-		m_current->data().addData(QString("%1 [%2]").arg(a_title).arg(index), QString::fromStdString(value));
+		QString link = isExtension ? QString("https://docs.vulkan.org/refpages/latest/refpages/source/%1.html").arg(QString::fromStdString(value).split(" ")[0]) : "";
+		m_current->data().addData(QString("%1 [%2]").arg(a_title).arg(index), VulkanTableModel::Data{ QString::fromStdString(value), link });
 		index++;
 	}
 }

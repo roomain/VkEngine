@@ -3,10 +3,15 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="EngineCore/EngineCore.vcxproj" Id="494516eb-db3f-4b40-ae1b-22949e65490b" />
-  <Project Path="EngineExample/EngineExample.vcxproj" Id="e12bd178-35b7-4834-89de-11bdbeb830fe" />
+  <Project Path="EngineCore/EngineCore.vcxproj" Id="494516eb-db3f-4b40-ae1b-22949e65490b">
+    <BuildDependency Project="Reflective/Reflective/Reflective.vcxproj" />
+  </Project>
+  <Project Path="EngineExample/EngineExample.vcxproj" Id="e12bd178-35b7-4834-89de-11bdbeb830fe">
+    <BuildDependency Project="EngineCore/EngineCore.vcxproj" />
+  </Project>
   <Project Path="Reflective/Reflective/Reflective.vcxproj" Id="c632d8d7-44b4-4edf-b3a8-76dfb6cd0b80" />
   <Project Path="VkConfigurator/VkConfigurator.vcxproj" Id="1cb47d8e-ae31-45b0-b34e-598587b3bb8c">
+    <BuildDependency Project="EngineCore/EngineCore.vcxproj" />
     <Platform Project="x64" />
   </Project>
 </Solution>
