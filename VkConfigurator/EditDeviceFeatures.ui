@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditDeviceFeaturesClass</class>
+ <widget class="QWidget" name="EditDeviceFeaturesClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>513</width>
+    <height>1039</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>EditDeviceFeatures</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-460</y>
+        <width>497</width>
+        <height>1497</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="geometryShader">
+         <property name="text">
+          <string>geometryShader</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <widget class="QCheckBox" name="fillModeNonSolid">
+         <property name="text">
+          <string>fillModeNonSolid</string>
+         </property>
+        </widget>
+       </item>
+       <item row="16" column="0">
+        <widget class="QCheckBox" name="largePoints">
+         <property name="text">
+          <string>largePoints</string>
+         </property>
+        </widget>
+       </item>
+       <item row="25" column="0">
+        <widget class="QCheckBox" name="vertexPipelineStoresAndAtomics">
+         <property name="text">
+          <string>vertexPipelineStoresAndAtomics</string>
+         </property>
+        </widget>
+       </item>
+       <item row="26" column="0">
+        <widget class="QCheckBox" name="fragmentStoresAndAtomics">
+         <property name="text">
+          <string>fragmentStoresAndAtomics</string>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="0">
+        <widget class="QCheckBox" name="multiViewport">
+         <property name="text">
+          <string>multiViewport</string>
+         </property>
+        </widget>
+       </item>
+       <item row="48" column="0">
+        <widget class="QCheckBox" name="sparseResidency2Samples">
+         <property name="text">
+          <string>sparseResidency2Samples</string>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="0">
+        <widget class="QCheckBox" name="wideLines">
+         <property name="text">
+          <string>wideLines</string>
+         </property>
+        </widget>
+       </item>
+       <item row="31" column="0">
+        <widget class="QCheckBox" name="shaderStorageImageReadWithoutFormat">
+         <property name="text">
+          <string>shaderStorageImageReadWithoutFormat</string>
+         </property>
+        </widget>
+       </item>
+       <item row="41" column="0">
+        <widget class="QCheckBox" name="shaderInt16">
+         <property name="text">
+          <string>shaderInt16</string>
+         </property>
+        </widget>
+       </item>
+       <item row="45" column="0">
+        <widget class="QCheckBox" name="sparseResidencyBuffer">
+         <property name="text">
+          <string>sparseResidencyBuffer</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="robustBufferAccess">
+         <property name="text">
+          <string>robustBufferAccess</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="imageCubeArray">
+         <property name="text">
+          <string>imageCubeArray</string>
+         </property>
+        </widget>
+       </item>
+       <item row="35" column="0">
+        <widget class="QCheckBox" name="shaderStorageBufferArrayDynamicIndexing">
+         <property name="text">
+          <string>shaderStorageBufferArrayDynamicIndexing</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QCheckBox" name="multiDrawIndirect">
+         <property name="text">
+          <string>multiDrawIndirect</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QCheckBox" name="depthClamp">
+         <property name="text">
+          <string>depthClamp</string>
+         </property>
+        </widget>
+       </item>
+       <item row="22" column="0">
+        <widget class="QCheckBox" name="textureCompressionBC">
+         <property name="text">
+          <string>textureCompressionBC</string>
+         </property>
+        </widget>
+       </item>
+       <item row="43" column="0">
+        <widget class="QCheckBox" name="shaderResourceMinLod">
+         <property name="text">
+          <string>shaderResourceMinLod</string>
+         </property>
+        </widget>
+       </item>
+       <item row="33" column="0">
+        <widget class="QCheckBox" name="shaderUniformBufferArrayDynamicIndexing">
+         <property name="text">
+          <string>shaderUniformBufferArrayDynamicIndexing</string>
+         </property>
+        </widget>
+       </item>
+       <item row="19" column="0">
+        <widget class="QCheckBox" name="samplerAnisotropy">
+         <property name="text">
+          <string>samplerAnisotropy</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QCheckBox" name="depthBiasClamp">
+         <property name="text">
+          <string>depthBiasClamp</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QCheckBox" name="drawIndirectFirstInstance">
+         <property name="text">
+          <string>drawIndirectFirstInstance</string>
+         </property>
+        </widget>
+       </item>
+       <item row="30" column="0">
+        <widget class="QCheckBox" name="shaderStorageImageMultisample">
+         <property name="text">
+          <string>shaderStorageImageMultisample</string>
+         </property>
+        </widget>
+       </item>
+       <item row="53" column="0">
+        <widget class="QCheckBox" name="variableMultisampleRate">
+         <property name="text">
+          <string>variableMultisampleRate</string>
+         </property>
+        </widget>
+       </item>
+       <item row="52" column="0">
+        <widget class="QCheckBox" name="sparseResidencyAliased">
+         <property name="text">
+          <string>sparseResidencyAliased</string>
+         </property>
+        </widget>
+       </item>
+       <item row="27" column="0">
+        <widget class="QCheckBox" name="shaderTessellationAndGeometryPointSize">
+         <property name="text">
+          <string>shaderTessellationAndGeometryPointSize</string>
+         </property>
+        </widget>
+       </item>
+       <item row="38" column="0">
+        <widget class="QCheckBox" name="shaderCullDistance">
+         <property name="text">
+          <string>shaderCullDistance</string>
+         </property>
+        </widget>
+       </item>
+       <item row="40" column="0">
+        <widget class="QCheckBox" name="shaderInt64">
+         <property name="text">
+          <string>shaderInt64</string>
+         </property>
+        </widget>
+       </item>
+       <item row="50" column="0">
+        <widget class="QCheckBox" name="sparseResidency8Samples">
+         <property name="text">
+          <string>sparseResidency8Samples</string>
+         </property>
+        </widget>
+       </item>
+       <item row="23" column="0">
+        <widget class="QCheckBox" name="occlusionQueryPrecise">
+         <property name="text">
+          <string>occlusionQueryPrecise</string>
+         </property>
+        </widget>
+       </item>
+       <item row="54" column="0">
+        <widget class="QCheckBox" name="inheritedQueries">
+         <property name="text">
+          <string>inheritedQueries</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="tessellationShader">
+         <property name="text">
+          <string>tessellationShader</string>
+         </property>
+        </widget>
+       </item>
+       <item row="32" column="0">
+        <widget class="QCheckBox" name="shaderStorageImageWriteWithoutFormat">
+         <property name="text">
+          <string>shaderStorageImageWriteWithoutFormat</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="fullDrawIndexUint32">
+         <property name="text">
+          <string>fullDrawIndexUint32</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QCheckBox" name="dualSrcBlend">
+         <property name="text">
+          <string>dualSrcBlend</string>
+         </property>
+        </widget>
+       </item>
+       <item row="44" column="0">
+        <widget class="QCheckBox" name="sparseBinding">
+         <property name="text">
+          <string>sparseBinding</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0">
+        <widget class="QCheckBox" name="depthBounds">
+         <property name="text">
+          <string>depthBounds</string>
+         </property>
+        </widget>
+       </item>
+       <item row="39" column="0">
+        <widget class="QCheckBox" name="shaderFloat64">
+         <property name="text">
+          <string>shaderFloat64</string>
+         </property>
+        </widget>
+       </item>
+       <item row="42" column="0">
+        <widget class="QCheckBox" name="shaderResourceResidency">
+         <property name="text">
+          <string>shaderResourceResidency</string>
+         </property>
+        </widget>
+       </item>
+       <item row="28" column="0">
+        <widget class="QCheckBox" name="shaderImageGatherExtended">
+         <property name="text">
+          <string>shaderImageGatherExtended</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QCheckBox" name="logicOp">
+         <property name="text">
+          <string>logicOp</string>
+         </property>
+        </widget>
+       </item>
+       <item row="24" column="0">
+        <widget class="QCheckBox" name="pipelineStatisticsQuery">
+         <property name="text">
+          <string>pipelineStatisticsQuery</string>
+         </property>
+        </widget>
+       </item>
+       <item row="34" column="0">
+        <widget class="QCheckBox" name="shaderSampledImageArrayDynamicIndexing">
+         <property name="text">
+          <string>shaderSampledImageArrayDynamicIndexing</string>
+         </property>
+        </widget>
+       </item>
+       <item row="37" column="0">
+        <widget class="QCheckBox" name="shaderClipDistance">
+         <property name="text">
+          <string>shaderClipDistance</string>
+         </property>
+        </widget>
+       </item>
+       <item row="17" column="0">
+        <widget class="QCheckBox" name="alphaToOne">
+         <property name="text">
+          <string>alphaToOne</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="sampleRateShading">
+         <property name="text">
+          <string>sampleRateShading</string>
+         </property>
+        </widget>
+       </item>
+       <item row="49" column="0">
+        <widget class="QCheckBox" name="sparseResidency4Samples">
+         <property name="text">
+          <string>sparseResidency4Samples</string>
+         </property>
+        </widget>
+       </item>
+       <item row="21" column="0">
+        <widget class="QCheckBox" name="textureCompressionASTC_LDR">
+         <property name="text">
+          <string>textureCompressionASTC_LDR</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="independentBlend">
+         <property name="text">
+          <string>independentBlend</string>
+         </property>
+        </widget>
+       </item>
+       <item row="29" column="0">
+        <widget class="QCheckBox" name="shaderStorageImageExtendedFormats">
+         <property name="text">
+          <string>shaderStorageImageExtendedFormats</string>
+         </property>
+        </widget>
+       </item>
+       <item row="51" column="0">
+        <widget class="QCheckBox" name="sparseResidency16Samples">
+         <property name="text">
+          <string>sparseResidency16Samples</string>
+         </property>
+        </widget>
+       </item>
+       <item row="20" column="0">
+        <widget class="QCheckBox" name="textureCompressionETC2">
+         <property name="text">
+          <string>textureCompressionETC2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="46" column="0">
+        <widget class="QCheckBox" name="sparseResidencyImage2D">
+         <property name="text">
+          <string>sparseResidencyImage2D</string>
+         </property>
+        </widget>
+       </item>
+       <item row="36" column="0">
+        <widget class="QCheckBox" name="shaderStorageImageArrayDynamicIndexing">
+         <property name="text">
+          <string>shaderStorageImageArrayDynamicIndexing</string>
+         </property>
+        </widget>
+       </item>
+       <item row="47" column="0">
+        <widget class="QCheckBox" name="sparseResidencyImage3D">
+         <property name="text">
+          <string>sparseResidencyImage3D</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

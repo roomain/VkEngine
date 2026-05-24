@@ -58,6 +58,18 @@
     <ClCompile Include="ConfigurationEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EditDeviceFeatures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditBaseParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringListWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditFlag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VulkanTreeModel.h">
@@ -70,6 +82,18 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ConfigurationEditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="EditDeviceFeatures.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="EditBaseParameters.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="StringListWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="EditFlag.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -102,6 +126,18 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="ConfigurationEditor.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="EditDeviceFeatures.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="EditBaseParameters.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="StringListWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="EditFlag.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

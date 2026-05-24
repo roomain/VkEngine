@@ -14,4 +14,3 @@ public:
 private:
     Ui::VkConfiguratorClass ui;
 };
-

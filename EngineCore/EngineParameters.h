@@ -97,9 +97,9 @@ constexpr VkQueueFlagBits operator | (const VkQueueFlagBits a_first, const VkQue
 }
 
 template<>
-VkQueueFlagBits convert<VkQueueFlagBits, std::string_view>(const std::string_view& a_data)
+inline VkQueueFlagBits convert<VkQueueFlagBits, std::string_view>(const std::string_view& a_data)
 {
-    VkQueueFlagBits flag = static_cast<VkQueueFlagBits>(0);
+    auto flag = static_cast<VkQueueFlagBits>(0);
     auto splitted = split(a_data, '|');
     for (const auto& data : splitted)
     {
@@ -167,7 +167,7 @@ struct DeviceParameters : BaseParameters
 
 /*@brief tool to remove doubloon*/
 template<typename Type>
-std::vector<Type> removeDoubloon(const std::vector<Type>& a_data)
+inline std::vector<Type> removeDoubloon(const std::vector<Type>& a_data)
 {
     std::vector<Type> cleaned;
     for (const auto& data : a_data)
