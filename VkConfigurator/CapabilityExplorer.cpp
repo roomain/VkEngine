@@ -2,7 +2,7 @@
 #include "VulkanTreeModel.h"
 #include "VulkanTreeItem.h"
 #include "VkCapabiltyVisitorImpl.h"
-#include "EngineApplication.h"
+#include "CapabilitiesDatabase.h"
 #include <QDesktopServices>
 #include <QUrl>
 
@@ -10,8 +10,7 @@ CapabilityExplorer::CapabilityExplorer(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
-	m_capabilities = EngineApplication::hostCapabilities();
-	m_visitor.visit(m_capabilities);
+	m_visitor.visit(CapabilitiesDatabase::instance().capabilities());
 
 	ui.tvVulkanArchi->setModel(m_visitor.createModel());
 	ui.tvVulkanArchi->expandAll();

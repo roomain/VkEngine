@@ -1,9 +1,9 @@
 #pragma once
 
-#include <QWidget>
+#include <QMainWindow>
 #include "ui_ConfigurationEditor.h"
 
-class ConfigurationEditor : public QWidget
+class ConfigurationEditor : public QMainWindow
 {
 	Q_OBJECT
 
@@ -19,8 +19,14 @@ private:
 
 
 public slots:
+	void onNewConfiguration();
 	void onOpenFile();
 	void onSaveFile();
 	void onSaveAsFile();
+	void onProfileSelected(const QModelIndex& current);
+	void onNewProfile();
+
+	void onRenameProfile();
+	void onDeleteProfile();
 };
 

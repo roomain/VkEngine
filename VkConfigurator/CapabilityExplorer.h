@@ -16,7 +16,6 @@ public:
 private:
 	Ui::CapabilityExplorerClass ui;
 	VkCapabiltyVisitorImpl m_visitor;
-	VulkanCapabilities m_capabilities;
 
 private slots:
 	void onCapabilitySelected(const QModelIndex& current);

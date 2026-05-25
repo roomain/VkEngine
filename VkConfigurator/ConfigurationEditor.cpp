@@ -4,19 +4,35 @@
 #include <map>
 
 ConfigurationEditor::ConfigurationEditor(QWidget *parent)
-	: QWidget(parent)
+	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+	QList<int> sizes;
+	sizes.append(width() / 3);
+	sizes.append(2 * width() / 3);
+	ui.splitter->setSizes(sizes);
+	QObject::connect(ui.twProfiles, &QTreeView::clicked, this, &ConfigurationEditor::onProfileSelected);
+	QObject::connect(ui.twProfiles, &QTreeView::pressed, this, &ConfigurationEditor::onProfileSelected);
 }
 
 ConfigurationEditor::~ConfigurationEditor()
 {
 }
 
-void ConfigurationEditor::onOpenFile()
+void ConfigurationEditor::onNewConfiguration()
 {
 	ui.twProfiles->clear();
-	ui.tbwConf->clear();
+
+	for (int index = 0; index < ui.vLayoutEdit->count(); ++index)
+	{
+		delete ui.vLayoutEdit->takeAt(index);
+	}
+
+	Reflective::instance().clear();
+}
+
+void ConfigurationEditor::onOpenFile()
+{	
 	QString file = QFileDialog::getOpenFileName(nullptr, "Open configuration file", QString(), "Json files (*.json)");
 	if (!file.isEmpty())
 	{
@@ -55,6 +71,13 @@ void ConfigurationEditor::onOpenFile()
 		}
 		ui.twProfiles->expandAll();
 		emit loadedFinished();
+
+		ui.twProfiles->clear();
+
+		for (int index = 0; index < ui.vLayoutEdit->count(); ++index)
+		{
+			delete ui.vLayoutEdit->takeAt(index);
+		}
 	}
 }
 
@@ -66,4 +89,39 @@ void ConfigurationEditor::onSaveFile()
 void ConfigurationEditor::onSaveAsFile()
 {
     //
+}
+
+void ConfigurationEditor::onProfileSelected(const QModelIndex& current)
+{
+	for (int index = 0; index < ui.vLayoutEdit->count(); ++index)
+	{
+		delete ui.vLayoutEdit->takeAt(index);
+	}
+
+	Reflective::instance().setCurrentProfile(current.data(Qt::DisplayRole).toString().toStdString());
+	if (auto iter = std::find_if(Reflective::instance().cbegin(), Reflective::instance().cend(), [&current](const JsonReflectiveProfileData& a_data)
+		{
+			return a_data.profile == current.data(Qt::DisplayRole).toString().toStdString();
+		}); iter != Reflective::instance().cend())
+	{
+		for (const auto& className : iter->m_classes)
+		{
+			//
+		}
+	}
+}
+
+void ConfigurationEditor::onNewProfile()
+{
+	//
+}
+
+void ConfigurationEditor::onRenameProfile()
+{
+	//
+}
+
+void ConfigurationEditor::onDeleteProfile()
+{
+	//
 }

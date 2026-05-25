@@ -114,11 +114,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CapabilitiesDatabase.cpp" />
     <ClCompile Include="CapabilityExplorer.cpp" />
     <ClCompile Include="ConfigurationEditor.cpp" />
-    <ClCompile Include="EditBaseParameters.cpp" />
     <ClCompile Include="EditDeviceFeatures.cpp" />
     <ClCompile Include="EditFlag.cpp" />
+    <ClCompile Include="EditProfile.cpp" />
     <ClCompile Include="StringListWidget.cpp" />
     <ClCompile Include="VkCapabiltyVisitorImpl.cpp" />
     <ClCompile Include="VulkanTableModel.cpp" />
@@ -127,9 +128,9 @@
     <QtRcc Include="VkConfigurator.qrc" />
     <QtUic Include="CapabilityExplorer.ui" />
     <QtUic Include="ConfigurationEditor.ui" />
-    <QtUic Include="EditBaseParameters.ui" />
     <QtUic Include="EditDeviceFeatures.ui" />
     <QtUic Include="EditFlag.ui" />
+    <QtUic Include="EditProfile.ui" />
     <QtUic Include="StringListWidget.ui" />
     <QtUic Include="VkConfigurator.ui" />
     <QtMoc Include="VkConfigurator.h" />
@@ -143,8 +144,11 @@
     <QtMoc Include="CapabilityExplorer.h" />
     <QtMoc Include="ConfigurationEditor.h" />
     <QtMoc Include="EditDeviceFeatures.h" />
-    <QtMoc Include="EditBaseParameters.h" />
     <QtMoc Include="EditFlag.h" />
+    <ClInclude Include="CapabilitiesDatabase.h" />
+    <QtMoc Include="EditProfile.h" />
+    <ClInclude Include="Editor.h" />
+    <ClInclude Include="EditorFactory.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="StringListWidget.h" />
     <ClInclude Include="VkCapabiltyVisitorImpl.h" />
