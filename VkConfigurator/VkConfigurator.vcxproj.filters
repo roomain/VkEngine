@@ -64,13 +64,13 @@
     <ClCompile Include="StringListWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditFlag.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CapabilitiesDatabase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EditProfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,10 +93,10 @@
     <QtMoc Include="StringListWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="EditFlag.h">
+    <QtMoc Include="EditProfile.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="EditProfile.h">
+    <QtMoc Include="EditorDelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -113,10 +113,10 @@
     <ClInclude Include="CapabilitiesDatabase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Editor.h">
+    <ClInclude Include="EditorVulkanEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EditorFactory.h">
+    <ClInclude Include="EditorSetupEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -144,9 +144,6 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="StringListWidget.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="EditFlag.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="EditProfile.ui">

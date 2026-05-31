@@ -203,6 +203,7 @@ python reflective.py $(ProjectDir) -q
     <ClInclude Include="ScopedLink.h" />
     <ClInclude Include="StringToVkEnum.h" />
     <ClInclude Include="Transformation.h" />
+    <ClInclude Include="VkEnumMacros.h" />
     <ClInclude Include="VkEnumToString.h" />
     <ClInclude Include="vmaMemoryAllocator.cpp" />
     <ClInclude Include="vmaMemoryAllocator.h" />

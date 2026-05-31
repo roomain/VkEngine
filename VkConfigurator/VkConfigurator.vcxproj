@@ -118,7 +118,7 @@
     <ClCompile Include="CapabilityExplorer.cpp" />
     <ClCompile Include="ConfigurationEditor.cpp" />
     <ClCompile Include="EditDeviceFeatures.cpp" />
-    <ClCompile Include="EditFlag.cpp" />
+    <ClCompile Include="EditorDelegate.cpp" />
     <ClCompile Include="EditProfile.cpp" />
     <ClCompile Include="StringListWidget.cpp" />
     <ClCompile Include="VkCapabiltyVisitorImpl.cpp" />
@@ -129,7 +129,6 @@
     <QtUic Include="CapabilityExplorer.ui" />
     <QtUic Include="ConfigurationEditor.ui" />
     <QtUic Include="EditDeviceFeatures.ui" />
-    <QtUic Include="EditFlag.ui" />
     <QtUic Include="EditProfile.ui" />
     <QtUic Include="StringListWidget.ui" />
     <QtUic Include="VkConfigurator.ui" />
@@ -144,11 +143,11 @@
     <QtMoc Include="CapabilityExplorer.h" />
     <QtMoc Include="ConfigurationEditor.h" />
     <QtMoc Include="EditDeviceFeatures.h" />
-    <QtMoc Include="EditFlag.h" />
     <ClInclude Include="CapabilitiesDatabase.h" />
     <QtMoc Include="EditProfile.h" />
-    <ClInclude Include="Editor.h" />
-    <ClInclude Include="EditorFactory.h" />
+    <QtMoc Include="EditorDelegate.h" />
+    <ClInclude Include="EditorSetupEnums.h" />
+    <ClInclude Include="EditorVulkanEnum.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="StringListWidget.h" />
     <ClInclude Include="VkCapabiltyVisitorImpl.h" />

@@ -147,6 +147,9 @@
     <ClInclude Include="InternalConfiguration.h">
       <Filter>Fichiers d%27en-tête\parameters</Filter>
     </ClInclude>
+    <ClInclude Include="VkEnumMacros.h">
+      <Filter>Fichiers d%27en-tête\vkEnumVSstring</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
