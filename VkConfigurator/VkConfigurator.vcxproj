@@ -118,6 +118,7 @@
     <ClCompile Include="CapabilityExplorer.cpp" />
     <ClCompile Include="ConfigurationEditor.cpp" />
     <ClCompile Include="EditDeviceFeatures.cpp" />
+    <ClCompile Include="EditionNodeDelegate.cpp" />
     <ClCompile Include="EditorDelegate.cpp" />
     <ClCompile Include="EditProfile.cpp" />
     <ClCompile Include="StringListWidget.cpp" />
@@ -146,11 +147,18 @@
     <ClInclude Include="CapabilitiesDatabase.h" />
     <QtMoc Include="EditProfile.h" />
     <QtMoc Include="EditorDelegate.h" />
+    <QtMoc Include="EditionNodeDelegate.h" />
+    <ClInclude Include="EditLayerNode.h" />
     <ClInclude Include="EditorSetupEnums.h" />
     <ClInclude Include="EditorVulkanEnum.h" />
+    <ClInclude Include="enumeratesEnum.h" />
+    <ClInclude Include="EnumCombo.h" />
+    <ClInclude Include="IEditLayerNode.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="StringListWidget.h" />
+    <ClInclude Include="ValueEditionLayer.h" />
     <ClInclude Include="VkCapabiltyVisitorImpl.h" />
+    <ClInclude Include="vkEnumCombo.h" />
     <ClInclude Include="VulkanTreeItem.h" />
     <QtMoc Include="VulkanTableModel.h" />
   </ItemGroup>
