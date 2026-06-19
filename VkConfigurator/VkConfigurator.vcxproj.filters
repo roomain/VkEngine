@@ -76,6 +76,12 @@
     <ClCompile Include="EditionNodeDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EditProfileName.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="VulkanTreeModel.h">
@@ -103,6 +109,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="EditionNodeDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="EditProfileName.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="EditModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -134,13 +146,19 @@
     <ClInclude Include="ValueEditionLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IEditLayerNode.h">
+    <ClInclude Include="IEditNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EditLayerNode.h">
+    <ClInclude Include="TEditNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vkEnumCombo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditClassNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ITEditNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -171,6 +189,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="EditProfile.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="EditProfileName.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

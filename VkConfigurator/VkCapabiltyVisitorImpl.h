@@ -9,6 +9,7 @@ class VkCapabiltyVisitorImpl : public CapabilitiesVisitor
 private:
 	VulkanTreeItem* m_root = nullptr;
 	VulkanTreeItem* m_current = nullptr;
+	bool m_isArray = false;
 
 public:
 	~VkCapabiltyVisitorImpl();

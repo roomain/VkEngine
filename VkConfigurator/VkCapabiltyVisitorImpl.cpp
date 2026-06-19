@@ -52,12 +52,32 @@ void VkCapabiltyVisitorImpl::endNode()
 
 void VkCapabiltyVisitorImpl::benginDataArray(const char* a_title)
 {
-	//
+	if (m_current)
+	{
+		QIcon icon;
+
+		if (m_current->displayRole().toString() == "Extensions")
+		{
+			icon = QIcon(":/VkConfigurator/resources/extension.png");
+		}
+		else if (m_current->displayRole().toString() == "Layers")
+		{
+			icon = QIcon(":/VkConfigurator/resources/layerItem.png");
+		}
+		else
+		{
+			return;
+		}
+		m_current = new VulkanTreeItem(a_title, icon, m_current);
+		m_isArray = true;
+	}
 }
 
 void VkCapabiltyVisitorImpl::endDataArray()
 {
-	//
+	if (m_current && m_isArray)
+		m_current = m_current->parent();
+	m_isArray = false;
 }
 
 void VkCapabiltyVisitorImpl::visitData(const char* a_title, const bool a_value)

@@ -16,7 +16,7 @@ signals:
 
 private:
 	Ui::ConfigurationEditorClass ui;
-
+	void enableActions();
 
 public slots:
 	void onNewConfiguration();
@@ -28,5 +28,10 @@ public slots:
 
 	void onRenameProfile();
 	void onDeleteProfile();
+
+	void onAddEngineParameters();
+	void onQueueParameters();
+	void onDeviceParameters();
+	void onDeviceFeatures();
 };
 

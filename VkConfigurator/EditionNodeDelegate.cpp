@@ -1,5 +1,6 @@
 #include "EditionNodeDelegate.h"
-#include "IEditLayerNode.h"
+#include "IEditNode.h"
+#include "EditModel.h"
 #include <string>
 #include <qapplication.h>
 #include <vulkan/vulkan.hpp>
@@ -10,10 +11,11 @@
 #include <QDoubleSpinBox>
 #include <qlineedit.h>
 #include <qcheckbox.h>
+#include <QPainter>
 
 std::unordered_map<std::type_index, Editor> EditionNodeDelegate::s_editorGenerator = {
 	{ std::type_index(typeid(VkQueueFlagBits)), {
-			[]() {return new FlagCombo<VkQueueFlagBits>(); },
+			[](QWidget* parent) {return new FlagCombo<VkQueueFlagBits>(parent); },
 			[](QWidget* editor, const QVariant& value) 
 			{
 				auto pEditor = static_cast<FlagCombo<VkQueueFlagBits>*>(editor);
@@ -27,7 +29,7 @@ std::unordered_map<std::type_index, Editor> EditionNodeDelegate::s_editorGenerat
 		}
 	},
 	{ std::type_index(typeid(int)), {
-			[]() {return new QSpinBox(); },
+			[](QWidget* parent) {return new QSpinBox(parent); },
 			[](QWidget* editor, const QVariant& value)
 			{
 				auto pEditor = static_cast<QSpinBox*>(editor);
@@ -41,7 +43,7 @@ std::unordered_map<std::type_index, Editor> EditionNodeDelegate::s_editorGenerat
 		}
 	},
 	{ std::type_index(typeid(float)), {
-			[]() {return new QDoubleSpinBox(); },
+			[](QWidget* parent) {return new QDoubleSpinBox(parent); },
 			[](QWidget* editor, const QVariant& value)
 			{
 				auto pEditor = static_cast<QDoubleSpinBox*>(editor);
@@ -55,7 +57,7 @@ std::unordered_map<std::type_index, Editor> EditionNodeDelegate::s_editorGenerat
 		}
 	},
 	{ std::type_index(typeid(double)), {
-			[]() {return new QDoubleSpinBox(); },
+			[](QWidget* parent) {return new QDoubleSpinBox(parent); },
 			[](QWidget* editor, const QVariant& value)
 			{
 				auto pEditor = static_cast<QDoubleSpinBox*>(editor);
@@ -69,7 +71,7 @@ std::unordered_map<std::type_index, Editor> EditionNodeDelegate::s_editorGenerat
 		}
 	},
 	{ std::type_index(typeid(std::string)), {
-			[]() {return new QLineEdit(); },
+			[](QWidget* parent) {return new QLineEdit(parent); },
 			[](QWidget* editor, const QVariant& value)
 			{
 				auto pEditor = static_cast<QLineEdit*>(editor);
@@ -83,7 +85,7 @@ std::unordered_map<std::type_index, Editor> EditionNodeDelegate::s_editorGenerat
 		}
 	},
 	{ std::type_index(typeid(bool)), {
-			[]() {return new QCheckBox(); },
+			[](QWidget* parent) {return new QCheckBox(parent); },
 			[](QWidget* editor, const QVariant& value)
 			{
 				auto pEditor = static_cast<QCheckBox*>(editor);
@@ -105,89 +107,154 @@ EditionNodeDelegate::EditionNodeDelegate(QObject *parent)
 EditionNodeDelegate::~EditionNodeDelegate()
 {}
 
+QStyleOptionButton EditionNodeDelegate::genButton(QPainter* painter, const int index, const int row, const QRect& rect, 
+	const QString& label)const
+{
+	QStyleOptionButton btn;
+	btn.rect = rect;
+	btn.features = QStyleOptionButton::DefaultButton;
+	btn.state = QStyle::State_Active | QStyle::State_Enabled;
+	btn.text = label;
+	auto pen = painter->pen();
+	painter->setPen(QPen(QColor(71, 138, 255), 2));
+	if (index == m_btnEvent.buttonIndex && row == m_btnEvent.buttonRow)
+	{
+		switch (m_btnEvent.evntType)
+		{
+		case QEvent::MouseButtonPress:
+			btn.state |= QStyle::State_Selected | QStyle::State_MouseOver;
+			painter->setPen(QPen(QColor(255, 20, 50), 4));
+			break;
+
+		case QEvent::MouseMove:
+			btn.state |= QStyle::State_MouseOver;
+			painter->setPen(QPen(QColor(255, 146, 30), 2));
+			break;
+		}
+
+	}
+	painter->drawRoundedRect(rect, 4, 4);
+
+	QApplication::style()->drawControl(
+		QStyle::CE_PushButtonLabel, &btn, painter);
+
+	painter->setPen(pen);
+	return btn;
+}
+
+
 void EditionNodeDelegate::paint(QPainter* painter,
 	const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-	QStyledItemDelegate::paint(painter, option, index);
-	auto pNode = static_cast<const IEditLayerNode*>(index.constInternalPointer());
-	if (pNode && pNode->isContainer())
+	auto pNode = static_cast<const IEditNode*>(index.constInternalPointer());
+	if (pNode && pNode->isContainer() && index.column() == 0)
 	{
-		QStyleOptionButton btnAdd;
-		btnAdd.rect = QRect(option.rect.right() - 80,
-			option.rect.top() + 2,
-			35,
-			option.rect.height() - 4);
-		btnAdd.text = "+";
+		QStyleOptionButton btnAdd = genButton(painter, 0, index.row(), QRect(
+			option.rect.right() - option.rect.height(),
+			option.rect.top(),
+			option.rect.height(),
+			option.rect.height()), "+");
 
-		QStyleOptionButton btnRm;
-		btnRm.rect = QRect(option.rect.right() - 40,
-			btnRm.rect.top() + 2,
-			35,
-			option.rect.height() - 4);
-		btnRm.text = "-";
+		QStyleOptionButton btnRm = genButton(painter, 1, index.row(), QRect(
+			option.rect.right() -  2 * option.rect.height() - 4,
+			option.rect.top(),
+			option.rect.height(),
+			option.rect.height()), "-");
 
-		QApplication::style()->drawControl(
-			QStyle::CE_PushButton, &btnAdd, painter);
-
-		QApplication::style()->drawControl(
-			QStyle::CE_PushButton, &btnRm, painter);
+		auto textRect = option.rect;
+		textRect.setWidth(option.rect.width() - 2 * option.rect.height() - 4);
+		QApplication::style()->drawItemText(painter, textRect, QStyle::State_None, option.palette,
+			true, pNode->displayRole().toString());
+	}
+	else
+	{
+		QStyledItemDelegate::paint(painter, option, index);
 	}
 }
 
 QWidget* EditionNodeDelegate::createEditor(QWidget* parent,
 	const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-	auto pNode = static_cast<const IEditLayerNode*>(index.constInternalPointer());
+	auto pNode = static_cast<const IEditNode*>(index.constInternalPointer());
 	if (auto iter = s_editorGenerator.find(pNode->type()); iter != s_editorGenerator.end())
-	{
-		return iter->second.genEditor();
-	}
+		return iter->second.genEditor(parent);
+	
 	return nullptr;
 }
 
 void EditionNodeDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
-	auto pNode = static_cast<const IEditLayerNode*>(index.constInternalPointer());
-	s_editorGenerator[pNode->type()];
+	auto pNode = static_cast<const IEditNode*>(index.constInternalPointer());
+	s_editorGenerator[pNode->type()].setEditorValue(editor, pNode->getValue());
 }
 
 void EditionNodeDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-	auto pNode = static_cast<const IEditLayerNode*>(index.constInternalPointer());
-	s_editorGenerator[pNode->type()];
+	auto pNode = static_cast<const IEditNode*>(index.constInternalPointer());
+	auto value = s_editorGenerator[pNode->type()].getEditorValue(editor);
+	model->setData(index, value);
 }
 
+QString EditionNodeDelegate::displayText(const QVariant& value, const QLocale& locale)const
+{
+	if (value.metaType() == QMetaType::fromType<VkQueueFlagBits>())
+		return QString::fromStdString(Flag<VkQueueFlagBits>::to_string(value.value<VkQueueFlagBits>()));
+
+	return QStyledItemDelegate::displayText(value, locale);
+}
 
 bool EditionNodeDelegate::editorEvent(QEvent* event, QAbstractItemModel* model,
 	const QStyleOptionViewItem& option, const QModelIndex& index)
 {
-	auto pNode = static_cast<IEditLayerNode*>(index.internalPointer());
-	if (event->type() == QEvent::MouseButtonRelease && pNode->isContainer())
+	auto pNode = static_cast<IEditNode*>(index.internalPointer());
+
+	if(index.column() != 0 || !pNode->isContainer())
+		return QStyledItemDelegate::editorEvent(event, model, option, index);
+
+	m_btnEvent.buttonIndex = -1;
+	m_btnEvent.buttonRow = index.row();
+	m_btnEvent.evntType = event->type();
+	if (auto pEvnt = dynamic_cast<QMouseEvent*>(event))
 	{
-		QMouseEvent* pEvnt = static_cast<QMouseEvent*>(event);
+		QRect btnAdd(option.rect.right() - option.rect.height(),
+			option.rect.top(),
+			option.rect.height(),
+			option.rect.height());
 
-		QRect btnAdd(option.rect.right() - 80,
-			option.rect.top() + 2,
-			35,
-			option.rect.height() - 4);
+		QRect btnRm(option.rect.right() - 2 * option.rect.height() - 4,
+			option.rect.top(),
+			option.rect.height(),
+			option.rect.height());
+		
 
-		QRect btnRm(option.rect.right() - 40,
-			option.rect.top() + 2,
-			35,
-			option.rect.height() - 4);
-
+		EditModel* pModel = static_cast<EditModel*>(model);
 		if (btnAdd.contains(pEvnt->pos()))
 		{
-			pNode->append();
-			return true;
+			m_btnEvent.buttonIndex = 0;
+			if (m_btnEvent.evntType == QEvent::MouseButtonRelease)
+			{
+				pModel->beginAddRow(index);
+				pNode->append();
+				pModel->endAddRow();
+				return true;
+			}
 		}
 
 		if (btnRm.contains(pEvnt->pos()))
 		{
-			pNode->remove();
-			return true;
+			m_btnEvent.buttonIndex = 1;
+			if (m_btnEvent.evntType == QEvent::MouseButtonRelease && pModel->rowCount(index) > 0)
+			{
+				pModel->beginRemRow(index);
+				pNode->remove();
+				pModel->endRemRow();
+				return true;
+			}
 		}
+
+		
 	}
+
 
 	return QStyledItemDelegate::editorEvent(event, model, option, index);
 }

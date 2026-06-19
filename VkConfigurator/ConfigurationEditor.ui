@@ -45,21 +45,22 @@
         </property>
        </column>
       </widget>
-      <widget class="QScrollArea" name="scrollArea">
-       <property name="widgetResizable">
+      <widget class="QTreeView" name="confView">
+       <property name="mouseTracking">
         <bool>true</bool>
        </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>68</width>
-          <height>567</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="vLayoutEdit"/>
-       </widget>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="uniformRowHeights">
+        <bool>true</bool>
+       </property>
+       <attribute name="headerVisible">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="headerCascadingSectionResizes">
+        <bool>true</bool>
+       </attribute>
       </widget>
      </widget>
     </item>
@@ -77,8 +78,16 @@
    </attribute>
    <addaction name="actionNew_profile"/>
    <addaction name="separator"/>
+   <addaction name="actionAdd_Engine_Parameters"/>
+   <addaction name="actionAdd_Device_Features"/>
+   <addaction name="actionAdd_Queue_Parameters"/>
+   <addaction name="actionAdd_Device_Parameters"/>
   </widget>
   <action name="actionNew_profile">
+   <property name="icon">
+    <iconset resource="VkConfigurator.qrc">
+     <normaloff>:/VkConfigurator/resources/profile.png</normaloff>:/VkConfigurator/resources/profile.png</iconset>
+   </property>
    <property name="text">
     <string>New profile</string>
    </property>
@@ -86,7 +95,57 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
+  <action name="actionAdd_Engine_Parameters">
+   <property name="icon">
+    <iconset resource="VkConfigurator.qrc">
+     <normaloff>:/VkConfigurator/resources/engine.png</normaloff>:/VkConfigurator/resources/engine.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Engine Parameters</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionAdd_Device_Features">
+   <property name="icon">
+    <iconset resource="VkConfigurator.qrc">
+     <normaloff>:/VkConfigurator/resources/parameters.png</normaloff>:/VkConfigurator/resources/parameters.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Device Features</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionAdd_Queue_Parameters">
+   <property name="icon">
+    <iconset resource="VkConfigurator.qrc">
+     <normaloff>:/VkConfigurator/resources/queue.png</normaloff>:/VkConfigurator/resources/queue.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Queue Parameters</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionAdd_Device_Parameters">
+   <property name="icon">
+    <iconset resource="VkConfigurator.qrc">
+     <normaloff>:/VkConfigurator/resources/device.png</normaloff>:/VkConfigurator/resources/device.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Device Parameters</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="VkConfigurator.qrc"/>
+ </resources>
  <connections/>
 </ui>

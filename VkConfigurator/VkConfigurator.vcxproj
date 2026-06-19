@@ -121,6 +121,8 @@
     <ClCompile Include="EditionNodeDelegate.cpp" />
     <ClCompile Include="EditorDelegate.cpp" />
     <ClCompile Include="EditProfile.cpp" />
+    <ClCompile Include="EditProfileName.cpp" />
+    <ClCompile Include="EditModel.cpp" />
     <ClCompile Include="StringListWidget.cpp" />
     <ClCompile Include="VkCapabiltyVisitorImpl.cpp" />
     <ClCompile Include="VulkanTableModel.cpp" />
@@ -131,6 +133,7 @@
     <QtUic Include="ConfigurationEditor.ui" />
     <QtUic Include="EditDeviceFeatures.ui" />
     <QtUic Include="EditProfile.ui" />
+    <QtUic Include="EditProfileName.ui" />
     <QtUic Include="StringListWidget.ui" />
     <QtUic Include="VkConfigurator.ui" />
     <QtMoc Include="VkConfigurator.h" />
@@ -148,12 +151,16 @@
     <QtMoc Include="EditProfile.h" />
     <QtMoc Include="EditorDelegate.h" />
     <QtMoc Include="EditionNodeDelegate.h" />
-    <ClInclude Include="EditLayerNode.h" />
+    <ClInclude Include="EditClassNode.h" />
+    <ClInclude Include="TEditNode.h" />
     <ClInclude Include="EditorSetupEnums.h" />
     <ClInclude Include="EditorVulkanEnum.h" />
+    <QtMoc Include="EditProfileName.h" />
     <ClInclude Include="enumeratesEnum.h" />
     <ClInclude Include="EnumCombo.h" />
-    <ClInclude Include="IEditLayerNode.h" />
+    <ClInclude Include="IEditNode.h" />
+    <QtMoc Include="EditModel.h" />
+    <ClInclude Include="ITEditNode.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="StringListWidget.h" />
     <ClInclude Include="ValueEditionLayer.h" />

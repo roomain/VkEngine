@@ -1,12 +1,15 @@
 <RCC>
-    <qresource prefix="/VkConfigurator">
-        <file>resources/device.png</file>
-        <file>resources/extension.png</file>
-        <file>resources/layer.png</file>
-        <file>resources/memory.png</file>
-        <file>resources/queue.png</file>
-        <file>resources/queueList.png</file>
-        <file>resources/vulkanConfIcon.png</file>
-        <file>resources/profile.png</file>
-    </qresource>
+  <qresource prefix="/VkConfigurator">
+    <file>resources/engine.png</file>
+    <file>resources/parameters.png</file>
+    <file>resources/layerItem.png</file>
+    <file>resources/device.png</file>
+    <file>resources/extension.png</file>
+    <file>resources/layer.png</file>
+    <file>resources/memory.png</file>
+    <file>resources/queue.png</file>
+    <file>resources/queueList.png</file>
+    <file>resources/vulkanConfIcon.png</file>
+    <file>resources/profile.png</file>
+  </qresource>
 </RCC>
