@@ -1,5 +1,6 @@
 #pragma once
 #include <qcombobox.h>
+#include <qstandarditemmodel.h>
 template<typename Type>
 void enumerates(QComboBox* combobox) {}
 
@@ -10,22 +11,25 @@ void enumeratesFlags(QComboBox* combobox) {}
 #define BEGIN_ENUM(Type) \
 template<> \
 void enumerates<Type>(QComboBox* combobox) \
-{ \
+{ 
 
-#define VALUE_ENUM(value)\
-	combobox->addItem(to_string(value), static_cast<int>(value)); \
+#define VALUE_ENUM(value) \
+	combobox->addItem(QString(#value), static_cast<int>(value)); 
 
 #define END_ENUM \
 }
 
-#define BEGIN_FLAG(Type) \
+#define BEGIN_FLAG(Base, Type) \
 template<> \
-void enumeratesFlags<Type>(QComboBox* combobox) \
+void enumeratesFlags<Base>(QComboBox* combobox) \
 { \
+	QStandardItem* item = nullptr;
 
 #define VALUE_FLAG(value) \
-	combobox->addItem(to_string(value), static_cast<int>(value)); \
-	combobox->setItemData(combobox->count(), Qt::Unchecked, Qt::CheckStateRole); \
+	item = new QStandardItem(QString(#value)); \
+	item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable); \
+	item->setData(static_cast<unsigned int>(value), Qt::UserRole); \
+	static_cast<QStandardItemModel*>(combobox->model())->appendRow(item);
 
 #define END_FLAG \
 }

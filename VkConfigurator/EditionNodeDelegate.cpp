@@ -5,6 +5,7 @@
 #include <qapplication.h>
 #include <vulkan/vulkan.hpp>
 #include "vkEnumCombo.h"
+#include "VkEnumtoString.h"
 #include "EnumCombo.h"
 #include <QMouseEvent>
 #include <QSpinBox>
@@ -29,6 +30,20 @@ std::unordered_map<std::type_index, Editor> EditionNodeDelegate::s_editorGenerat
 		}
 	},
 	{ std::type_index(typeid(int)), {
+			[](QWidget* parent) {return new QSpinBox(parent); },
+			[](QWidget* editor, const QVariant& value)
+			{
+				auto pEditor = static_cast<QSpinBox*>(editor);
+				pEditor->setValue(value.toInt());
+			},
+			[](const QWidget* editor)
+			{
+				auto pEditor = static_cast<const QSpinBox*>(editor);
+				return pEditor->value();
+			}
+		}
+	},
+	{ std::type_index(typeid(unsigned int)), {
 			[](QWidget* parent) {return new QSpinBox(parent); },
 			[](QWidget* editor, const QVariant& value)
 			{
@@ -236,6 +251,7 @@ bool EditionNodeDelegate::editorEvent(QEvent* event, QAbstractItemModel* model,
 				pModel->beginAddRow(index);
 				pNode->append();
 				pModel->endAddRow();
+				emit expandNode(index);
 				return true;
 			}
 		}

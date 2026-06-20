@@ -1,4 +1,3 @@
-#pragma once
 /***********************************************
 * @headerfile VkEnumMacros.h
 * @date 23 / 02 / 2026
@@ -6,29 +5,6 @@
 ************************************************/
 #include "vulkan/vulkan_core.h"
 
-#ifndef BEGIN_ENUM
-#define BEGIN_ENUM
-#endif
-
-#ifndef VALUE_ENUM
-#define VALUE_ENUM
-#endif
-
-#ifndef END_ENUM
-#define END_ENUM
-#endif
-
-#ifndef BEGIN_FLAG
-#define BEGIN_FLAG
-#endif
-
-#ifndef VALUE_FLAG
-#define VALUE_FLAG
-#endif
-
-#ifndef END_FLAG
-#define END_FLAG
-#endif
 
 BEGIN_ENUM(VkResult)
 VALUE_ENUM(VK_SUCCESS)
@@ -3140,10 +3116,3 @@ VALUE_ENUM(VK_SHADER_GROUP_SHADER_ANY_HIT_KHR)
 VALUE_ENUM(VK_SHADER_GROUP_SHADER_INTERSECTION_KHR)
 VALUE_ENUM(VK_SHADER_GROUP_SHADER_MAX_ENUM_KHR)
 END_ENUM
-
-#undef BEGIN_ENUM
-#undef VALUE_ENUM
-#undef END_ENUM
-#undef BEGIN_FLAG
-#undef VALUE_FLAG
-#undef END_FLAG

@@ -26,7 +26,9 @@ ConfigurationEditor::ConfigurationEditor(QWidget *parent)
 	QObject::connect(ui.actionAdd_Device_Features, &QAction::triggered, this, &ConfigurationEditor::onDeviceFeatures);
 
 	ui.confView->setModel(new EditModel());
-	ui.confView->setItemDelegate(new EditionNodeDelegate());
+	auto delegate = new EditionNodeDelegate();
+	ui.confView->setItemDelegate(delegate);
+	QObject::connect(delegate, &EditionNodeDelegate::expandNode, ui.confView, &QTreeView::expand);
 	enableActions();
 }
 
@@ -99,7 +101,7 @@ void ConfigurationEditor::onAddEngineParameters()
 	Reflective::instance().writeProfile(profineName, parameter);
 	Reflective::instance().setCurrentProfile(profineName);
 	auto pModel = static_cast<EditModel*>(ui.confView->model());
-	pModel->addClass(new EditClassNode("EngineParameters", parameter));
+	ui.confView->expand(pModel->addClass(new EditClassNode("EngineParameters", parameter)));
 }
 
 void ConfigurationEditor::onQueueParameters()
@@ -109,7 +111,7 @@ void ConfigurationEditor::onQueueParameters()
 	Reflective::instance().writeProfile(profineName, parameter);
 	Reflective::instance().setCurrentProfile(profineName);
 	auto pModel = static_cast<EditModel*>(ui.confView->model());
-	pModel->addClass(new EditClassNode("QueuesParameters", parameter));
+	ui.confView->expand(pModel->addClass(new EditClassNode("QueuesParameters", parameter)));
 }
 
 void ConfigurationEditor::onDeviceParameters()
@@ -119,7 +121,7 @@ void ConfigurationEditor::onDeviceParameters()
 	Reflective::instance().writeProfile(profineName, parameter);
 	Reflective::instance().setCurrentProfile(profineName);
 	auto pModel = static_cast<EditModel*>(ui.confView->model());
-	pModel->addClass(new EditClassNode("DeviceParameters", parameter));
+	ui.confView->expand(pModel->addClass(new EditClassNode("DeviceParameters", parameter)));
 }
 
 void ConfigurationEditor::onDeviceFeatures()
@@ -129,7 +131,7 @@ void ConfigurationEditor::onDeviceFeatures()
 	Reflective::instance().writeProfile(profineName, parameter);
 	Reflective::instance().setCurrentProfile(profineName);
 	auto pModel = static_cast<EditModel*>(ui.confView->model());
-	pModel->addClass(new EditClassNode("DeviceFeatures", parameter));
+	ui.confView->expand(pModel->addClass(new EditClassNode("DeviceFeatures", parameter)));
 }
 
 
