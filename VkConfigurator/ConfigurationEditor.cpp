@@ -16,8 +16,7 @@ ConfigurationEditor::ConfigurationEditor(QWidget *parent)
 	sizes.append(width() / 3);
 	sizes.append(2 * width() / 3);
 	ui.splitter->setSizes(sizes);
-	QObject::connect(ui.twProfiles, &QTreeView::clicked, this, &ConfigurationEditor::onProfileSelected);
-	QObject::connect(ui.twProfiles, &QTreeView::pressed, this, &ConfigurationEditor::onProfileSelected);
+	QObject::connect(ui.twProfiles, &QTreeWidget::currentItemChanged, this, &ConfigurationEditor::currentItemChanged);
 	QObject::connect(ui.actionNew_profile, &QAction::triggered, this, &ConfigurationEditor::onNewProfile);
 
 	QObject::connect(ui.actionAdd_Engine_Parameters, &QAction::triggered, this, &ConfigurationEditor::onAddEngineParameters);
@@ -154,20 +153,17 @@ void ConfigurationEditor::enableActions()
 	ui.actionAdd_Device_Features->setEnabled(isSelected);
 }
 
-void ConfigurationEditor::onProfileSelected(const QModelIndex& current)
+void ConfigurationEditor::currentItemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous)
 {
-	// todo save old profile
-
-
 	enableActions();
 
 	auto pModel = static_cast<EditModel*>(ui.confView->model());
 	pModel->clear();
 
-	Reflective::instance().setCurrentProfile(current.data(Qt::DisplayRole).toString().toStdString());
+	Reflective::instance().setCurrentProfile(current->text(0).toStdString());
 	if (auto iter = std::find_if(Reflective::instance().cbegin(), Reflective::instance().cend(), [&current](const JsonReflectiveProfileData& a_data)
 		{
-			return a_data.profile == current.data(Qt::DisplayRole).toString().toStdString();
+			return a_data.profile == current->text(0).toStdString();
 		}); iter != Reflective::instance().cend())
 	{
 		for (const auto& className : iter->m_classes)
@@ -177,11 +173,18 @@ void ConfigurationEditor::onProfileSelected(const QModelIndex& current)
 	}
 }
 
+
+
 void ConfigurationEditor::onNewProfile()
 {
-	EditProfileName profileDiag([](const QString& name)
+	EditProfileName profileDiag([this](const QString& name)
 		{
-			return !Reflective::instance().hasProfile(name.toStdString());
+			for (int index = 0; index < ui.twProfiles->topLevelItemCount(); ++index)
+			{
+				if (name.compare(ui.twProfiles->topLevelItem(index)->text(0), Qt::CaseInsensitive) == 0)
+					return true;
+			}
+			return false;
 		}, this);
 	if (profileDiag.exec() == QDialog::Accepted)
 	{
@@ -189,6 +192,7 @@ void ConfigurationEditor::onNewProfile()
 		item->setText(0, profileDiag.profileName());
 		item->setIcon(0, QIcon(":/VkConfigurator/resources/profile.png"));
 		ui.twProfiles->addTopLevelItem(item);
+		ui.twProfiles->setCurrentItem(item);
 	}
 }
 

@@ -6,7 +6,7 @@ EditProfileName::EditProfileName(const CheckProfile& check, QWidget *parent)
 {
 	ui.setupUi(this);
 	QObject::connect(ui.lEdtProfile, &QLineEdit::textChanged, this, &EditProfileName::onProfineNameChanged);
-	ui.lEdtProfile->setText(EditProfileName::generateName());
+	ui.lEdtProfile->setText(generateName());
 }
 
 EditProfileName::~EditProfileName()
@@ -19,24 +19,16 @@ QString EditProfileName::profileName()const
 
 void EditProfileName::onProfineNameChanged(const QString& name)
 {
-	ui.pBtnOk->setEnabled(m_check(name));
+	ui.pBtnOk->setEnabled(!m_check(name));
 }
 
 QString EditProfileName::generateName()
 {
 	QString baseName = "Profile";
 	QString name = baseName;
-	auto find = [](const std::string& testName)
-		{
-			return Reflective::instance().cend() != std::find_if(Reflective::instance().cbegin(), Reflective::instance().cend(),
-				[&testName](auto&& data)
-				{
-					return data.profile.compare(testName) == 0;
-				});
-		};
 
 	int index = 1;
-	while (find(name.toStdString()))
+	while (m_check(name))
 	{
 		name = QString("%1_%2").arg(baseName).arg(index);
 		++index;

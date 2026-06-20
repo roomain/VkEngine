@@ -23,7 +23,7 @@ public slots:
 	void onOpenFile();
 	void onSaveFile();
 	void onSaveAsFile();
-	void onProfileSelected(const QModelIndex& current);
+	void currentItemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous);
 	void onNewProfile();
 
 	void onRenameProfile();

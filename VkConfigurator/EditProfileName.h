@@ -19,7 +19,7 @@ private:
 	Ui::EditProfileNameClass ui;
 	CheckProfile m_check;
 
-	static QString generateName();
+	QString generateName();
 
 private slots:
 	void onProfineNameChanged(const QString& name);
