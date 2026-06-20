@@ -17,7 +17,7 @@ class EditionNodeDelegate  : public QStyledItemDelegate
 
 public:
 	EditionNodeDelegate(QObject *parent = nullptr);
-	~EditionNodeDelegate();
+	~EditionNodeDelegate() = default;
 
 	void paint(QPainter* painter,
 		const QStyleOptionViewItem& option, const QModelIndex& index) const override;

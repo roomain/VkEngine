@@ -153,7 +153,9 @@
     <PreBuildEvent>
       <Command>cd $(SolutionDir)Reflective\script
 python reflective.py $(ProjectDir) -q
-</Command>
+
+cd $(SolutionDir)\scripts
+genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)\VkEnumMacros.h</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -179,7 +181,9 @@ python reflective.py $(ProjectDir) -q
     <PreBuildEvent>
       <Command>cd $(SolutionDir)Reflective\script
 python reflective.py $(ProjectDir) -q
-</Command>
+
+cd $(SolutionDir)\scripts
+genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)\VkEnumMacros.h</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

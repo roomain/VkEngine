@@ -5,7 +5,7 @@
 #include <qapplication.h>
 #include <vulkan/vulkan.hpp>
 #include "vkEnumCombo.h"
-#include "VkEnumtoString.h"
+#include "VkEnumToString.h"
 #include "EnumCombo.h"
 #include <QMouseEvent>
 #include <QSpinBox>
@@ -117,9 +117,6 @@ std::unordered_map<std::type_index, Editor> EditionNodeDelegate::s_editorGenerat
 
 EditionNodeDelegate::EditionNodeDelegate(QObject *parent)
 	: QStyledItemDelegate(parent)
-{}
-
-EditionNodeDelegate::~EditionNodeDelegate()
 {}
 
 QStyleOptionButton EditionNodeDelegate::genButton(QPainter* painter, const int index, const int row, const QRect& rect, 
@@ -242,7 +239,7 @@ bool EditionNodeDelegate::editorEvent(QEvent* event, QAbstractItemModel* model,
 			option.rect.height());
 		
 
-		EditModel* pModel = static_cast<EditModel*>(model);
+		auto pModel = static_cast<EditModel*>(model);
 		if (btnAdd.contains(pEvnt->pos()))
 		{
 			m_btnEvent.buttonIndex = 0;
