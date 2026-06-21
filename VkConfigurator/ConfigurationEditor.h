@@ -16,6 +16,7 @@ signals:
 
 private:
 	Ui::ConfigurationEditorClass ui;
+	QString m_currentFile;
 	void enableActions();
 
 public slots:

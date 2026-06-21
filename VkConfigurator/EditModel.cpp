@@ -20,6 +20,22 @@ void EditModel::endAddRow()
 	endInsertRows();
 }
 
+void EditModel::save(const std::string& profile)
+{
+	for (const auto node : m_classes)
+		node->save(profile);
+}
+
+void EditModel::startInit()
+{
+	beginResetModel();
+}
+
+void EditModel::endInit()
+{
+	endResetModel();
+}
+
 void EditModel::beginRemRow(const QModelIndex& model)
 {
 	int size = rowCount(model);

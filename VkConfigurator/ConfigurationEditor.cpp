@@ -50,45 +50,48 @@ void ConfigurationEditor::onOpenFile()
 	QString file = QFileDialog::getOpenFileName(nullptr, "Open configuration file", QString(), "Json files (*.json)");
 	if (!file.isEmpty())
 	{
-		Reflective::instance().loadFile(file.toStdString());
-
-		std::map<QString, QTreeWidgetItem*> mapTree;
-		ui.twProfiles->clear();
-		// fill profiles list
-		for (auto iter = Reflective::instance().cbegin(); iter != Reflective::instance().cend(); ++iter)
+		if (Reflective::instance().loadFile(file.toStdString()))
 		{
-			QString profileName = QString::fromStdString(iter->profile);
-			QTreeWidgetItem* item = new QTreeWidgetItem();
-			item->setText(0, profileName);
-			item->setData(0, Qt::UserRole, QString::fromStdString(iter->parent));
-			item->setIcon(0, QIcon(":/VkConfigurator/resources/profile.png"));
-			mapTree[profileName] = item;
-		}
+			m_currentFile = file;
 
-		for (auto [name, item] : mapTree)
-		{
-			QString parent = item->data(0, Qt::UserRole).toString();
-			if (parent.isEmpty())
+			std::map<QString, QTreeWidgetItem*> mapTree;
+			ui.twProfiles->clear();
+			// fill profiles list
+			for (auto iter = Reflective::instance().cbegin(); iter != Reflective::instance().cend(); ++iter)
 			{
-				ui.twProfiles->addTopLevelItem(item);
+				QString profileName = QString::fromStdString(iter->profile);
+				QTreeWidgetItem* item = new QTreeWidgetItem();
+				item->setText(0, profileName);
+				item->setData(0, Qt::UserRole, QString::fromStdString(iter->parent));
+				item->setIcon(0, QIcon(":/VkConfigurator/resources/profile.png"));
+				mapTree[profileName] = item;
 			}
-			else
+
+			for (auto [name, item] : mapTree)
 			{
-				if (auto iter = mapTree.find(parent); iter != mapTree.end())
-				{
-					(*iter).second->addChild(item);
-				}
-				else
+				QString parent = item->data(0, Qt::UserRole).toString();
+				if (parent.isEmpty())
 				{
 					ui.twProfiles->addTopLevelItem(item);
 				}
+				else
+				{
+					if (auto iter = mapTree.find(parent); iter != mapTree.end())
+					{
+						(*iter).second->addChild(item);
+					}
+					else
+					{
+						ui.twProfiles->addTopLevelItem(item);
+					}
+				}
 			}
+			ui.twProfiles->expandAll();
+			emit loadedFinished();
+
+
+			enableActions();
 		}
-		ui.twProfiles->expandAll();
-		emit loadedFinished();
-
-
-		enableActions();
 		// todo
 	}
 }
@@ -136,12 +139,18 @@ void ConfigurationEditor::onDeviceFeatures()
 
 void ConfigurationEditor::onSaveFile()
 {
-    //
+	if (m_currentFile.isEmpty())
+		m_currentFile = QFileDialog::getSaveFileName(this, "Save configuration", "", "Json Files (*.json)");
+	
+	if (!m_currentFile.isEmpty())
+		Reflective::instance().writeFile(m_currentFile.toStdString(), true);
 }
 
 void ConfigurationEditor::onSaveAsFile()
 {
-    //
+	auto filePath = QFileDialog::getSaveFileName(this, "Save configuration", "", "Json Files (*.json)");
+	if (!filePath.isEmpty())
+		Reflective::instance().writeFile(filePath.toStdString(), true);
 }
 
 void ConfigurationEditor::enableActions()
@@ -158,19 +167,55 @@ void ConfigurationEditor::currentItemChanged(QTreeWidgetItem* current, QTreeWidg
 	enableActions();
 
 	auto pModel = static_cast<EditModel*>(ui.confView->model());
+	if (previous)
+		pModel->save(previous->text(0).toStdString());
+
 	pModel->clear();
 
-	Reflective::instance().setCurrentProfile(current->text(0).toStdString());
-	if (auto iter = std::find_if(Reflective::instance().cbegin(), Reflective::instance().cend(), [&current](const JsonReflectiveProfileData& a_data)
+	if (current == nullptr)
+		return;
+
+	pModel->startInit();
+	const auto currentProfile = current->text(0).toStdString();
+	Reflective::instance().setCurrentProfile(currentProfile);
+	QList<QModelIndex> nodeList;
+	if (auto iter = std::find_if(Reflective::instance().cbegin(), Reflective::instance().cend(), [&currentProfile](const JsonReflectiveProfileData& a_data)
 		{
-			return a_data.profile == current->text(0).toStdString();
+			return a_data.profile == currentProfile;
 		}); iter != Reflective::instance().cend())
 	{
-		for (const auto& className : iter->m_classes)
+		for (const auto& [className, data] : iter->m_classes)
 		{
-			//
+			if (className.compare("DeviceFeatures") == 0)
+			{
+				DeviceFeatures parameter;
+				nodeList.append(pModel->addClass(new EditClassNode("DeviceFeatures", parameter)));
+			}
+
+			if (className.compare("DeviceParameters") == 0)
+			{
+				DeviceParameters parameter;
+				nodeList.append(pModel->addClass(new EditClassNode("DeviceFeatures", parameter)));
+			}
+
+			if (className.compare("QueuesParameters") == 0)
+			{
+				QueuesParameters parameter;
+				nodeList.append(pModel->addClass(new EditClassNode("QueuesParameters", parameter)));
+			}
+
+			if (className.compare("EngineParameters") == 0)
+			{
+				EngineParameters parameter;
+				nodeList.append(pModel->addClass(new EditClassNode("EngineParameters", parameter)));
+			}
+
+			
 		}
 	}
+	pModel->endInit();
+	for(const auto &index : nodeList)
+		ui.confView->expand(index);
 }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "ITEditNode.h"
 #include "TEditNode.h"
+#include "Reflective.h"
 
 template<typename Type>
 class EditClassNode : public ITEditNode<Type>
@@ -23,6 +24,11 @@ private:
                 (appendChild(IEditNode::m_name, tupleArgs.first, parent.*(tupleArgs.second)), ...);
             },
             ParentType::s_reflectiveCtx);
+    }
+
+    void save(const std::string& profile)const override
+    {
+        Reflective::instance().writeProfile(profile, m_ref);
     }
 
     template<typename MemberType>

@@ -41,6 +41,7 @@ public:
     virtual void remove() {};
     virtual std::type_index type()const = 0;
     QString name()const { return QString::fromStdString(m_name); }
+    virtual void save(const std::string& profile)const {}
 
     constexpr size_t childCount()const { return m_children.size(); }
     IEditNode* const child(const int index) { return m_children[index]; }

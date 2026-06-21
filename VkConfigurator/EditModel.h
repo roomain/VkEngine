@@ -21,9 +21,11 @@ public:
 	~EditModel();
 	void clear()
 	{
+		beginResetModel();
 		for (auto pNode : m_classes)
 			delete pNode;
 		m_classes.clear();
+		endResetModel();
 	}
 
 	QModelIndex addClass(IEditNode* pNode)
@@ -33,6 +35,11 @@ public:
 		endAddRow();
 		return index(static_cast<int>(m_classes.size()) - 1, 0);
 	}
+
+	void save(const std::string& profile);
+
+	void startInit();
+	void endInit();
 
 	void beginAddRow(const QModelIndex& model);
 	void endAddRow();
