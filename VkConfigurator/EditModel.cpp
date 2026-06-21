@@ -66,7 +66,7 @@ QVariant EditModel::headerData(int section, Qt::Orientation orientation, int rol
 
 QModelIndex EditModel::index(int row, int column, const QModelIndex& parent) const
 {
-	IEditNode* item = reinterpret_cast<IEditNode*>(parent.internalPointer());
+	auto item = reinterpret_cast<IEditNode*>(parent.internalPointer());
 	if (item)
 		return createIndex(row, column, item->child(row));
 	return createIndex(row, column, m_classes[row]);

@@ -4,8 +4,9 @@
 #include "EditProfileName.h"
 #include "EditModel.h"
 #include "EngineParameters.h"
-#include "EditClassNode.h"
 #include "EditionNodeDelegate.h"
+#include "EditClassNode.h"
+#include "fillEditModel.h"
 #include <map>
 
 ConfigurationEditor::ConfigurationEditor(QWidget *parent)
@@ -29,10 +30,6 @@ ConfigurationEditor::ConfigurationEditor(QWidget *parent)
 	ui.confView->setItemDelegate(delegate);
 	QObject::connect(delegate, &EditionNodeDelegate::expandNode, ui.confView, &QTreeView::expand);
 	enableActions();
-}
-
-ConfigurationEditor::~ConfigurationEditor()
-{
 }
 
 void ConfigurationEditor::onNewConfiguration()
@@ -166,7 +163,7 @@ void ConfigurationEditor::currentItemChanged(QTreeWidgetItem* current, QTreeWidg
 {
 	enableActions();
 
-	auto pModel = static_cast<EditModel*>(ui.confView->model());
+	const auto pModel = static_cast<EditModel*>(ui.confView->model());
 	if (previous)
 		pModel->save(previous->text(0).toStdString());
 
@@ -178,42 +175,10 @@ void ConfigurationEditor::currentItemChanged(QTreeWidgetItem* current, QTreeWidg
 	pModel->startInit();
 	const auto currentProfile = current->text(0).toStdString();
 	Reflective::instance().setCurrentProfile(currentProfile);
-	QList<QModelIndex> nodeList;
-	if (auto iter = std::find_if(Reflective::instance().cbegin(), Reflective::instance().cend(), [&currentProfile](const JsonReflectiveProfileData& a_data)
-		{
-			return a_data.profile == currentProfile;
-		}); iter != Reflective::instance().cend())
-	{
-		for (const auto& [className, data] : iter->m_classes)
-		{
-			if (className.compare("DeviceFeatures") == 0)
-			{
-				DeviceFeatures parameter;
-				nodeList.append(pModel->addClass(new EditClassNode("DeviceFeatures", parameter)));
-			}
-
-			if (className.compare("DeviceParameters") == 0)
-			{
-				DeviceParameters parameter;
-				nodeList.append(pModel->addClass(new EditClassNode("DeviceFeatures", parameter)));
-			}
-
-			if (className.compare("QueuesParameters") == 0)
-			{
-				QueuesParameters parameter;
-				nodeList.append(pModel->addClass(new EditClassNode("QueuesParameters", parameter)));
-			}
-
-			if (className.compare("EngineParameters") == 0)
-			{
-				EngineParameters parameter;
-				nodeList.append(pModel->addClass(new EditClassNode("EngineParameters", parameter)));
-			}
-
-			
-		}
-	}
+	std::vector<QModelIndex> nodeList;
+	fill(nodeList, currentProfile, pModel);
 	pModel->endInit();
+
 	for(const auto &index : nodeList)
 		ui.confView->expand(index);
 }

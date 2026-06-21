@@ -155,7 +155,7 @@
 python reflective.py $(ProjectDir) -q
 
 cd $(SolutionDir)\scripts
-genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)\VkEnumMacros.h</Command>
+genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -183,7 +183,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)\VkEnumMacros.h</Comm
 python reflective.py $(ProjectDir) -q
 
 cd $(SolutionDir)\scripts
-genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)\VkEnumMacros.h</Command>
+genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

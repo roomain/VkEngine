@@ -78,12 +78,20 @@
       <PreprocessorDefinitions>_UNICODE;UNICODE;QT_NO_DEPRECATED_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp23</LanguageStandard>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)\scripts
+genModelData.py $(SolutionDir)EngineCore $(ProjectDir)fillEditModel.h</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>_UNICODE;UNICODE;QT_NO_DEPRECATED_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp23</LanguageStandard>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)\scripts
+genModelData.py $(SolutionDir)EngineCore $(ProjectDir)fillEditModel.h</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>

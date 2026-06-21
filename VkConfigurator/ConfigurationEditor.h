@@ -9,7 +9,7 @@ class ConfigurationEditor : public QMainWindow
 
 public:
 	ConfigurationEditor(QWidget *parent = nullptr);
-	~ConfigurationEditor();
+	~ConfigurationEditor() = default;
 
 signals:
 	void loadedFinished();
