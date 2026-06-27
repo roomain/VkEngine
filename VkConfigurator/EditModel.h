@@ -16,6 +16,8 @@ private:
 	Qt::ItemFlags flags_column_0(IEditNode* pNode) const;
 	Qt::ItemFlags flags_column_1(IEditNode* pNode) const;
 
+	static IEditNode* find(std::vector<IEditNode*>::const_iterator begin, std::vector<IEditNode*>::const_iterator end, const QString& name);
+
 public:
 	EditModel(QObject *parent = nullptr);
 	~EditModel();
@@ -35,6 +37,8 @@ public:
 		endAddRow();
 		return index(static_cast<int>(m_classes.size()) - 1, 0);
 	}
+
+	IEditNode* findNode(const QString& name, QModelIndex& index)const;
 
 	void save(const std::string& profile);
 

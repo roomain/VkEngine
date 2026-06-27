@@ -233,4 +233,9 @@ public:
         return QVariant::fromValue(m_ref.get());
     }
 
+    std::reference_wrapper<Type> reference()
+    {
+        return m_ref;
+    }
+
 };

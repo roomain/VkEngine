@@ -2,6 +2,8 @@
 
 #include <QMainWindow>
 #include "ui_ConfigurationEditor.h"
+class VulkanTreeItem;
+class IEditNode;
 
 class ConfigurationEditor : public QMainWindow
 {
@@ -19,6 +21,13 @@ private:
 	QString m_currentFile;
 	void enableActions();
 
+	static void copyTo(IEditNode* pNode, const QVariant& data);
+	void copyTo(const QString& path, const QVariant& data);
+	void onCopyLayer(VulkanTreeItem* pItem, const QVariant& data);
+	void onCopyExtension(VulkanTreeItem* pItem, const QVariant& data);
+	void addToVector(std::vector<std::string>& vData, const std::string& text);
+	static bool isInstanceProperty(VulkanTreeItem* pItem);
+
 public slots:
 	void onNewConfiguration();
 	void onOpenFile();
@@ -34,5 +43,8 @@ public slots:
 	void onQueueParameters();
 	void onDeviceParameters();
 	void onDeviceFeatures();
+
+	void onProfileCtxMenu(const QPoint& pt);
+	void onCopy(VulkanTreeItem* pItem, const QVariant& data);
 };
 

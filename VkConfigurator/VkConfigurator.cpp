@@ -12,6 +12,8 @@ VkConfigurator::VkConfigurator(QWidget *parent)
     QObject::connect(ui.actionSave, &QAction::triggered, ui.dwContentsConf, &ConfigurationEditor::onSaveFile);
     QObject::connect(ui.actionSave_as, &QAction::triggered, ui.dwContentsConf, &ConfigurationEditor::onSaveAsFile);
     QObject::connect(ui.dwContentsConf, &ConfigurationEditor::loadedFinished, ui.dwgConf, &QDockWidget::raise);
+
+    QObject::connect(ui.dwContentsCapabilities, &CapabilityExplorer::sg_copy, ui.dwContentsConf, &ConfigurationEditor::onCopy);
 }
 
 VkConfigurator::~VkConfigurator()

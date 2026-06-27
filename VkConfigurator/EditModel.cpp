@@ -203,3 +203,39 @@ QVariant EditModel::data(const QModelIndex& index, int role) const
 	}
 	return QVariant();
 }
+
+
+IEditNode* EditModel::find(std::vector<IEditNode*>::const_iterator begin, std::vector<IEditNode*>::const_iterator end, const QString& name)
+{
+	if (auto iter = std::ranges::find_if(begin, end, [&name](IEditNode* pNode) { return (pNode->displayRole().toString().compare(name, Qt::CaseInsensitive) == 0); });
+		iter != end)
+		return *iter;
+	return nullptr;	
+}
+
+IEditNode* EditModel::findNode(const QString& name, QModelIndex& modelIndex)const
+{
+	const auto path = name.split('.');
+	int index = 0;
+	QString localPath;
+	IEditNode* pNode = nullptr;
+	for (const auto namePath : path)
+	{
+		if (index == 0)
+		{
+			localPath = namePath;
+			pNode = EditModel::find(m_classes.begin(), m_classes.end(), namePath);
+		}
+		else
+		{
+			localPath += "." + namePath;
+			pNode = EditModel::find(pNode->begin(), pNode->end(), localPath);
+		}
+
+		if (pNode == nullptr)
+			return pNode;
+		++index;
+	}
+	modelIndex = createIndex(pNode->indexInparent(), 0, pNode);
+	return pNode;
+}
