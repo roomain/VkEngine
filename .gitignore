@@ -348,6 +348,8 @@ debug/
 x64/
 Win32/
 
+VkConfigurator/fillEditModel.h
+
 #save directories
 **/save
 

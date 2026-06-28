@@ -46,6 +46,9 @@
       </attribute>
      </widget>
      <widget class="QTableView" name="tbwVulkanCapacities">
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
       <attribute name="horizontalHeaderVisible">
        <bool>true</bool>
       </attribute>
