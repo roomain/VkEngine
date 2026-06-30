@@ -18,8 +18,8 @@ int g_height = 600;
 EngineApplicationParameters g_appParam
 {
     "EngineExample",
-    "",		/*!< parameters file*/
-    "",		/*!< parameters profile*/
+    "profileTest.json",		/*!< parameters file*/
+    "Profile_test",		/*!< parameters profile*/
     1		/*!< application version*/
 };
 

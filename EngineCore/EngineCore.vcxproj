@@ -204,6 +204,9 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="InternalConfiguration.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="QueuesManager.h" />
+    <ClInclude Include="reflective_convert.h" />
+    <ClInclude Include="reflect_convert_from_string.h" />
+    <ClInclude Include="reflect_convert_to_string.h" />
     <ClInclude Include="ScopedLink.h" />
     <ClInclude Include="StringToVkEnum.h" />
     <ClInclude Include="Transformation.h" />

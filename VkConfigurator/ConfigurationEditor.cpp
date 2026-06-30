@@ -115,11 +115,11 @@ void ConfigurationEditor::onOpenFile()
 void ConfigurationEditor::onAddEngineParameters()
 {
 	EngineParameters parameter;
-	auto profineName = ui.twProfiles->currentItem()->text(0).toStdString();
-	if (!Reflective::instance().hasClass(profineName, "EngineParameters"))
+	auto profileName = ui.twProfiles->currentItem()->text(0).toStdString();
+	if (!Reflective::instance().hasClass(profileName, "EngineParameters"))
 	{
-		Reflective::instance().writeProfile(profineName, parameter);
-		Reflective::instance().setCurrentProfile(profineName);
+		Reflective::instance().writeProfile(profileName, parameter);
+		Reflective::instance().setCurrentProfile(profileName);
 		auto pModel = static_cast<EditModel*>(ui.confView->model());
 		ui.confView->expand(pModel->addClass(new EditClassNode("EngineParameters", parameter)));
 	}
@@ -128,12 +128,12 @@ void ConfigurationEditor::onAddEngineParameters()
 void ConfigurationEditor::onQueueParameters()
 {
 	QueuesParameters parameter;
-	auto profineName = ui.twProfiles->currentItem()->text(0).toStdString();
+	auto profileName = ui.twProfiles->currentItem()->text(0).toStdString();
 
-	if (!Reflective::instance().hasClass(profineName, "QueuesParameters"))
+	if (!Reflective::instance().hasClass(profileName, "QueuesParameters"))
 	{
-		Reflective::instance().writeProfile(profineName, parameter);
-		Reflective::instance().setCurrentProfile(profineName);
+		Reflective::instance().writeProfile(profileName, parameter);
+		Reflective::instance().setCurrentProfile(profileName);
 		auto pModel = static_cast<EditModel*>(ui.confView->model());
 		ui.confView->expand(pModel->addClass(new EditClassNode("QueuesParameters", parameter)));
 	}
@@ -142,11 +142,11 @@ void ConfigurationEditor::onQueueParameters()
 void ConfigurationEditor::onDeviceParameters()
 {
 	DeviceParameters parameter;
-	auto profineName = ui.twProfiles->currentItem()->text(0).toStdString();
-	if (!Reflective::instance().hasClass(profineName, "DeviceParameters"))
+	auto profileName = ui.twProfiles->currentItem()->text(0).toStdString();
+	if (!Reflective::instance().hasClass(profileName, "DeviceParameters"))
 	{
-		Reflective::instance().writeProfile(profineName, parameter);
-		Reflective::instance().setCurrentProfile(profineName);
+		Reflective::instance().writeProfile(profileName, parameter);
+		Reflective::instance().setCurrentProfile(profileName);
 		auto pModel = static_cast<EditModel*>(ui.confView->model());
 		ui.confView->expand(pModel->addClass(new EditClassNode("DeviceParameters", parameter)));
 	}
@@ -155,11 +155,11 @@ void ConfigurationEditor::onDeviceParameters()
 void ConfigurationEditor::onDeviceFeatures()
 {
 	DeviceFeatures parameter;
-	auto profineName = ui.twProfiles->currentItem()->text(0).toStdString();
-	if (!Reflective::instance().hasClass(profineName, "DeviceFeatures"))
+	auto profileName = ui.twProfiles->currentItem()->text(0).toStdString();
+	if (!Reflective::instance().hasClass(profileName, "DeviceFeatures"))
 	{
-		Reflective::instance().writeProfile(profineName, parameter);
-		Reflective::instance().setCurrentProfile(profineName);
+		Reflective::instance().writeProfile(profileName, parameter);
+		Reflective::instance().setCurrentProfile(profileName);
 		auto pModel = static_cast<EditModel*>(ui.confView->model());
 		ui.confView->expand(pModel->addClass(new EditClassNode("DeviceFeatures", parameter)));
 	}
@@ -171,6 +171,10 @@ void ConfigurationEditor::onSaveFile()
 	if (m_currentFile.isEmpty())
 		m_currentFile = QFileDialog::getSaveFileName(this, "Save configuration", "", "Json Files (*.json)");
 	
+	const auto pModel = static_cast<EditModel*>(ui.confView->model());
+	if (pModel)
+		pModel->save(ui.twProfiles->currentItem()->text(0).toStdString());
+
 	if (!m_currentFile.isEmpty())
 		Reflective::instance().writeFile(m_currentFile.toStdString(), true);
 }
@@ -179,7 +183,10 @@ void ConfigurationEditor::onSaveAsFile()
 {
 	auto filePath = QFileDialog::getSaveFileName(this, "Save configuration", "", "Json Files (*.json)");
 	if (!filePath.isEmpty())
-		Reflective::instance().writeFile(filePath.toStdString(), true);
+	{
+		m_currentFile = filePath;
+		onSaveFile();
+	}
 }
 
 void ConfigurationEditor::enableActions()

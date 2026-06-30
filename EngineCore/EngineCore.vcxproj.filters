@@ -61,6 +61,9 @@
     <Filter Include="Fichiers sources\parameters">
       <UniqueIdentifier>{c1ba0fe2-7e88-40d1-9737-a1cf1a11d761}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\reflective_convert">
+      <UniqueIdentifier>{024832f8-b8e0-42de-a1fb-89c4adc61871}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -149,6 +152,15 @@
     </ClInclude>
     <ClInclude Include="VkEnumMacros.h">
       <Filter>Fichiers d%27en-tête\vkEnumVSstring</Filter>
+    </ClInclude>
+    <ClInclude Include="reflect_convert_from_string.h">
+      <Filter>Fichiers d%27en-tête\reflective_convert</Filter>
+    </ClInclude>
+    <ClInclude Include="reflect_convert_to_string.h">
+      <Filter>Fichiers d%27en-tête\reflective_convert</Filter>
+    </ClInclude>
+    <ClInclude Include="reflective_convert.h">
+      <Filter>Fichiers d%27en-tête\reflective_convert</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

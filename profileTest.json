@@ -6,7 +6,7 @@
       "ClassArray": [
         {
           "Id": {
-            "name": "Profile_test",
+            "name": "Profile",
             "parent": null
           },
           "DeviceParameters": {
@@ -15,9 +15,9 @@
               "fullDrawIndexUint32": false,
               "imageCubeArray": false,
               "independentBlend": false,
-              "geometryShader": false,
-              "tessellationShader": false,
-              "sampleRateShading": false,
+              "geometryShader": true,
+              "tessellationShader": true,
+              "sampleRateShading": true,
               "dualSrcBlend": false,
               "logicOp": false,
               "multiDrawIndirect": false,
@@ -69,11 +69,15 @@
             }
           },
           "EngineParameters": {
-            "debugging": false
+            "debugging": true,
+            "extensions": [
+              "VK_KHR_surface",
+              "VK_KHR_external_memory_capabilities"
+            ]
           },
           "QueuesParameters": {
-            "count": 1,
-            "priority": 1E0
+            "count": 4,
+            "priority": 2.5E0
           }
         }
       ]

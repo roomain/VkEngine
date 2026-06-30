@@ -19,6 +19,7 @@ signals:
 private:
 	Ui::ConfigurationEditorClass ui;
 	QString m_currentFile;
+
 	void enableActions();
 
 	static void copyTo(IEditNode* pNode, const QVariant& data);

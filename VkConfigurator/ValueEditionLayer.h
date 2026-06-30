@@ -9,8 +9,8 @@
 using EditGetter = std::function<QVariant()>;
 using EditSetter = std::function<void(const QVariant&)>;
 
-template<typename, typename = std::void_t<>>
-struct has_base : std::false_type {};
-
-template<typename T>
-struct has_base<T, std::void_t<typename T::Base>> : std::true_type {};
+//template<typename, typename = std::void_t<>>
+//struct has_base : std::false_type {};
+//
+//template<typename T>
+//struct has_base<T, std::void_t<typename T::Base>> : std::true_type {};
