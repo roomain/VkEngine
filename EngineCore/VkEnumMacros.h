@@ -1,6 +1,6 @@
 /***********************************************
 * @headerfile VkEnumMacros.h
-* @date 30/6/2026
+* @date 1/7/2026
 * @author genEnum.py
 ************************************************/
 #include <vulkan/vulkan_core.h>

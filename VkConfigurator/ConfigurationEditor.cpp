@@ -31,6 +31,7 @@ ConfigurationEditor::ConfigurationEditor(QWidget *parent)
 	ui.confView->setModel(new EditModel());
 	auto delegate = new EditionNodeDelegate();
 	ui.confView->setItemDelegate(delegate);
+	ui.confView->setColumnWidth(0, ui.confView->width() / 2);
 	QObject::connect(delegate, &EditionNodeDelegate::expandNode, ui.confView, &QTreeView::expand);
 	enableActions();
 }
