@@ -40,6 +40,7 @@ EngineApplication::EngineApplication(const EngineApplicationParameters& a_appPar
 	{
 		if (Reflective::instance().hasProfile(a_appParameters.parametersProfile))
 		{
+			Reflective::instance().setCurrentProfile(a_appParameters.parametersProfile);
 			EngineParameters parameters;
 			auto cleanedLayers = removeDoubloon(parameters.layers);
 			instanceInfo.enabledLayerCount = static_cast<uint32_t>(cleanedLayers.size());

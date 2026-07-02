@@ -348,6 +348,9 @@ debug/
 x64/
 Win32/
 
+#generated files
+EngineCore/VkEnumMacros.h
+
 VkConfigurator/fillEditModel.h
 
 #save directories

@@ -3,6 +3,7 @@
 #define SDL_MAIN_HANDLED
 #include <SDL3/SDL.h>
 #include <iostream>
+#include <filesystem>
 #include <memory>
 #include "events.h"
 #include "EngineApplication.h"
@@ -36,6 +37,8 @@ int main(int argc, char* argv[])
 
     CapabilitiesConsoleVisitorImpl visitor;
     visitor.visit(EngineApplication::hostCapabilities());
+
+    g_appParam.parametersFilename = std::filesystem::current_path().string() + "\\" + g_appParam.parametersFilename;
 
     g_appEngine = std::make_shared<EngineApplication>(g_appParam);
     auto& caps = g_appEngine->capabilities();
