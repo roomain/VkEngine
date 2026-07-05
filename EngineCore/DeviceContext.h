@@ -5,7 +5,7 @@
 * @author Roomain
 ************************************************/
 #include <vulkan/vulkan.hpp>
-#include <vma/vk_mem_alloc.h>
+#include <vk_mem_alloc.h>
 
 /*@brief base data use for vulkan call*/
 struct DeviceContext

@@ -9,7 +9,7 @@
 #include <optional>
 #include <functional>
 #include <vulkan/vulkan.hpp>
-#include <vma/vk_mem_alloc.h>
+#include <vk_mem_alloc.h>
 #include <boost/asio/thread_pool.hpp>
 #include <boost/asio/post.hpp>
 #include "notCopiable.h"
