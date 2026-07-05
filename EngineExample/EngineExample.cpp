@@ -52,6 +52,8 @@ int main(int argc, char* argv[])
         return 1;
     }
     
+    auto hasProfile = Reflective::instance().hasProfile("Profile_test");
+
     DeviceParameters devParameters;// <= ERROR NO QUEUE!
     auto suitableDev = g_appEngine->suitableDevices(devParameters, &surface);
     
