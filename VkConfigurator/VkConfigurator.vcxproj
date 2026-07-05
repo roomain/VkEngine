@@ -80,7 +80,7 @@
     </ClCompile>
     <PreBuildEvent>
       <Command>cd $(SolutionDir)\scripts
-genModelData.py $(SolutionDir)EngineCore $(ProjectDir)fillEditModel.h</Command>
+python genModelData.py $(SolutionDir)EngineCore $(ProjectDir)fillEditModel.h</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
