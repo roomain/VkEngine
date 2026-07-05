@@ -7,9 +7,7 @@
 #include <memory>
 #include "events.h"
 #include "EngineApplication.h"
-#include "EngineParameters.h"
 #include "capabilitiesVisitorImpl.h"
-#include <SDL3/SDL_vulkan.h>
 
 SDL_Window* g_window = nullptr;
 SDL_Renderer* g_renderer = nullptr;
@@ -33,7 +31,6 @@ int main(int argc, char* argv[])
         SDL_Log("SDL_Init failed (%s)", SDL_GetError());
         return 1;
     }
-    SDL_Vulkan_LoadLibrary(nullptr);
 
     g_window = SDL_CreateWindow("EngineExample", g_width, g_height, SDL_WINDOW_VULKAN | SDL_WINDOW_RESIZABLE);
     
@@ -43,22 +40,8 @@ int main(int argc, char* argv[])
 
     g_appParam.parametersFilename = std::filesystem::current_path().string() + "\\" + g_appParam.parametersFilename;
 
-    g_appEngine = std::make_shared<EngineApplication>(g_appParam); 
+    g_appEngine = std::make_shared<EngineApplication>(g_appParam);
     auto& caps = g_appEngine->capabilities();
-    VkSurfaceKHR surface;
-    if (!SDL_Vulkan_CreateSurface(g_window, caps.instance, nullptr, &surface))
-    {
-        SDL_Log("SDL_Vulkan_CreateSurface failed (%s)", SDL_GetError());
-        return 1;
-    }
-    
-    DeviceParameters devParameters;// <= ERROR NO QUEUE!
-    auto suitableDev = g_appEngine->suitableDevices(devParameters, &surface);
-    
-
-    //DeviceConfiguration configuration;
-    //auto device = g_appEngine->createDevice(configuration);
-    
 
 
     SDL_Event event;

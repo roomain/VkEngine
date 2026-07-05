@@ -9,6 +9,16 @@
             "name": "Profile_test",
             "parent": null
           },
+          "EngineParameters": {
+            "debugging": true,
+            "extensions": [
+              "VK_KHR_surface",
+              "VK_KHR_win32_surface"
+            ],
+            "layers": [
+              "VK_LAYER_LUNARG_crash_diagnostic"
+            ]
+          },
           "DeviceParameters": {
             "features": {
               "robustBufferAccess": false,
@@ -78,15 +88,6 @@
                 "count": 4,
                 "priority": 1E0
               }
-            ]
-          },
-          "EngineParameters": {
-            "debugging": true,
-            "extensions": [
-              "VK_KHR_surface"
-            ],
-            "layers": [
-              "VK_LAYER_LUNARG_crash_diagnostic"
             ]
           }
         }

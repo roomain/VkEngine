@@ -22,13 +22,13 @@ VulkanCapabilities EngineApplication::hostCapabilities()
 	VK_CHECK_EXCEPT(vkCreateInstance(&instanceInfo, nullptr, &instance))
 	getVulkanCapabilities(capabilities, instance);
 	vkDestroyInstance(instance, nullptr);
-	// reset
-	capabilities.instance = VK_NULL_HANDLE;
 	return capabilities;
 }
 
 EngineApplication::EngineApplication(const EngineApplicationParameters& a_appParameters)
 {
+	// loading modules
+
 	auto appInfo = initApplicationInfo(a_appParameters.appName, 
 		EngineApplication::ENGINE_NAME, 
 		a_appParameters.appVersion,
@@ -41,7 +41,6 @@ EngineApplication::EngineApplication(const EngineApplicationParameters& a_appPar
 		if (Reflective::instance().hasProfile(a_appParameters.parametersProfile))
 		{
 			Reflective::instance().setCurrentProfile(a_appParameters.parametersProfile);
-			// setup vulkan instance parameters
 			EngineParameters parameters;
 			auto cleanedLayers = removeDoubloon(parameters.layers);
 			instanceInfo.enabledLayerCount = static_cast<uint32_t>(cleanedLayers.size());
@@ -51,10 +50,7 @@ EngineApplication::EngineApplication(const EngineApplicationParameters& a_appPar
 			instanceInfo.enabledExtensionCount = static_cast<uint32_t>(cleanedExtensions.size());
 			auto tempExt = vStringToChar(cleanedExtensions);
 			instanceInfo.ppEnabledExtensionNames = tempExt.data();
-			// create vulkan instance
 			VK_CHECK_EXCEPT(vkCreateInstance(&instanceInfo, nullptr, &m_capabilities.instance))
-
-			// setup vulkan capabilities
 			getVulkanCapabilities(m_capabilities);
 			if (parameters.debugging)
 			{
