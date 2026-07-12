@@ -103,7 +103,7 @@ public:
         return rotation;
     }
 
-    inline void rotateAround(const double& a_angle, const glm::dvec3& a_axis, const glm::dvec3& a_target)
+    inline void rotateAround(const double a_angle, const glm::dvec3& a_axis, const glm::dvec3& a_target)
     {
         glm::dvec3 offset = a_target - position();
         m_transform = glm::translate(m_transform, offset);

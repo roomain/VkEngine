@@ -19,7 +19,7 @@ struct QueueConfiguration
 /*@brief device configuration corresponding to device parameters*/
 struct DeviceConfiguration
 {
-    uint32_t deviceIndex;                   /*!< device index*/
+    uint32_t deviceIndex = 0;               /*!< device index*/
     std::vector<std::string> extensions;    /*!< device layers*/
     std::vector<std::string> layers;        /*!< device extension*/
     VkPhysicalDeviceFeatures features;      /*!< device features*/

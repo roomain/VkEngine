@@ -9,6 +9,7 @@
 #include "EngineApplication.h"
 #include "EngineParameters.h"
 #include "capabilitiesVisitorImpl.h"
+#include "VkEnumToString.h"
 #include <SDL3/SDL_vulkan.h>
 
 SDL_Window* g_window = nullptr;
@@ -52,14 +53,59 @@ int main(int argc, char* argv[])
         return 1;
     }
     
-    auto hasProfile = Reflective::instance().hasProfile("Profile_test");
+    //auto hasProfile = Reflective::instance().hasProfile("Profile_test");
 
     DeviceParameters devParameters;// <= ERROR NO QUEUE!
     auto suitableDev = g_appEngine->suitableDevices(devParameters, &surface);
     
+    if (suitableDev.empty())
+    {
+		std::cerr << "No suitable device found" << std::endl;
+        return -1;
+    }
 
-    //DeviceConfiguration configuration;
-    //auto device = g_appEngine->createDevice(configuration);
+	for (const auto& dev : suitableDev)
+	{        
+        std::cout << "0 - device index: " << dev.deviceIndex << "\n";
+        
+        if (!dev.extensions.empty())
+        {
+            std::cout << "\t*Extensions:\n";
+            for (const auto& ext : dev.extensions)
+                std::cout << "\t\t" << ext << "\n";
+            std::cout << "\n";
+        }
+
+        if (!dev.layers.empty())
+        {
+            std::cout << "\t*Layers:\n";
+            for (const auto& layer : dev.layers)
+                std::cout << "\t\t" << layer << "\n";
+            std::cout << "\n";
+        }
+
+        if (!dev.queues.empty())
+        {
+            std::cout << "\t*Queues:\n";
+            for (const auto& queue : dev.queues)
+            {
+                std::cout << "\t\tFamily index: " << queue.familyIndex << "\n";
+                std::cout << "\t\tFlags: " << Flag<VkQueueFlagBits>::to_string(queue.flags) << "\n";
+                std::cout << "\t\tCount: " << queue.queueCount << "\n";
+                std::cout << "\t\tPriority: " << queue.priority << "\n";
+                std::cout << "\t\t-------------------------------\n";
+            }
+        }
+        std::cout << "\n\n";
+	}
+
+    int index = 0;
+	if (suitableDev.size() > 1)
+	{
+		std::cout << "Multiple suitable devices found, using the first one" << std::endl;
+        std::cin >> index;
+	}
+    auto device = g_appEngine->createDevice(suitableDev[index]);
     
 
 

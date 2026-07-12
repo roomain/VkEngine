@@ -24,7 +24,7 @@ public:
 	void visitData(const char* a_title, const int32_t a_value) override;
 	void visitData(const char* a_title, const uint32_t a_value) override;
 	void visitData(const char* a_title, const float a_value) override;
-	void visitData(const char* a_title, const double& a_value) override;
+	void visitData(const char* a_title, const double a_value) override;
 	void visitData(const char* a_title, const char* a_value) override;
 	void visitData(const char* a_title, const std::string_view& a_value) override;
 	void visitData(const char* a_title, const std::vector<std::string>& a_value) override;

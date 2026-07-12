@@ -101,7 +101,7 @@ void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const float 
 	}
 }
 
-void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const double& a_value)
+void CapabilitiesConsoleVisitorImpl::visitData(const char* a_title, const double a_value)
 {
 	setupTabs();
 	if (m_isArray)

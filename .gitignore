@@ -348,6 +348,9 @@ debug/
 x64/
 Win32/
 
+#cpp check
+vkEngineCheck-cppcheck-build-dir/
+
 #generated files
 EngineCore/VkEnumMacros.h
 

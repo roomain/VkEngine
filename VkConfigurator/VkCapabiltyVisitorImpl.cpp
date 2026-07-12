@@ -112,7 +112,7 @@ void VkCapabiltyVisitorImpl::visitData(const char* a_title, const float a_value)
 	}
 }
 
-void VkCapabiltyVisitorImpl::visitData(const char* a_title, const double& a_value)
+void VkCapabiltyVisitorImpl::visitData(const char* a_title, const double a_value)
 {
 	if (m_current)
 	{

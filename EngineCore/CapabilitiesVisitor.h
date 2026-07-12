@@ -91,7 +91,7 @@ protected:
 	virtual void visitData(const char* a_title, const int32_t a_value) = 0;
 	virtual void visitData(const char* a_title, const uint32_t a_value) = 0;
 	virtual void visitData(const char* a_title, const float a_value) = 0;
-	virtual void visitData(const char* a_title, const double& a_value) = 0;
+	virtual void visitData(const char* a_title, const double a_value) = 0;
 	virtual void visitData(const char* a_title, const char* a_value) = 0;
 	virtual void visitData(const char* a_title, const std::string_view& a_value) = 0;
 	virtual void visitData(const char* a_title, const std::vector<std::string>& a_value) = 0;
