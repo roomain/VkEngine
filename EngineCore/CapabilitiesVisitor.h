@@ -41,7 +41,7 @@ private:
 		{
 			a_unit = "Go";
 		}
-		else if (a_computedSize > 0.01)
+		else if (a_computedSize = static_cast<double>(a_size) / mega; a_computedSize > 0.01)
 		{
 			a_unit = "Mo";
 		}

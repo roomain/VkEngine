@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <CRC_DIR Condition="exists('D:\libraries\crc32c')">D:\libraries\crc32c\install\$(Configuration)</CRC_DIR>
+    <CRC_DIR Condition="exists('C:\libraries\crc32c')">C:\libraries\crc32c\install\$(Configuration)</CRC_DIR>
+    <CRC_INC>$(CRC_DIR)\include</CRC_INC>
+    <CRC_LIB>$(CRC_DIR)\lib</CRC_LIB>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(CRC_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(CRC_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>crc32c.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="CRC_DIR">
+      <Value>$(CRC_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CRC_INC">
+      <Value>$(CRC_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CRC_LIB">
+      <Value>$(CRC_LIB)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

@@ -64,6 +64,12 @@
     <Filter Include="Fichiers d%27en-tête\reflective_convert">
       <UniqueIdentifier>{024832f8-b8e0-42de-a1fb-89c4adc61871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\shader">
+      <UniqueIdentifier>{9d80fb91-719a-4c76-8f9e-17614d2ba81c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\shader">
+      <UniqueIdentifier>{03e49d9d-6cde-402c-8a2f-e7a165b1f5d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -162,6 +168,9 @@
     <ClInclude Include="reflective_convert.h">
       <Filter>Fichiers d%27en-tête\reflective_convert</Filter>
     </ClInclude>
+    <ClInclude Include="EngineShaderDatabase.h">
+      <Filter>Fichiers d%27en-tête\shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -205,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="EngineBuffer.cpp">
       <Filter>Fichiers sources\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineShaderDatabase.cpp">
+      <Filter>Fichiers sources\shader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

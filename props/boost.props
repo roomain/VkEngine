@@ -7,7 +7,6 @@
     <BOOST_DIR Condition="exists('C:\Libraries\boost')">C:\Libraries\boost\boost_$(BOOST_VERSION)</BOOST_DIR>
     <BOOST_LIB>$(BOOST_DIR)\stage\lib</BOOST_LIB>
   </PropertyGroup>
-  <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(BOOST_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

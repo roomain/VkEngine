@@ -15,12 +15,12 @@
 [[nodiscard]] constexpr type::reverse_iterator rend() { return member.rend(); }
 
 /*@brief define const iteration on member of type 'type'*/
-#define DEFINE_CONST_ITER(type, member)\
+#define DEFINE_CONST_ITER(type, member) \
 [[nodiscard]] constexpr type::const_iterator cbegin()const { return member.cbegin(); } \
 [[nodiscard]] constexpr type::const_iterator cend()const { return member.cend(); }
 
 /*@brief define const reverse iteration on member of type 'type'*/
-#define DEFINE_CONST_REV_ITER(type, member)\
+#define DEFINE_CONST_REV_ITER(type, member) \
 [[nodiscard]] constexpr type::const_reverse_iterator rcbegin()const { return member.crbegin(); } \
 [[nodiscard]] constexpr type::const_reverse_iterator rcend()const { return member.crend(); }
 

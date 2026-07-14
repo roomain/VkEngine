@@ -2,7 +2,7 @@
 <project version="1">
     <builddir>vkEngineCheck-cppcheck-build-dir</builddir>
     <importproject>VkEngine.slnx</importproject>
-    <analyze-all-vs-configs>false</analyze-all-vs-configs>
+    <analyze-all-vs-configs>true</analyze-all-vs-configs>
     <check-headers>true</check-headers>
     <check-unused-templates>true</check-unused-templates>
     <inline-suppression>true</inline-suppression>
@@ -12,6 +12,12 @@
         <config>Debug</config>
         <config>Release</config>
     </vs-configurations>
+    <exclude>
+        <path name="C:/VulkanSDK/"/>
+        <path name="C:/Windows/"/>
+        <path name="C:/Program Files/"/>
+        <path name="C:/Libraries/"/>
+    </exclude>
     <check-level-normal/>
     <project-name>vkEngineCheck</project-name>
 </project>

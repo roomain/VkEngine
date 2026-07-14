@@ -86,6 +86,8 @@
     <Import Project="..\props\Reflection.props" />
     <Import Project="..\props\asyncplusplus.props" />
     <Import Project="..\props\VMA.props" />
+    <Import Project="..\props\crc32c.props" />
+    <Import Project="..\props\libbson.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -96,6 +98,8 @@
     <Import Project="..\props\Reflection.props" />
     <Import Project="..\props\asyncplusplus.props" />
     <Import Project="..\props\VMA.props" />
+    <Import Project="..\props\crc32c.props" />
+    <Import Project="..\props\libbson.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -199,6 +203,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="EngineParallelWorker.h" />
     <ClInclude Include="enginecore_globals.h" />
     <ClInclude Include="EngineRenderer.h" />
+    <ClInclude Include="EngineShaderDatabase.h" />
     <ClInclude Include="EngineSwapChain.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="InternalConfiguration.h" />
@@ -230,6 +235,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClCompile Include="EngineExceptions.cpp" />
     <ClCompile Include="EngineLog.cpp" />
     <ClCompile Include="EngineRenderer.cpp" />
+    <ClCompile Include="EngineShaderDatabase.cpp" />
     <ClCompile Include="EngineSwapChain.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -6,20 +6,23 @@
 ************************************************/
 #include "DeviceContext.h"
 #include "EngineExceptions.h"
+#include "VulkanBufferInitializers.h"
 
-class EngineDynamicBuffer
+class EngineBuffer
 {
 private:
-	DeviceContext m_devCtx; /*!< device context*/
-	VmaAllocation m_allocation = VK_NULL_HANDLE;
-	VkBufferCreateInfo m_bufferCreateInfo;  /*!< buffer create information*/
-	VkBuffer m_buffer = VK_NULL_HANDLE;     /*!< buffer handle*/
-	VkDeviceSize m_activeSize = 0;
+	DeviceContext m_devCtx;							/*!< device context*/
+	VmaAllocation m_allocation = VK_NULL_HANDLE;	/*!< vma allocation*/
+	VkBufferCreateInfo m_bufferCreateInfo;			/*!< buffer create information*/
+	VkBuffer m_buffer = VK_NULL_HANDLE;				/*!< buffer handle*/
+	VkDeviceSize m_activeSize = 0;					/*!< used size must be <= m_bufferCreateInfo.size*/
 
 	void releaseBuffer();
-	explicit EngineDynamicBuffer(const DeviceContext& a_ctxt) : m_devCtx{ a_ctxt } {}
+	explicit EngineBuffer(const DeviceContext& a_ctxt);
+
 public:
-	~EngineDynamicBuffer();
+	EngineBuffer() = delete;
+	~EngineBuffer();
 	[[nodiscard]] constexpr VkBuffer buffer()const { return m_buffer; }
 	[[nodiscard]] VkDeviceSize allocationSize()const { return m_bufferCreateInfo.size; }
 	[[nodiscard]] VkDeviceSize bufferSize()const { return m_activeSize; }

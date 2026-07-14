@@ -8,7 +8,6 @@
     <SDL_LIB>$(SDL_DIR)\VS2026\$(Configuration)</SDL_LIB>
     <SDL_BIN>$(SDL_DIR)\VS2026\$(Configuration)</SDL_BIN>
   </PropertyGroup>
-  <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SDL_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
