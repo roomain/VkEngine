@@ -19,6 +19,7 @@ set(GLM_ENABLE_SIMD_AVX2 ON CACHE BOOL "" FORCE)
 add_subdirectory(glm)
 add_subdirectory(asyncplusplus)
 add_subdirectory(SDL)
+add_subdirectory(slang)
 
 set(CRC32C_BUILD_BENCHMARKS OFF CACHE BOOL "" FORCE)
 set(CRC32C_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -33,22 +34,3 @@ add_subdirectory(crc32c)
 add_subdirectory(libbson)
 
 install(SCRIPT "${CMAKE_SOURCE_DIR}/postinstall.cmake")
-#add_custom_target(CopyInstall ALL
-#    COMMAND ${CMAKE_COMMAND} -E make_directory
-#        "${CMAKE_SOURCE_DIR}/install/$<CONFIG>"
-#
-#    COMMAND ${CMAKE_COMMAND} -E copy_directory
-#        "${CMAKE_BINARY_DIR}/install"
-#        "${CMAKE_SOURCE_DIR}/install/$<CONFIG>"
-#)
-#
-#add_dependencies(CopyInstall
-#    glm
-#    Async++
-#    SDL3-static      # adapter au vrai nom
-#    crc32c
-#    crc32c_arm64
-#    crc32c_sse42
-#    bson_shared      # adapter au vrai nom
-#    bson_static
-#)

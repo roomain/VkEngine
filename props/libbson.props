@@ -1,34 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
-  <PropertyGroup Label="UserMacros">
-    <LIBBSON_DIR Condition="exists('D:\libraries\libbson')">D:\libraries\libbson\install\$(Configuration)</LIBBSON_DIR>
-    <LIBBSON_DIR Condition="exists('C:\libraries\libbson')">C:\libraries\libbson\install\$(Configuration)</LIBBSON_DIR>
-    <LIBBSON_INC>$(LIBBSON_DIR)\include</LIBBSON_INC>
-    <LIBBSON_LIB>$(LIBBSON_DIR)\lib</LIBBSON_LIB>
-    <LIBBSON_BIN>$(LIBBSON_DIR)\bin</LIBBSON_BIN>
-  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(LIBBSON_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(LIBBSON_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>bson-static-1.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\install\$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bson-1.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>    
+    <PreBuildEvent>
+      <Command>copy /Y $(SolutionDir)thirdparty\install\$(Configuration)\bin\libbson-1.0.dll $(OutDir) </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command></Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <BuildMacro Include="LIBBSON_DIR">
-      <Value>$(LIBBSON_DIR)</Value>
-    </BuildMacro>
-    <BuildMacro Include="LIBBSON_INC">
-      <Value>$(LIBBSON_INC)</Value>
-    </BuildMacro>
-    <BuildMacro Include="LIBBSON_LIB">
-      <Value>$(LIBBSON_LIB)</Value>
-    </BuildMacro>
-    <BuildMacro Include="LIBBSON_BIN">
-      <Value>$(LIBBSON_BIN)</Value>
-    </BuildMacro>
-  </ItemGroup>
 </Project>

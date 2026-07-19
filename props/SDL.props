@@ -2,11 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <SDL_DIR Condition="exists('D:\libraries\SDL')">D:\libraries\SDL</SDL_DIR>
-    <SDL_DIR Condition="exists('C:\libraries\SDL')">C:\libraries\SDL</SDL_DIR>
+    <SDL_DIR>$(SolutionDir)thirdparty\SDL</SDL_DIR>
     <SDL_INC>$(SDL_DIR)\include</SDL_INC>
-    <SDL_LIB>$(SDL_DIR)\VS2026\$(Configuration)</SDL_LIB>
-    <SDL_BIN>$(SDL_DIR)\VS2026\$(Configuration)</SDL_BIN>
+    <SDL_LIB>$(SolutionDir)thirdparty\install\lib\$(Configuration)</SDL_LIB>
+    <SDL_BIN>$(SolutionDir)thirdparty\install\bin\$(Configuration)</SDL_BIN>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

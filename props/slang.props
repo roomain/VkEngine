@@ -7,8 +7,11 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\install\$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>crc32c.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
+      <AdditionalDependencies>slang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>    
+    <PreBuildEvent>
+      <Command>copy /Y $(SolutionDir)thirdparty\install\$(Configuration)\bin\slang.dll $(OutDir) </Command>
+    </PreBuildEvent>
     <PostBuildEvent>
       <Command></Command>
     </PostBuildEvent>

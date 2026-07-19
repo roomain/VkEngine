@@ -2,8 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <GLM_DIR Condition="exists('D:\Libraries\glm')">D:\Libraries\glm</GLM_DIR>
-    <GLM_DIR Condition="exists('C:\Libraries\glm')">C:\Libraries\glm</GLM_DIR>
+    <GLM_DIR>$(SolutionDir)thirdparty\glm</GLM_DIR>
     <GLM_INC>$(GLM_DIR)</GLM_INC>
   </PropertyGroup>
   <PropertyGroup />

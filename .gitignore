@@ -347,6 +347,9 @@ release/
 debug/
 x64/
 Win32/
+thirdparty/build/
+thirdparty/install/
+thirdparty/VS2026/
 
 #cpp check
 vkEngineCheck-cppcheck-build-dir/
