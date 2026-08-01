@@ -1,30 +1,12 @@
 [submodule "Reflective"]
 	path = Reflective
 	url = https://github.com/roomain/Reflective.git
-[submodule "thirdparty/crc32c"]
-	path = thirdparty/crc32c
-	url = https://github.com/google/crc32c.git
-[submodule "thirdparty/libbson"]
-	path = thirdparty/libbson
-	url = https://github.com/mongodb/libbson.git
 [submodule "thirdparty/boost"]
 	path = thirdparty/boost
 	url = https://github.com/boostorg/boost.git
-[submodule "thirdparty/glm"]
-	path = thirdparty/glm
-	url = https://github.com/g-truc/glm.git
-[submodule "thirdparty/SDL"]
-	path = thirdparty/SDL
-	url = https://github.com/libsdl-org/SDL.git
-[submodule "thirdparty/VulkanMemoryAllocator"]
-	path = thirdparty/VulkanMemoryAllocator
-	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
-[submodule "thirdparty/asyncplusplus"]
-	path = thirdparty/asyncplusplus
-	url = https://github.com/Amanieu/asyncplusplus.git
 [submodule "thirdparty/imgui"]
 	path = thirdparty/imgui
 	url = https://github.com/ocornut/imgui.git
-[submodule "thirdparty/netImgui"]
-	path = thirdparty/netImgui
-	url = https://github.com/sammyfreg/netImgui.git
+[submodule "thirdparty/slang"]
+	path = thirdparty/slang
+	url = https://github.com/shader-slang/slang.git
