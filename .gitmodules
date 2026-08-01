@@ -28,6 +28,3 @@
 [submodule "thirdparty/netImgui"]
 	path = thirdparty/netImgui
 	url = https://github.com/sammyfreg/netImgui.git
-[submodule "thirdparty/slang"]
-	path = thirdparty/slang
-	url = https://github.com/shader-slang/slang.git
