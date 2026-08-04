@@ -15,8 +15,18 @@
 #include "notCopiable.h"
 #include "macros/iterators.h"
 
+
+
+namespace slang
+{
+	struct IGlobalSession;
+	struct TargetDesc;
+	struct SessionDesc;
+	struct ISession;
+}
+
 using ShaderDatabase = std::unordered_map<std::string, VkShaderModule>;
-using ShaderLoaderDatabase = std::unordered_map<std::string, std::function < std::vector<uint32_t>(const std::filesystem::path&)>>;
+using ShaderLoaderDatabase = std::unordered_map<std::string, std::function<std::vector<uint32_t>(const std::filesystem::path&)>>;
 
 class EngineShaderDatabase
 {
@@ -36,6 +46,11 @@ private:
 		".glslinc", ".shaderinc"
 	};
 
+	slang::IGlobalSession* m_globalSession = nullptr;
+	slang::ISession* m_pSlangSession = nullptr;
+	std::unique_ptr<slang::TargetDesc> m_pTarget;
+	std::unique_ptr<slang::SessionDesc> m_pSession;
+
 	std::filesystem::path m_shaderDirectory;/*!< path to shader directory*/
 	std::filesystem::path m_bsonFile;		/*!< path to bson*/
 	ShaderDatabase m_shaderDatabase;		/*!< shader modules by filename*/
@@ -47,14 +62,15 @@ private:
 	void newDBFile();
 	void completeDBFile(bson_t* a_bson);
 
-	static std::vector<uint32_t> compileShader(const std::filesystem::path& a_path);
-	static std::vector<uint32_t> loadSpirv(const std::filesystem::path& a_path);
-	static std::vector<uint32_t> loadSlang(const std::filesystem::path& a_path);
-	static std::vector<uint32_t> loadGLSL(const std::filesystem::path& a_path);
+	std::vector<uint32_t> compileShader(const std::filesystem::path& a_path);
+	std::vector<uint32_t> loadSpirv(const std::filesystem::path& a_path);
+	std::vector<uint32_t> loadSlang(const std::filesystem::path& a_path);
+	std::vector<uint32_t> loadGLSL(const std::filesystem::path& a_path);
 
 public:
 	EngineShaderDatabase() = delete;
-	EngineShaderDatabase(const std::string& a_shaderDirectory);
+	explicit EngineShaderDatabase(const std::string& a_shaderDirectory);
+	~EngineShaderDatabase();
 	NOT_COPIABLE(EngineShaderDatabase)
 	DEFINE_ITER(ShaderDatabase, m_shaderDatabase)
 	DEFINE_CONST_ITER(ShaderDatabase, m_shaderDatabase)

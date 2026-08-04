@@ -10,6 +10,7 @@
 #include "notCopiable.h"
 #include "internalConfiguration.h"
 
+/*@brief represents swapchain of rendering*/
 class EngineSwapChain
 {
 private:

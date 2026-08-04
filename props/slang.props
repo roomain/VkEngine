@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <SLANG_DIR>$(SolutionDir)thirdparty\install_slang</SLANG_DIR>
+    <SLANG_INC>$(SLANG_DIR)\include</SLANG_INC>
+    <SLANG_LIB>$(SLANG_DIR)\lib\$(Configuration)</SLANG_LIB>
+    <SLANG_BIN>$(SLANG_DIR)\bin\$(Configuration)</SLANG_BIN>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SLANG_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\install\$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>slang.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>    
-    <PreBuildEvent>
-      <Command>copy /Y $(SolutionDir)thirdparty\install\$(Configuration)\bin\slang.dll $(OutDir) </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command></Command>
-    </PostBuildEvent>
+      <AdditionalLibraryDirectories>$(SLANG_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>slang-compiler.lib;slang-rt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>     
   </ItemDefinitionGroup>
+  <Target Name="CopySlangDll" AfterTargets="Build">
+    <Copy SourceFiles="$(SLANG_BIN)\slang-compiler.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <ItemGroup>
+    <BuildMacro Include="SLANG_DIR">
+      <Value>$(SLANG_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SLANG_INC">
+      <Value>$(SLANG_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SLANG_LIB">
+      <Value>$(SLANG_LIB)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SLANG_BIN">
+      <Value>$(SLANG_BIN)</Value>
+    </BuildMacro>
+  </ItemGroup>
 </Project>

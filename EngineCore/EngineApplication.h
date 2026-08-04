@@ -25,11 +25,12 @@ using EngineRendererPtr = std::shared_ptr<EngineRenderer>;
 struct DeviceParameters;
 struct RendererParameters;
 
+/*@brief Application mandatory parameters */
 struct EngineApplicationParameters
 {
 	std::string appName;				/*!< application name*/
-	std::string parametersFilename;		/*!< parameters file*/
-	std::string parametersProfile;		/*!< parameters profile*/
+	std::string parametersFilename;		/*!< parameters file contains witch contains vulkan parameters by profile*/
+	std::string parametersProfile;		/*!< parameters profile to use*/
 	uint32_t appVersion;				/*!< application version*/
 };
 

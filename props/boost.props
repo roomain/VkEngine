@@ -2,14 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <BOOST_VERSION>1_91_0</BOOST_VERSION>
-    <BOOST_DIR Condition="exists('D:\Libraries\boost')">D:\Libraries\boost\boost_$(BOOST_VERSION)</BOOST_DIR>
-    <BOOST_DIR Condition="exists('C:\Libraries\boost')">C:\Libraries\boost\boost_$(BOOST_VERSION)</BOOST_DIR>
-    <BOOST_LIB>$(BOOST_DIR)\stage\lib</BOOST_LIB>
+    <BOOST_DIR>$(SolutionDir)thirdparty\install_Boost</BOOST_DIR>
+    <BOOST_INC>$(BOOST_DIR)\include</BOOST_INC>
+    <BOOST_LIB>$(BOOST_DIR)\lib\$(Configuration)</BOOST_LIB>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(BOOST_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOST_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -19,11 +18,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <BuildMacro Include="BOOST_VERSION">
-      <Value>$(BOOST_VERSION)</Value>
-    </BuildMacro>
     <BuildMacro Include="BOOST_DIR">
       <Value>$(BOOST_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BOOST_INC">
+      <Value>$(BOOST_INC)</Value>
     </BuildMacro>
     <BuildMacro Include="BOOST_LIB">
       <Value>$(BOOST_LIB)</Value>

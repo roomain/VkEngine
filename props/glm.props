@@ -2,8 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <GLM_DIR>$(SolutionDir)thirdparty\glm</GLM_DIR>
-    <GLM_INC>$(GLM_DIR)</GLM_INC>
+    <GLM_DIR>$(SolutionDir)thirdparty\install_glm</GLM_DIR>
+    <GLM_INC>$(GLM_DIR)\include</GLM_INC>
+    <GLM_LIB>$(GLM_DIR)\lib\$(Configuration)</GLM_LIB>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
@@ -11,6 +12,10 @@
       <AdditionalIncludeDirectories>$(GLM_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>      
       <PreprocessorDefinitions>GLM_ENABLE_EXPERIMENTAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(GLM_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="GLM_DIR">
@@ -18,6 +23,9 @@
     </BuildMacro>
     <BuildMacro Include="GLM_INC">
       <Value>$(GLM_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="GLM_LIB">
+      <Value>$(GLM_LIB)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

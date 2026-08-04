@@ -1,5 +1,5 @@
 /***********************************************
-* @headerfile enumerate.cppm
+* @headerfile enumerate.h
 * @date 19 / 02 / 2026
 * @author Roomain
 ************************************************/

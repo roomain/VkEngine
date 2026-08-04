@@ -88,6 +88,7 @@
     <Import Project="..\props\VMA.props" />
     <Import Project="..\props\crc32c.props" />
     <Import Project="..\props\libbson.props" />
+    <Import Project="..\props\slang.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -100,6 +101,7 @@
     <Import Project="..\props\VMA.props" />
     <Import Project="..\props\crc32c.props" />
     <Import Project="..\props\libbson.props" />
+    <Import Project="..\props\slang.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

@@ -8,6 +8,7 @@
 #include "EngineExceptions.h"
 #include "VulkanBufferInitializers.h"
 
+/*@brief class for using buffer with vulkan*/
 class EngineBuffer
 {
 private:

@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <ASYNC_DIR>$(SolutionDir)thirdparty\install_asyncplusplus</ASYNC_DIR>
+    <ASYNC_INC>$(ASYNC_DIR)\include</ASYNC_INC>
+    <ASYNC_LIB>$(ASYNC_DIR)\lib\$(Configuration)</ASYNC_LIB>
+    <ASYNC_BIN>$(ASYNC_DIR)\bin\$(Configuration)</ASYNC_BIN>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ASYNC_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\install\$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ASYNC_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>async++.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command></Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
+  </ItemDefinitionGroup>    
+  <Target Name="CopyAsyncDll" AfterTargets="Build">
+    <Copy SourceFiles="$(ASYNC_BIN)\async++.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <ItemGroup>
+    <BuildMacro Include="ASYNC_DIR">
+      <Value>$(ASYNC_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ASYNC_INC">
+      <Value>$(ASYNC_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ASYNC_LIB">
+      <Value>$(ASYNC_LIB)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ASYNC_BIN">
+      <Value>$(ASYNC_BIN)</Value>
+    </BuildMacro>
+  </ItemGroup>
 </Project>
