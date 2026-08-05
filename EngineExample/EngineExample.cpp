@@ -105,9 +105,16 @@ int main(int argc, char* argv[])
 		std::cout << "Multiple suitable devices found, using the first one" << std::endl;
         std::cin >> index;
 	}
-    auto device = g_appEngine->createDevice(suitableDev[index]);
+    RendererConfiguration renderConf{
+        suitableDev[index],
+        SurfaceConfiguration{
+            surface,
+            static_cast<uint32_t>(g_width), 
+            static_cast<uint32_t>(g_height)
+        }
+    };
+    auto device = g_appEngine->createRenderer(renderConf);
     
-
 
     SDL_Event event;
     bool quit = false;
