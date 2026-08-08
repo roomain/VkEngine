@@ -9,9 +9,12 @@
 #include "DeviceContext.h"
 #include "notCopiable.h"
 #include "internalConfiguration.h"
+#include "enginecore_globals.h"
 
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 /*@brief represents swapchain of rendering*/
-class EngineSwapChain
+class ENGINECORE_EXPORT EngineSwapChain
 {
 private:
 
@@ -51,3 +54,4 @@ public:
 	void present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, std::vector<VkSemaphore>& a_waitSemaphore)const;
 };
 
+#pragma warning(pop)

@@ -8,6 +8,9 @@
 #include "events.h"
 #include "EngineApplication.h"
 #include "EngineParameters.h"
+#include "EngineRenderer.h"
+#include "EngineDevice.h"
+#include "EngineBuffer.h"
 #include "capabilitiesVisitorImpl.h"
 #include "VkEnumToString.h"
 #include <SDL3/SDL_vulkan.h>
@@ -113,8 +116,10 @@ int main(int argc, char* argv[])
             static_cast<uint32_t>(g_height)
         }
     };
-    auto device = g_appEngine->createRenderer(renderConf);
+    auto renderer = g_appEngine->createRenderer(renderConf);
     
+    auto device = renderer->device();
+    device->createParallelWorker<2>(VK_QUEUE_GRAPHICS_BIT);
 
     SDL_Event event;
     bool quit = false;

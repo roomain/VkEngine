@@ -82,6 +82,9 @@
       <Command>cd $(SolutionDir)\scripts
 python genModelData.py $(SolutionDir)EngineCore $(ProjectDir)fillEditModel.h</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>$(QTDIR)\bin\windeployqt.exe $(OutDir)$(TargetFileName)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -92,6 +95,9 @@ python genModelData.py $(SolutionDir)EngineCore $(ProjectDir)fillEditModel.h</Co
       <Command>cd $(SolutionDir)\scripts
 genModelData.py $(SolutionDir)EngineCore $(ProjectDir)fillEditModel.h</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>$(QTDIR)\bin\windeployqt.exe $(OutDir)$(TargetFileName)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>

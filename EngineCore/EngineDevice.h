@@ -8,11 +8,15 @@
 #include "QueuesManager.h"
 #include "notCopiable.h"
 #include "EngineParallelWorker.h"
+#include "enginecore_globals.h"
+
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 
 struct DeviceConfiguration;
 
 /*@brief Base class of device created by EngineApplication*/
-class EngineDevice
+class ENGINECORE_EXPORT EngineDevice
 {
 	friend class EngineApplication;
 protected:
@@ -33,9 +37,10 @@ public:
 	[[nodiscard]] constexpr uint32_t deviceIndex()const { return m_deviceIndex; }
 
 	template<size_t Size>
-	EngineParallelWorker<Size> createParallelWorker(VkQueueFlags a_flag)
+	EngineParallelWorker<Size> createParallelWorker(const VkQueueFlags a_flag)
 	{
-		return EngineParallelWorker<Size>(m_deviceCtx, m_queuesMng.createArray(a_flag));
+		return EngineParallelWorker<Size>(m_deviceCtx, m_queuesMng.createArray<Size>(a_flag));
 	}
 
 };
+#pragma warning(pop)

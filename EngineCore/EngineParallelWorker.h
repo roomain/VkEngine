@@ -29,7 +29,7 @@ private:
 public:
 	QueuePoolArray() = delete;
 	NOT_COPIABLE(QueuePoolArray)
-	explicit QueuePoolArray(ManagedQueueArray<Size>&& a_managed) : ManagedQueueArray<Size>(a_managed)
+	explicit QueuePoolArray(ManagedQueueArray<Size>&& a_managed) : ManagedQueueArray<Size>(std::move(a_managed))
 	{
 		for (auto& inUse : m_inUse)
 			inUse = false;
@@ -64,7 +64,7 @@ private:
 	boost::asio::thread_pool m_workerPool;	/*!< thread pool*/
 
 	explicit EngineParallelWorker(const DeviceContext& a_ctx, ManagedQueueArray<Size>&& a_data) :
-		m_DeviceCtx{ a_ctx }, m_queue { a_data }, m_workerPool(Size)
+		m_DeviceCtx{ a_ctx }, m_queue { std::move(a_data) }, m_workerPool(Size)
 	{
 		// nothing to do
 	}
@@ -72,6 +72,11 @@ private:
 public:
 	EngineParallelWorker() = delete;
 	NOT_COPIABLE(EngineParallelWorker)
+
+	~EngineParallelWorker()
+	{
+		//
+	}
 
 
 	void postTask(ContextFun& a_fun)
