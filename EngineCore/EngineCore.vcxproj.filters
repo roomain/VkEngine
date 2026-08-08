@@ -117,7 +117,7 @@
     <ClInclude Include="EngineDevice.h">
       <Filter>Fichiers d%27en-tête\Engine classes</Filter>
     </ClInclude>
-    <ClInclude Include="QueuesManager.h">
+    <ClInclude Include="EngineQueueManager.h">
       <Filter>Fichiers d%27en-tête\Managers</Filter>
     </ClInclude>
     <ClInclude Include="EngineRenderer.h">
@@ -171,6 +171,15 @@
     <ClInclude Include="EngineShaderDatabase.h">
       <Filter>Fichiers d%27en-tête\shader</Filter>
     </ClInclude>
+    <ClInclude Include="EngineManagedQueue.h">
+      <Filter>Fichiers d%27en-tête\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineQueue.h">
+      <Filter>Fichiers d%27en-tête\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineManagedQueueArray.h">
+      <Filter>Fichiers d%27en-tête\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -188,7 +197,7 @@
     <ClCompile Include="EngineApplication.cpp">
       <Filter>Fichiers sources\Engine classes</Filter>
     </ClCompile>
-    <ClCompile Include="QueuesManager.cpp">
+    <ClCompile Include="EngineQueuesManager.cpp">
       <Filter>Fichiers sources\Managers</Filter>
     </ClCompile>
     <ClCompile Include="EngineRenderer.cpp">
@@ -217,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="EngineShaderDatabase.cpp">
       <Filter>Fichiers sources\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineManagedQueue.cpp">
+      <Filter>Fichiers sources\Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

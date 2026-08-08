@@ -197,6 +197,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="CheckParameters.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="EngineBuffer.h" />
+    <ClInclude Include="EngineManagedQueueArray.h" />
     <ClInclude Include="EngineParameters.h" />
     <ClInclude Include="EngineApplication.h" />
     <ClInclude Include="EngineDevice.h" />
@@ -204,13 +205,15 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="EngineLog.h" />
     <ClInclude Include="EngineParallelWorker.h" />
     <ClInclude Include="enginecore_globals.h" />
+    <ClInclude Include="EngineQueue.h" />
     <ClInclude Include="EngineRenderer.h" />
     <ClInclude Include="EngineShaderDatabase.h" />
     <ClInclude Include="EngineSwapChain.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="InternalConfiguration.h" />
+    <ClInclude Include="EngineManagedQueue.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="QueuesManager.h" />
+    <ClInclude Include="EngineQueueManager.h" />
     <ClInclude Include="reflective_convert.h" />
     <ClInclude Include="reflect_convert_from_string.h" />
     <ClInclude Include="reflect_convert_to_string.h" />
@@ -236,6 +239,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="EngineExceptions.cpp" />
     <ClCompile Include="EngineLog.cpp" />
+    <ClCompile Include="EngineManagedQueue.cpp" />
     <ClCompile Include="EngineRenderer.cpp" />
     <ClCompile Include="EngineShaderDatabase.cpp" />
     <ClCompile Include="EngineSwapChain.cpp" />
@@ -245,7 +249,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="QueuesManager.cpp" />
+    <ClCompile Include="EngineQueuesManager.cpp" />
     <ClCompile Include="vmaMemoryCallbacks.cpp" />
     <ClCompile Include="VulkanCapabilities.cpp" />
   </ItemGroup>

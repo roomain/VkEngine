@@ -5,7 +5,7 @@
 * @author Roomain
 ************************************************/
 #include "DeviceContext.h"
-#include "QueuesManager.h"
+#include "EngineQueueManager.h"
 #include "notCopiable.h"
 #include "EngineParallelWorker.h"
 #include "enginecore_globals.h"
@@ -22,7 +22,7 @@ class ENGINECORE_EXPORT EngineDevice
 protected:
 	uint32_t m_deviceIndex;		/*!< device index in instance*/
 	DeviceContext m_deviceCtx;	/*!< device context: device handle + instance handle + memory */
-	QueuesManager m_queuesMng;	/*!< queue manager */
+	EngineQueueManager m_queuesMng;	/*!< queue manager */
 
 	/*@brief create memory allocator for DeviceContext*/
 	static void createMemoryAllocator(DeviceContext& a_ctx);
