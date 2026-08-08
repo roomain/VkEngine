@@ -119,7 +119,14 @@ int main(int argc, char* argv[])
     auto renderer = g_appEngine->createRenderer(renderConf);
     
     auto device = renderer->device();
-    device->createParallelWorker<2>(VK_QUEUE_GRAPHICS_BIT);
+    auto buffer = device->createBuffer();
+    auto worker = device->createParallelWorker<2>(VK_QUEUE_GRAPHICS_BIT);
+
+    std::vector<int> cpuBuffer(100, 5);
+    buffer->writeData(cpuBuffer.data(), cpuBuffer.size());
+
+    std::vector<int> readBuffer(100, 0);
+    buffer->readData(readBuffer.data(), readBuffer.size());
 
     SDL_Event event;
     bool quit = false;

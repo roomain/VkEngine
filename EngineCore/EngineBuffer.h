@@ -4,13 +4,19 @@
 * @date 03 / 06 / 2026
 * @author Roomain
 ************************************************/
+#include <memory>
 #include "DeviceContext.h"
 #include "EngineExceptions.h"
 #include "VulkanBufferInitializers.h"
+#include "enginecore_globals.h"
+
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 
 /*@brief class for using buffer with vulkan*/
-class EngineBuffer
+class ENGINECORE_EXPORT EngineBuffer
 {
+	friend class EngineDevice;
 private:
 	DeviceContext m_devCtx;							/*!< device context*/
 	VmaAllocation m_allocation = VK_NULL_HANDLE;	/*!< vma allocation*/
@@ -18,6 +24,8 @@ private:
 	VkBuffer m_buffer = VK_NULL_HANDLE;				/*!< buffer handle*/
 	VkDeviceSize m_activeSize = 0;					/*!< used size must be <= m_bufferCreateInfo.size*/
 
+	void internalWrite(const void* a_data, const size_t& a_size);
+	void internalRead(void* a_data, const size_t& a_offset, const size_t& a_size)const;
 	void releaseBuffer();
 	explicit EngineBuffer(const DeviceContext& a_ctxt);
 
@@ -29,23 +37,24 @@ public:
 	[[nodiscard]] VkDeviceSize bufferSize()const { return m_activeSize; }
 
 	template<typename Type>
-	void setData(Type* a_buffer, const size_t& a_bufferByteSize)
+	void writeData(const Type* a_buffer, const size_t& a_bufferByteSize)
 	{
-		if (m_bufferCreateInfo.size < a_bufferByteSize)
-			releaseBuffer();
+		internalWrite(a_buffer, a_bufferByteSize * sizeof(Type));
+	}
 
-		if (m_buffer == VK_NULL_HANDLE)
-		{
-			m_bufferCreateInfo.size = a_bufferByteSize;
-			VmaAllocationCreateInfo allocCreateInfo = {};
-			allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
-			allocCreateInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT;
+	template<typename Type>
+	void readData(Type* a_buffer, const size_t& a_offset, const size_t& a_bufferByteSize)const
+	{
+		internalRead(a_buffer, a_offset * sizeof(Type), a_bufferByteSize * sizeof(Type));
+	}
 
-			vmaCreateBuffer(m_devCtx.m_memAllocator, &m_bufferCreateInfo, &allocCreateInfo, &m_buffer, &m_allocation, nullptr);
-		}
-		m_activeSize = a_bufferByteSize;
-		vmaCopyMemoryToAllocation(m_devCtx.m_memAllocator, a_buffer, m_allocation, 0, a_bufferByteSize);
+	template<typename Type>
+	void readData(Type* a_buffer, const size_t& a_bufferByteSize)const
+	{
+		internalRead(a_buffer, 0, a_bufferByteSize * sizeof(Type));
 	}
 };
 
+using EngineBufferPtr = std::shared_ptr<EngineBuffer>;
 
+#pragma warning(pop)

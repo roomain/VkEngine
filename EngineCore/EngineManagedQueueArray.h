@@ -17,7 +17,7 @@ private:
 	std::array<EngineQueue, Size> m_queueArray;	/*!< managed queue*/
 	ReleaseQueueListManaged m_releaseSignal;	/*!< release signal*/
 
-	explicit EngineManagedQueueArray(const int a_familyIndex, std::array<EngineQueue, Size>&& a_queues, const ReleaseQueueListManaged& a_releaseCallback) :
+	explicit EngineManagedQueueArray(const int a_familyIndex, std::array<EngineQueue, Size>&& a_queues, ReleasQueueListCallback a_releaseCallback) :
 		m_queueFamily{ a_familyIndex }, m_queueArray{ a_queues }
 	{
 		if (a_releaseCallback)
@@ -32,7 +32,7 @@ public:
 	{
 		int index = 0;
 		std::array<uint32_t, Size> queueIndicies;
-		for (const auto [queue, queueIndex] : m_queueArray)
+		for (const auto [queueIndex, queue] : m_queueArray)
 		{
 			queueIndicies[index] = queueIndex;
 			++index;

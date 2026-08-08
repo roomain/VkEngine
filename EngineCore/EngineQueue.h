@@ -10,7 +10,7 @@
 
 // callbacks to release queue in vulkan
 using ReleaseQueueCallback = std::function<void(int, const uint32_t)>;
-using ReleasQueueListeCallback = std::function<void(int, const size_t&, const uint32_t*)>;
+using ReleasQueueListCallback = std::function<void(int, const size_t&, const uint32_t*)>;
 
 /*@brief release managed data signal*/
 using ReleaseQueueManaged = boost::signals2::signal<void(int, const uint32_t)>;

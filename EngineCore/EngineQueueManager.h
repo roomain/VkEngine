@@ -57,7 +57,7 @@ public:
 	template<size_t Size>
 	[[nodiscard]] EngineManagedQueueArray<Size>&& createArray(const VkQueueFlags a_flag)
 	{
-		for (auto& [family, stat] : m_stats)
+		for (const auto& [family, stat] : m_stats)
 		{
 			if ((stat.queueFlags & a_flag) == a_flag &&
 				(stat.queueCount - static_cast<uint32_t>(stat.usedQueues.size())) >= static_cast<uint32_t>(Size))

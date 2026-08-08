@@ -21,7 +21,7 @@ private:
 	ReleaseQueueManaged m_releaseSignal;/*!< release signal*/
 
 	/*@brief queue ctor*/
-	explicit EngineManagedQueue(const int a_family, EngineQueue&& a_queue, const ReleaseQueueCallback& a_callback);
+	explicit EngineManagedQueue(const int a_family, EngineQueue&& a_queue, ReleaseQueueCallback a_callback);
 
 public:
 	EngineManagedQueue() = delete;

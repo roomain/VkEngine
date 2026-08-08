@@ -13,6 +13,7 @@
 #pragma warning(push)
 #pragma warning( disable : 4251 )
 
+class EngineBuffer;
 struct DeviceConfiguration;
 
 /*@brief Base class of device created by EngineApplication*/
@@ -37,10 +38,11 @@ public:
 	[[nodiscard]] constexpr uint32_t deviceIndex()const { return m_deviceIndex; }
 
 	template<size_t Size>
-	EngineParallelWorker<Size> createParallelWorker(const VkQueueFlags a_flag)
+	[[nodiscard]] EngineParallelWorker<Size> createParallelWorker(const VkQueueFlags a_flag)
 	{
 		return EngineParallelWorker<Size>(m_deviceCtx, m_queuesMng.createArray<Size>(a_flag));
 	}
 
+	[[nodiscard]] std::shared_ptr<EngineBuffer> createBuffer()const;
 };
 #pragma warning(pop)

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "EngineDevice.h"
+#include "EngineBuffer.h"
 #include "vmaMemoryCallbacks.h"
 #include "vmaMemoryAllocator.h"
 
@@ -46,4 +47,10 @@ EngineDevice::EngineDevice(const DeviceConfiguration& a_parameters, const Device
 {
 	if (m_deviceCtx.m_memAllocator == VK_NULL_HANDLE)
 		createMemoryAllocator(m_deviceCtx);
+}
+
+std::shared_ptr<EngineBuffer> EngineDevice::createBuffer()const
+{
+	// use new operator because ctor is private
+	return EngineBufferPtr(new EngineBuffer(m_deviceCtx));
 }
