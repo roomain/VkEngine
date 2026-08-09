@@ -6,8 +6,7 @@
 ************************************************/
 #include <memory>
 #include "DeviceContext.h"
-#include "EngineExceptions.h"
-#include "VulkanBufferInitializers.h"
+#include "notCopiable.h"
 #include "enginecore_globals.h"
 
 #pragma warning(push)
@@ -30,8 +29,9 @@ private:
 	explicit EngineBuffer(const DeviceContext& a_ctxt);
 
 public:
+	NOT_COPIABLE(EngineBuffer)
 	EngineBuffer() = delete;
-	~EngineBuffer();
+	virtual ~EngineBuffer();
 	[[nodiscard]] constexpr VkBuffer buffer()const { return m_buffer; }
 	[[nodiscard]] VkDeviceSize allocationSize()const { return m_bufferCreateInfo.size; }
 	[[nodiscard]] VkDeviceSize bufferSize()const { return m_activeSize; }

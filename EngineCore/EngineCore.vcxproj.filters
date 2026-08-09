@@ -180,6 +180,9 @@
     <ClInclude Include="EngineManagedQueueArray.h">
       <Filter>Fichiers d%27en-tête\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="EngineTexture.h">
+      <Filter>Fichiers d%27en-tête\memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -229,6 +232,9 @@
     </ClCompile>
     <ClCompile Include="EngineManagedQueue.cpp">
       <Filter>Fichiers sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineTexture.cpp">
+      <Filter>Fichiers sources\memory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

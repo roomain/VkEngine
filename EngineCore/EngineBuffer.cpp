@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "EngineBuffer.h"
 
-
 EngineBuffer::EngineBuffer(const DeviceContext& a_ctxt) : m_devCtx{ a_ctxt }
 {
 	BufferCreateInfoParameters params{

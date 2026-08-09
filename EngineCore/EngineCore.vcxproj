@@ -209,6 +209,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="EngineRenderer.h" />
     <ClInclude Include="EngineShaderDatabase.h" />
     <ClInclude Include="EngineSwapChain.h" />
+    <ClInclude Include="EngineTexture.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="InternalConfiguration.h" />
     <ClInclude Include="EngineManagedQueue.h" />
@@ -243,6 +244,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClCompile Include="EngineRenderer.cpp" />
     <ClCompile Include="EngineShaderDatabase.cpp" />
     <ClCompile Include="EngineSwapChain.cpp" />
+    <ClCompile Include="EngineTexture.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
