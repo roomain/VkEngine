@@ -38,7 +38,7 @@ void EngineBuffer::internalWrite(const void* a_data, const size_t& a_size)
 	if (m_buffer == VK_NULL_HANDLE)
 	{
 		m_bufferCreateInfo.size = a_size;
-		VmaAllocationCreateInfo allocCreateInfo = {};
+		VmaAllocationCreateInfo allocCreateInfo {};
 		allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
 		allocCreateInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT;
 
