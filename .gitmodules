@@ -10,3 +10,6 @@
 [submodule "thirdparty/slang"]
 	path = thirdparty/slang
 	url = https://github.com/shader-slang/slang.git
+[submodule "thirdparty/RTTI"]
+	path = thirdparty/RTTI
+	url = https://github.com/roomain/RTTI.git
