@@ -7,10 +7,10 @@
 void EngineDevice::createMemoryAllocator(DeviceContext& a_ctx)
 {
 	static const VkAllocationCallbacks cpuAllocationCallbacks = {
-		nullptr, // pUserData
-		&vmaCpuAllocation, // pfnAllocation
-		&vmaCpuReallocation, // pfnReallocation
-		&vmaCpuFree // pfnFree
+		nullptr,				// pUserData
+		&vmaCpuAllocation,		// pfnAllocation
+		&vmaCpuReallocation,	// pfnReallocation
+		&vmaCpuFree				// pfnFree
 	};
 
 	static VmaVulkanFunctions vulkanFunctions

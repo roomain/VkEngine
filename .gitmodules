@@ -1,15 +1,6 @@
 [submodule "Reflective"]
 	path = Reflective
 	url = https://github.com/roomain/Reflective.git
-[submodule "thirdparty/boost"]
-	path = thirdparty/boost
-	url = https://github.com/boostorg/boost.git
 [submodule "thirdparty/imgui"]
 	path = thirdparty/imgui
 	url = https://github.com/ocornut/imgui.git
-[submodule "thirdparty/slang"]
-	path = thirdparty/slang
-	url = https://github.com/shader-slang/slang.git
-[submodule "thirdparty/RTTI"]
-	path = thirdparty/RTTI
-	url = https://github.com/roomain/RTTI.git

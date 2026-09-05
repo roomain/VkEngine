@@ -1,23 +1,28 @@
 #include "SlangResourceCompiler.h"
 #include <format>
+#include <filesystem>
 
-SlangResourceCompiler::SlangResourceCompiler(LogCallback a_log, LogCallback a_errorLog) : m_log{a_log},
-m_logError{a_errorLog}
+
+bool SlangResourceCompiler::isFileAvailable(const std::string& a_filename)
+{
+	std::filesystem::path path(a_filename);
+	return path.extension().string().compare(".slang") == 0;
+}
+
+SlangResourceCompiler::SlangResourceCompiler() : Compiler{}
 {
 	// global session
-	if (SLANG_FAILED(slang::createGlobalSession(m_globalSession.writeRef())))
+	if (SLANG_SUCCEEDED(slang::createGlobalSession(m_globalSession.writeRef())))
 	{
-		m_logError("Can't create slang global session.\n");
-		return;
+		slang::TargetDesc target;
+		slang::SessionDesc sessionDesc;
+		target.format = SLANG_SPIRV;
+		target.profile = m_globalSession->findProfile("spirv_1_5");
+		sessionDesc.targetCount = 1;
+		sessionDesc.targets = &target;
+		m_globalSession->createSession(sessionDesc, m_session.writeRef());
 	}
 
-	slang::TargetDesc target;
-	slang::SessionDesc sessionDesc;
-	target.format = SLANG_SPIRV;
-	target.profile = m_globalSession->findProfile("spirv_1_5");
-	sessionDesc.targetCount = 1;
-	sessionDesc.targets = &target;
-	m_globalSession->createSession(sessionDesc, m_session.writeRef());
 }
 
 
@@ -26,13 +31,10 @@ SlangResourceCompiler::~SlangResourceCompiler()
 	slang::shutdown();
 }
 
-Binary SlangResourceCompiler::compile(const std::string& a_filename)
+std::expected<Binary, CompilerError> SlangResourceCompiler::compile(const std::string& a_filename)
 {
 	if (!m_session)
-	{
-		m_logError("No slan session.\n");
-		return Binary{};
-	}
+		return std::unexpected(CompilerError{ CompilerError::Type::InitError,  "No slang session" });
 
 	Slang::ComPtr<slang::IBlob> diagnostics;
 	//---------------------------------------
@@ -44,9 +46,12 @@ Binary SlangResourceCompiler::compile(const std::string& a_filename)
 	if (!slangModule)
 	{
 		if (diagnostics)
-			m_logError(static_cast<const char*>(diagnostics->getBufferPointer()));
+			return std::unexpected(CompilerError{ CompilerError::Type::CompileError,  
+				static_cast<const char*>(diagnostics->getBufferPointer()) });
 
-		return Binary{};
+
+		return std::unexpected(CompilerError{ CompilerError::Type::CompileError,
+				"No slang module" });
 	}
 
 	//---------------------------------------
@@ -58,16 +63,13 @@ Binary SlangResourceCompiler::compile(const std::string& a_filename)
 	for (SlangInt32 index = 0; index < entryPointCount; ++index)
 	{
 		if (SLANG_FAILED(slangModule->getDefinedEntryPoint(index, entryPointsList[index].writeRef())))
-			m_logError("can't get entry point.\n");
+			return std::unexpected(CompilerError{ CompilerError::Type::CompileError,
+				"Can't get entry point"});
 	}
-
-	m_log(std::format("Entry point count: {}", entryPointCount));
 
 	if (entryPointsList.empty())
-	{
-		m_logError("No entry points\n");
-		return Binary{};
-	}
+		return std::unexpected(CompilerError{ CompilerError::Type::CompileError,
+			"Entry point not found" });
 
 	//---------------------------------------
 	// Compose
@@ -78,9 +80,11 @@ Binary SlangResourceCompiler::compile(const std::string& a_filename)
 	if (SLANG_FAILED(m_session->createCompositeComponentType(components.data(), 2, program.writeRef(), diagnostics.writeRef())))
 	{
 		if (diagnostics)
-			m_logError(static_cast<const char*>(diagnostics->getBufferPointer()));
+			return std::unexpected(CompilerError{ CompilerError::Type::CompileError,
+				static_cast<const char*>(diagnostics->getBufferPointer()) });
 
-		return Binary{};
+		return std::unexpected(CompilerError{ CompilerError::Type::CompileError,
+				"Create Composite Component"});
 	}
 
 	//---------------------------------------
@@ -90,9 +94,11 @@ Binary SlangResourceCompiler::compile(const std::string& a_filename)
 	if (SLANG_FAILED(program->link(linkedProgram.writeRef(), diagnostics.writeRef())))
 	{
 		if (diagnostics)
-			m_logError(static_cast<const char*>(diagnostics->getBufferPointer()));
+			return std::unexpected(CompilerError{ CompilerError::Type::LinkError,
+				static_cast<const char*>(diagnostics->getBufferPointer()) });
 
-		return Binary{};
+		return std::unexpected(CompilerError{ CompilerError::Type::LinkError,
+			"Unknown"});
 	}
 
 	//---------------------------------------
@@ -102,12 +108,13 @@ Binary SlangResourceCompiler::compile(const std::string& a_filename)
 	if (SLANG_FAILED(linkedProgram->getEntryPointCode(0, 0, spirv.writeRef(), diagnostics.writeRef())))
 	{
 		if (diagnostics)
-			m_logError(static_cast<const char*>(diagnostics->getBufferPointer()));
+			return std::unexpected(CompilerError{ CompilerError::Type::SpirvGen,
+				static_cast<const char*>(diagnostics->getBufferPointer()) });
 
-		return Binary{};
+
+		return std::unexpected(CompilerError{ CompilerError::Type::SpirvGen,
+			"Unknown" });
 	}
-
-	m_log(std::format("{} successfully compiled", a_filename));
 
 	Binary bin(spirv->getBufferSize());
 	memcpy(bin.data(), spirv->getBufferPointer(), spirv->getBufferSize());

@@ -12,13 +12,13 @@ uint32_t ResourceChecker::computeSrc(const std::string& a_filename)
 	return crc32c::Crc32c(bin.data(), fileSize);
 }
 
-ResourceChecker::ResourceChecker(const std::vector<std::string>& a_extensions) : m_fileExtensions{ a_extensions }
+ResourceChecker::ResourceChecker(const CheckerParameters& a_parameters) : m_parameters{ a_parameters }
 {
 	//
 }
 
-ResourceChecker::ResourceChecker(const std::vector<std::string>& a_extensions, const std::string& a_directory) :
-	ResourceChecker(a_extensions)
+ResourceChecker::ResourceChecker(const CheckerParameters& a_parameters, const std::string& a_directory) :
+	ResourceChecker(a_parameters)
 {
 	load(a_directory);
 }
@@ -28,7 +28,7 @@ void ResourceChecker::load(const std::string& a_directory)
 	m_resourceDirectory = std::filesystem::path(a_directory);
 	for (auto const& entry : std::filesystem::recursive_directory_iterator{ m_resourceDirectory })
 	{
-		if (entry.is_regular_file() && std::ranges::find(m_fileExtensions, entry.path().extension()) != m_fileExtensions.cend())
+		if (entry.is_regular_file() && std::ranges::find(m_parameters.extensions, entry.path().extension()) != m_parameters.extensions.cend())
 		{
 			m_headings.emplace_back(entry.path().filename().string(),
 				ResourceChecker::computeSrc(entry.path().string()));

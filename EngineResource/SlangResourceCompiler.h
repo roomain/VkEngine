@@ -7,27 +7,23 @@
 #include <string>
 #include <slang.h>
 #include <slang-com-ptr.h>
-#include "Resources.h"
-#include "notcopiable.h"
-#include "LogCallback.h"
+#include "Compiler.h"
 
 /*@brief slang shader compiler : compile to spirv*/
-class SlangResourceCompiler
+class SlangResourceCompiler : public Compiler
 {
 private:
 	Slang::ComPtr<slang::IGlobalSession> m_globalSession;
 	Slang::ComPtr<slang::ISession> m_session;
-	LogCallback m_log;
-	LogCallback m_logError;
 
 
 public:
-	SlangResourceCompiler() = delete;
-	explicit SlangResourceCompiler(LogCallback a_log, LogCallback a_errorLog);
+	static bool isFileAvailable(const std::string& a_filename);
+	SlangResourceCompiler();
 	virtual ~SlangResourceCompiler();
 	NOT_COPIABLE(SlangResourceCompiler)
 	NOT_MOVABLE(SlangResourceCompiler)
 
-	Binary compile(const std::string& a_filename);
+		std::expected<Binary, CompilerError> compile(const std::string& a_filename) override;
 };
 

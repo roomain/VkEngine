@@ -19,16 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LogCallback.h" />
+    <ClInclude Include="Compiler.h" />
+    <ClInclude Include="GLSLResourceCompiler.h" />
+    <ClInclude Include="Callbacks.h" />
     <ClInclude Include="ResourceChecker.h" />
     <ClInclude Include="ResourceFile.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="ShaderResourceCompiler.h" />
     <ClInclude Include="SlangResourceCompiler.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GLSLResourceCompiler.cpp" />
     <ClCompile Include="ResourceChecker.cpp" />
     <ClCompile Include="ResourceFile.cpp" />
     <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="ShaderResourceCompiler.cpp" />
     <ClCompile Include="SlangResourceCompiler.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -81,12 +86,14 @@
     <Import Project="..\props\crc32c.props" />
     <Import Project="..\props\slang.props" />
     <Import Project="..\props\common.props" />
+    <Import Project="..\props\glslCompiler.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\crc32c.props" />
     <Import Project="..\props\slang.props" />
     <Import Project="..\props\common.props" />
+    <Import Project="..\props\glslCompiler.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

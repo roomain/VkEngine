@@ -21,8 +21,8 @@ class ENGINECORE_EXPORT EngineDevice
 {
 	friend class EngineApplication;
 protected:
-	uint32_t m_deviceIndex;		/*!< device index in instance*/
-	DeviceContext m_deviceCtx;	/*!< device context: device handle + instance handle + memory */
+	uint32_t m_deviceIndex;			/*!< device index in instance*/
+	DeviceContext m_deviceCtx;		/*!< device context: device handle + instance handle + memory */
 	EngineQueueManager m_queuesMng;	/*!< queue manager */
 
 	/*@brief create memory allocator for DeviceContext*/

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <RTTI_DIR>$(SolutionDir)thirdparty\install_rtti</RTTI_DIR>
+    <RTTI_INC>$(RTTI_DIR)\include</RTTI_INC>
+    <RTTI_LIB>$(RTTI_DIR)\lib\$(Configuration)</RTTI_LIB>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(RTTI_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(RTTI_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>rtti.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command></Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="RTTI_DIR">
+      <Value>$(RTTI_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="RTTI_INC">
+      <Value>$(RTTI_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="RTTI_LIB">
+      <Value>$(RTTI_LIB)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

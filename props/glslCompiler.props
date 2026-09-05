@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />  
+  <PropertyGroup Label="UserMacros">
+    <GLSLANG_DIR>$(SolutionDir)thirdparty\glslang</GLSLANG_DIR>
+    <GLSLANG_INC>$(GLSLANG_DIR)\include</GLSLANG_INC>
+    <GLSLANG_LIB>$(GLSLANG_DIR)\lib\$(Configuration)</GLSLANG_LIB>
+    <GLSLANG_BIN>$(GLSLANG_DIR)\bin\$(Configuration)</GLSLANG_BIN>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(GLSLANG_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(GLSLANG_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">glslangd.lib;SPIRVd.lib;SPIRV-Toolsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">glslang.lib;SPIRV.lib;SPIRV-Tools.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command></Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>  
+  <Target Name="CopyGSLANGDll" AfterTargets="Build">
+    <Copy Condition="'$(Configuration)' == 'Debug'" SourceFiles="$(GLSLANG_BIN)\SPIRV-Tools-sharedd.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Copy Condition="'$(Configuration)' == 'Release'" SourceFiles="$(GLSLANG_BIN)\SPIRV-Tools-shared.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <ItemGroup>
+    <BuildMacro Include="GLSLANG_DIR">
+      <Value>$(GLSLANG_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="GLSLANG_INC">
+      <Value>$(GLSLANG_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="GLSLANG_LIB">
+      <Value>$(GLSLANG_LIB)</Value>
+    </BuildMacro>
+    <BuildMacro Include="GLSLANG_BIN">
+      <Value>$(GLSLANG_BIN)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
