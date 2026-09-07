@@ -5,7 +5,6 @@
 * @author Roomain
 ************************************************/
 #include <memory>
-#include <vector>
 #include "EngineSwapChain.h"
 
 struct SurfaceConfiguration;

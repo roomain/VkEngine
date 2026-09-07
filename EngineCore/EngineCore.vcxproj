@@ -205,6 +205,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="EngineLog.h" />
     <ClInclude Include="EngineParallelWorker.h" />
     <ClInclude Include="enginecore_globals.h" />
+    <ClInclude Include="EnginePipeline.h" />
     <ClInclude Include="EngineQueue.h" />
     <ClInclude Include="EngineRenderer.h" />
     <ClInclude Include="EngineShaderDatabase.h" />

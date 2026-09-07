@@ -120,9 +120,6 @@
     <ClInclude Include="EngineQueueManager.h">
       <Filter>Fichiers d%27en-tête\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="EngineRenderer.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="EngineSwapChain.h">
       <Filter>Fichiers d%27en-tête\Engine classes</Filter>
     </ClInclude>
@@ -183,6 +180,12 @@
     <ClInclude Include="EngineTexture.h">
       <Filter>Fichiers d%27en-tête\memory</Filter>
     </ClInclude>
+    <ClInclude Include="EngineRenderer.h">
+      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePipeline.h">
+      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -202,9 +205,6 @@
     </ClCompile>
     <ClCompile Include="EngineQueuesManager.cpp">
       <Filter>Fichiers sources\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineRenderer.cpp">
-      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="EngineSwapChain.cpp">
       <Filter>Fichiers sources\Engine classes</Filter>
@@ -235,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="EngineTexture.cpp">
       <Filter>Fichiers sources\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineRenderer.cpp">
+      <Filter>Fichiers sources\Engine classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

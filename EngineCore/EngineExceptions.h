@@ -32,7 +32,7 @@ private:
 public:
     EngineException() = delete;
     explicit EngineException(const std::source_location a_location, const char* a_what);
-    virtual ~EngineException() = default;
+    ~EngineException()override = default;
     std::source_location location()const { return m_location; }
 };
 
@@ -42,7 +42,7 @@ class ENGINECORE_EXPORT EngineVulkanException : public EngineException
 public:
     EngineVulkanException() = delete;
     explicit EngineVulkanException(const std::source_location a_location, const char* a_what);
-    virtual ~EngineVulkanException() = default;
+    ~EngineVulkanException()override = default;
 };
 
 class ENGINECORE_EXPORT EngineManageException : public EngineException
@@ -50,7 +50,7 @@ class ENGINECORE_EXPORT EngineManageException : public EngineException
 public:
     EngineManageException() = delete;
     explicit EngineManageException(const std::source_location a_location, const char* a_what);
-    virtual ~EngineManageException() = default;
+    ~EngineManageException()override = default;
 };
 
 #define VK_CHECK_EXCEPT(vkCall) \
