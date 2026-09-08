@@ -53,7 +53,7 @@ public:
 	[[nodiscard]] inline const VulkanCapabilities& capabilities()const noexcept { return m_capabilities; }
 #pragma region devices
 	[[nodiscard]] std::vector<DeviceConfiguration> suitableDevices(const DeviceParameters& a_parameters, const VkSurfaceKHR* a_surface = VK_NULL_HANDLE)const;
-	[[nodiscard]] EngineDevicePtr createDevice(const DeviceConfiguration& a_parameters);
+	[[nodiscard]] EngineDevicePtr createDevice(const DeviceConfiguration& a_parameters, bool a_enableDynRendering = false);
 	[[nodiscard]] EngineRendererPtr createRenderer(const RendererConfiguration& a_parameter);
 	// todo save device
 #pragma endregion //devices

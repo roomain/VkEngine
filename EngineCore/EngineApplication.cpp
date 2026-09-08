@@ -96,7 +96,7 @@ std::vector<DeviceConfiguration> EngineApplication::suitableDevices(const Device
 	return findSuitableDevices(a_parameters, m_capabilities, a_surface);
 }
 
-EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_configuration)
+EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_configuration, bool a_enableDynRendering)
 {
 	if (auto iter = std::ranges::find_if(m_deviceInstance, [&a_configuration](const auto& device)
 		{
@@ -133,9 +133,21 @@ EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_con
 		createInfo.ppEnabledLayerNames = tempLayers.data();
 		createInfo.enabledLayerCount = static_cast<uint32_t>(cleanedLayers.size());
 
-		// parameter of extensions
+		if (a_enableDynRendering)
+		{
+			VkPhysicalDeviceDynamicRenderingFeaturesKHR enabledDynamicRenderingFeaturesKHR = {
+				.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR,
+				.dynamicRendering = VK_TRUE
+			};
 
-		// todo
+			VkPhysicalDeviceFeatures2 physicalDeviceFeatures2{
+				.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
+				.pNext = &enabledDynamicRenderingFeaturesKHR,
+				.features = a_configuration.features
+			};
+			createInfo.pEnabledFeatures = nullptr;
+			createInfo.pNext = &physicalDeviceFeatures2;
+		}
 
 		vkCreateDevice(m_capabilities.devices[a_configuration.deviceIndex].physDevice, &createInfo, nullptr, &ctx.m_vkDevice);
 		EngineDevicePtr newDevice (new EngineDevice(a_configuration, ctx));
@@ -146,5 +158,5 @@ EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_con
 
 EngineRendererPtr EngineApplication::createRenderer(const RendererConfiguration& a_configuration)
 {
-	return EngineRendererPtr(new EngineRenderer(createDevice(a_configuration.deviceConf), a_configuration.surfaceConf));
+	return EngineRendererPtr(new EngineRenderer(createDevice(a_configuration.deviceConf, true), a_configuration.surfaceConf));
 }
