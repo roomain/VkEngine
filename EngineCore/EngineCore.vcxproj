@@ -199,6 +199,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="CheckParameters.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="EngineBuffer.h" />
+    <ClInclude Include="EngineComponent.h" />
     <ClInclude Include="EngineManagedQueueArray.h" />
     <ClInclude Include="EngineParameters.h" />
     <ClInclude Include="EngineApplication.h" />
@@ -240,6 +241,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="EngineApplication.cpp" />
     <ClCompile Include="EngineBuffer.cpp" />
+    <ClCompile Include="EngineComponent.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="EngineExceptions.cpp" />
     <ClCompile Include="EngineLog.cpp" />

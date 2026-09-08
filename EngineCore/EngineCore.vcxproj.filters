@@ -70,6 +70,12 @@
     <Filter Include="Fichiers sources\shader">
       <UniqueIdentifier>{03e49d9d-6cde-402c-8a2f-e7a165b1f5d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\components">
+      <UniqueIdentifier>{383846a2-26ba-4076-83d2-e26008057fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\components">
+      <UniqueIdentifier>{e0995c0d-a725-4c63-bdee-fa59b6e73c77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -186,6 +192,9 @@
     <ClInclude Include="EnginePipeline.h">
       <Filter>Fichiers d%27en-tête\Engine classes</Filter>
     </ClInclude>
+    <ClInclude Include="EngineComponent.h">
+      <Filter>Fichiers d%27en-tête\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -238,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="EngineRenderer.cpp">
       <Filter>Fichiers sources\Engine classes</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineComponent.cpp">
+      <Filter>Fichiers sources\components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

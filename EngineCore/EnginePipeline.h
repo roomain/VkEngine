@@ -18,10 +18,10 @@ protected:
 
 public:
 	EnginePipeline() = default;
-	virtual ~EnginePipeline()
-	{
-		if (m_pipeline != VK_NULL_HANDLE)
-			vkDestroyPipeline(, m_pipeline, nullptr);
-	}
+	//virtual ~EnginePipeline()
+	//{
+	//	if (m_pipeline != VK_NULL_HANDLE)
+	//		vkDestroyPipeline(, m_pipeline, nullptr);
+	//}
 	constexpr VkPipeline pipeline()const { return m_pipeline; }
 };
