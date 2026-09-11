@@ -195,6 +195,9 @@
     <ClInclude Include="EngineComponent.h">
       <Filter>Fichiers d%27en-tête\components</Filter>
     </ClInclude>
+    <ClInclude Include="EngineViewportManager.h">
+      <Filter>Fichiers d%27en-tête\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
