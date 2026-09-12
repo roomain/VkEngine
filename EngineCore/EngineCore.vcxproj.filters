@@ -198,6 +198,9 @@
     <ClInclude Include="EngineViewportManager.h">
       <Filter>Fichiers d%27en-tête\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="EngineViewport.h">
+      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
