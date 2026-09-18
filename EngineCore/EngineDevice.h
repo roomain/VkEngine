@@ -43,6 +43,6 @@ public:
 		return EngineParallelWorker<Size>(m_deviceCtx, m_queuesMng.createArray<Size>(a_flag));
 	}
 
-	[[nodiscard]] std::shared_ptr<EngineBuffer> createBuffer()const;
+	//[[nodiscard]] std::shared_ptr<EngineBuffer> createBuffer()const;
 };
 #pragma warning(pop)

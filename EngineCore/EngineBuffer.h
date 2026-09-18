@@ -5,56 +5,37 @@
 * @author Roomain
 ************************************************/
 #include <memory>
+#include <atomic>
 #include "DeviceContext.h"
 #include "notCopiable.h"
 #include "enginecore_globals.h"
 
-#pragma warning(push)
-#pragma warning( disable : 4251 )
-
-/*@brief class for using buffer with vulkan*/
 class ENGINECORE_EXPORT EngineBuffer
 {
 	friend class EngineDevice;
-private:
-	DeviceContext m_devCtx;							/*!< device context*/
-	VmaAllocation m_allocation = VK_NULL_HANDLE;	/*!< vma allocation*/
-	VkBufferCreateInfo m_bufferCreateInfo;			/*!< buffer create information*/
-	VkBuffer m_buffer = VK_NULL_HANDLE;				/*!< buffer handle*/
-	VkDeviceSize m_activeSize = 0;					/*!< used size must be <= m_bufferCreateInfo.size*/
 
-	void internalWrite(const void* a_data, const size_t& a_size);
-	void internalRead(void* a_data, const size_t& a_offset, const size_t& a_size)const;
-	void releaseBuffer();
+protected:
+	struct VMABuffer
+	{
+		VmaAllocation allocation = VK_NULL_HANDLE;	/*!< vma allocation*/
+		VkBuffer buffer = VK_NULL_HANDLE;			/*!< staging buffer handle*/
+	};
+
+	void releaseBuffer(VMABuffer& a_buffer);
+	void createBuffer(const VkBufferCreateInfo bufferInfo, VMABuffer& a_buffer);
+	void reallocBuffer(const VkDeviceSize& a_size);
+
+	DeviceContext m_devCtx;					/*!< device context*/
+	VkDeviceSize m_bufferSize = 0;			/*!< buffer size*/
+	VMABuffer m_buffer;						/*!< buffer*/
+
 	explicit EngineBuffer(const DeviceContext& a_ctxt);
 
 public:
 	NOT_COPIABLE(EngineBuffer)
 	EngineBuffer() = delete;
 	virtual ~EngineBuffer();
-	[[nodiscard]] constexpr VkBuffer buffer()const { return m_buffer; }
-	[[nodiscard]] VkDeviceSize allocationSize()const { return m_bufferCreateInfo.size; }
-	[[nodiscard]] VkDeviceSize bufferSize()const { return m_activeSize; }
-
-	template<typename Type>
-	void writeData(const Type* a_buffer, const size_t& a_bufferByteSize)
-	{
-		internalWrite(a_buffer, a_bufferByteSize * sizeof(Type));
-	}
-
-	template<typename Type>
-	void readData(Type* a_buffer, const size_t& a_offset, const size_t& a_bufferByteSize)const
-	{
-		internalRead(a_buffer, a_offset * sizeof(Type), a_bufferByteSize * sizeof(Type));
-	}
-
-	template<typename Type>
-	void readData(Type* a_buffer, const size_t& a_bufferByteSize)const
-	{
-		internalRead(a_buffer, 0, a_bufferByteSize * sizeof(Type));
-	}
+	[[nodiscard]] constexpr VkBuffer buffer()const { return m_buffer.buffer; }
+	[[nodiscard]] VkDeviceSize allocationSize()const { return m_bufferSize; }
 };
 
-using EngineBufferPtr = std::shared_ptr<EngineBuffer>;
-
-#pragma warning(pop)

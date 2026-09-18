@@ -195,6 +195,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CapabilitiesVisitor.h" />
     <ClInclude Include="CheckParameters.h" />
     <ClInclude Include="DeviceContext.h" />
@@ -211,16 +212,21 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="EnginePipeline.h" />
     <ClInclude Include="EngineQueue.h" />
     <ClInclude Include="EngineRenderer.h" />
-    <ClInclude Include="EngineShaderDatabase.h" />
+    <ClInclude Include="EngineStagingBuffer.h" />
     <ClInclude Include="EngineSwapChain.h" />
     <ClInclude Include="EngineTexture.h" />
     <ClInclude Include="EngineViewport.h" />
     <ClInclude Include="EngineViewportManager.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="FrustumProjection.h" />
+    <ClInclude Include="GPUBuffers.h" />
     <ClInclude Include="InternalConfiguration.h" />
     <ClInclude Include="EngineManagedQueue.h" />
+    <ClInclude Include="OrthoProjection.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="EngineQueueManager.h" />
+    <ClInclude Include="ProjectionInterface.h" />
     <ClInclude Include="reflective_convert.h" />
     <ClInclude Include="reflect_convert_from_string.h" />
     <ClInclude Include="reflect_convert_to_string.h" />
@@ -238,6 +244,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="VulkanShaderInitializers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CapabilitiesVisitor.cpp" />
     <ClCompile Include="CheckParameters.cpp" />
     <ClCompile Include="dllmain.cpp" />
@@ -248,10 +255,15 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClCompile Include="EngineExceptions.cpp" />
     <ClCompile Include="EngineLog.cpp" />
     <ClCompile Include="EngineManagedQueue.cpp" />
+    <ClCompile Include="EnginePipeline.cpp" />
     <ClCompile Include="EngineRenderer.cpp" />
-    <ClCompile Include="EngineShaderDatabase.cpp" />
+    <ClCompile Include="EngineStagingBuffer.cpp" />
     <ClCompile Include="EngineSwapChain.cpp" />
     <ClCompile Include="EngineTexture.cpp" />
+    <ClCompile Include="EngineViewportManager.cpp" />
+    <ClCompile Include="FrustumProjection.cpp" />
+    <ClCompile Include="GPUBuffers.cpp" />
+    <ClCompile Include="OrthoProjection.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

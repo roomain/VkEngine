@@ -7,7 +7,11 @@
 #include <type_traits>
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
+
+#pragma warning(push)
+#pragma warning( disable : 4244 )
 #include <glm/gtx/matrix_decompose.hpp>
+#pragma warning(pop)
 
 class Transformation
 {
@@ -16,12 +20,57 @@ private:
 
     explicit Transformation(glm::dmat4&& a_transform)noexcept : m_transform{ a_transform } {}
 
+    static inline glm::dmat4 recompose(
+        const glm::dvec3& scale, const glm::dquat& orientation, const glm::dvec3& translation,
+        const glm::dvec3& skew, const glm::dvec4& perspective)
+    {
+        glm::dmat4 m (1.);
+
+        m[0][3] = perspective.x;
+        m[1][3] = perspective.y;
+        m[2][3] = perspective.z;
+        m[3][3] = perspective.w;
+
+        m *= glm::translate(translation);
+        m *= glm::mat4_cast(orientation);
+
+        if (abs(skew.x) > 0.) {
+            glm::dmat4 tmp(1.f);
+            tmp[2][1] = skew.x;
+            m *= tmp;
+        }
+
+        if (abs(skew.y) > 0.) {
+            glm::dmat4 tmp(1.f);
+            tmp[2][0] = skew.y;
+            m *= tmp;
+        }
+
+        if (abs(skew.z) > 0.) {
+            glm::dmat4 tmp(1.f);
+            tmp[1][0] = skew.z;
+            m *= tmp;
+        }
+
+        m *= glm::scale(scale);
+
+        return m;
+    }
+
 public:
     Transformation() : m_transform{ glm::identity< glm::dmat4>() } {}
     explicit Transformation(const Transformation& a_other) = default;
     Transformation(Transformation&& a_other) noexcept : m_transform{ a_other.m_transform } {}
 
-    inline glm::dmat4 matrix()const noexcept { return m_transform; }
+    explicit Transformation(const glm::dvec3& a_xAxis, const glm::dvec3& a_yAxis, const glm::dvec3& a_zAxis, const glm::dvec3& a_origin)
+    {
+        m_transform[0] = glm::dvec4(a_xAxis, 0);
+        m_transform[1] = glm::dvec4(a_yAxis, 0);
+        m_transform[2] = glm::dvec4(a_zAxis, 0);
+        m_transform[3] = glm::dvec4(a_origin, 1);
+    }
+
+    [[nodiscard]] inline const glm::dmat4& matrix()const noexcept { return m_transform; }
 #pragma region Edition
     /////////////////////////////////////////////
     // EDITION FUNCTION
@@ -40,7 +89,8 @@ public:
         glm::dvec3 skew;
         glm::dvec4 perspective;
         glm::decompose(m_transform, scale, rotation, translation, skew, perspective);
-        m_transform = glm::recompose(scale, glm::dquat(a_axisAngles), translation, skew, perspective);
+        rotation = glm::dquat(a_axisAngles);
+        m_transform = Transformation::recompose(scale, rotation, translation, skew, perspective);
     }
 
     inline void setScale(const glm::dvec3& a_scale)
@@ -51,7 +101,8 @@ public:
         glm::dvec3 skew;
         glm::dvec4 perspective;
         glm::decompose(m_transform, scale, rotation, translation, skew, perspective);
-        m_transform = glm::recompose(a_scale, rotation, translation, skew, perspective);
+        scale = a_scale;
+        m_transform = Transformation::recompose(scale, rotation, translation, skew, perspective);
     }
 
     inline void setQuaternion(const glm::dquat& a_quaternion)
@@ -62,7 +113,8 @@ public:
         glm::dvec3 skew;
         glm::dvec4 perspective;
         glm::decompose(m_transform, scale, rotation, translation, skew, perspective);
-        m_transform = glm::recompose(scale, a_quaternion, translation, skew, perspective);
+        rotation = a_quaternion;
+        m_transform = Transformation::recompose(scale, rotation, translation, skew, perspective);
     }
 
     [[nodiscard]] inline glm::dvec3 position()const
@@ -165,7 +217,7 @@ public:
     template<typename ArithmeticType> requires std::is_arithmetic_v<ArithmeticType>
     inline void operator *= (const ArithmeticType a_other)
     {
-        m_transform += a_other;
+        m_transform *= a_other;
     }
 
     template<typename ArithmeticType> requires std::is_arithmetic_v<ArithmeticType>

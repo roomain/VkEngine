@@ -1,16 +1,12 @@
+#pragma once
 /***********************************************
-* @headerfile TVariable.cppm
+* @headerfile TVariable.h
 * @date 20 / 02 / 2026
 * @author Roomain
 ************************************************/
-#pragma once
-
-#include <boost/signals2.hpp>
+#include "TSignal.h"
 #include "macros/notCopiable.h"
 
-/*@brief boost signal template arguments*/
-template<typename ...Args>
-using TSignal = boost::signals2::signal<void(Args...)>;
 
 template<typename VarType>
 class TVariable

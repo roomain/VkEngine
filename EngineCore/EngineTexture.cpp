@@ -25,14 +25,14 @@ EngineTexture::EngineTexture(const DeviceContext& a_ctxt, const TextureParameter
         .usage = VMA_MEMORY_USAGE_AUTO
     };
 
-    VK_CHECK_LOG(vmaCreateImage(m_devCtx.m_memAllocator, &imageInfo, &allocationInfo, &m_image, &m_allocation, nullptr));
+    VK_CHECK_LOG(vmaCreateImage(m_devCtx.memAllocator, &imageInfo, &allocationInfo, &m_image, &m_allocation, nullptr));
 }
 
 EngineTexture::~EngineTexture()
 {
     if (m_image)
     {
-        vmaDestroyImage(m_devCtx.m_memAllocator, m_image, m_allocation);
+        vmaDestroyImage(m_devCtx.memAllocator, m_image, m_allocation);
         m_image = VK_NULL_HANDLE;
         m_allocation = VK_NULL_HANDLE;
     }

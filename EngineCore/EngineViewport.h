@@ -5,6 +5,7 @@
 * @author Roomain
 ************************************************/
 #include <cmath>
+#include <vector>
 #include <functional>
 #include <vulkan/vulkan.hpp>
 
@@ -17,6 +18,10 @@ class EngineViewport
 private:
 	VkViewport m_viewport;
 
+	// todo link to camera
+	// 2 viewports can have the same camera
+
+
 public:
 	EngineViewport() = delete;
 	EngineViewport(const float a_posX, const float a_posY, const float a_width, const float a_height) :
@@ -25,6 +30,8 @@ public:
 		//
 	}
 
+	virtual ~EngineViewport() = default;
+	
 	inline void setDepth(const float a_min, const float a_max)
 	{
 		m_viewport.minDepth = a_min;
@@ -49,16 +56,24 @@ public:
 		m_viewport.y += a_transY;
 	}
 
+	constexpr [[nodiscard]] float x()const { return m_viewport.x; }
+
+	constexpr [[nodiscard]] float y()const { return m_viewport.y; }
+
+	constexpr [[nodiscard]] float width()const { return m_viewport.width; }
+
+	constexpr [[nodiscard]] float height()const { return m_viewport.height; }
+
 	inline [[nodiscard]] const VkViewport& viewport()const { return m_viewport; }
 
-	inline [[nodiscard]] bool grab(const float a_posX, const float a_posY, ViewportTransform& a_grabFun)
+	inline [[nodiscard]] bool grab(const float a_posX, const float a_posY, std::vector<ViewportTransform>& a_vGrabFun)
 	{
 		static constexpr float EPSILON = 3.f;
 		bool valid = false;
 		if (fabsf(a_posX - m_viewport.x) < EPSILON)
 		{
 			valid = true;
-			a_grabFun = [this](const float a_translation)
+			a_vGrabFun.emplace_back([this](const float a_translation)
 				{
 					if (m_viewport.width - a_translation > 0)
 					{
@@ -67,12 +82,12 @@ public:
 						return true;
 					}
 					return false;
-				};
+				});
 		}
 		else if (fabsf(a_posX - m_viewport.x - m_viewport.width) < EPSILON)
 		{
 			valid = true;
-			a_grabFun = [this](const float a_translation)
+			a_vGrabFun.emplace_back([this](const float a_translation)
 				{
 					if (m_viewport.width - a_translation > 0)
 					{
@@ -80,12 +95,12 @@ public:
 						return true;
 					}
 					return false;
-				};
+				});
 		}
 		else if (fabsf(a_posY - m_viewport.y) < EPSILON)
 		{
 			valid = true;
-			a_grabFun = [this](const float a_translation)
+			a_vGrabFun.emplace_back([this](const float a_translation)
 				{
 					if (m_viewport.height - a_translation > 0)
 					{
@@ -94,12 +109,12 @@ public:
 						return true;
 					}
 					return false;
-				};
+				});
 		}
 		else if (fabsf(a_posY - m_viewport.y - m_viewport.height) < EPSILON)
 		{
 			valid = true;
-			a_grabFun = [this](const float a_translation)
+			a_vGrabFun.emplace_back([this](const float a_translation)
 				{
 					if (m_viewport.height - a_translation > 0)
 					{
@@ -107,7 +122,7 @@ public:
 						return true;
 					}
 					return false;
-				};
+				});
 		}
 		return valid;
 	}

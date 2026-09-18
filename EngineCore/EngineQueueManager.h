@@ -55,7 +55,7 @@ public:
 	[[nodiscard]] EngineManagedQueue createQueue(VkQueueFlags a_flags);
 
 	template<size_t Size>
-	[[nodiscard]] EngineManagedQueueArray<Size>&& createArray(const VkQueueFlags a_flag)
+	[[nodiscard]] EngineManagedQueueArray<Size> createArray(const VkQueueFlags a_flag)
 	{
 		for (const auto& [family, stat] : m_stats)
 		{
@@ -64,7 +64,7 @@ public:
 			{
 				std::array<EngineQueue, Size> queuesArray;
 				getQueues(family, queuesArray);
-				return std::move(EngineManagedQueueArray<Size>(family, std::move(queuesArray), std::bind_front(&EngineQueueManager::releaseQueueList, this)));
+				return EngineManagedQueueArray<Size>(family, std::move(queuesArray), std::bind_front(&EngineQueueManager::releaseQueueList, this));
 			}
 		}
 		throw EngineManageException(std::source_location::current(), "Not enough queue");

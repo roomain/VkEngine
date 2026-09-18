@@ -72,7 +72,7 @@ VkExtent2D EngineSwapChain::getImageExtent(const VkSurfaceCapabilitiesKHR& a_sur
 void EngineSwapChain::createImageBuffers()
 {
 	std::vector<VkImage> images;
-	VK_CHECK_EXCEPT(enumerateEx(&vkGetSwapchainImagesKHR, images, VK_SUCCESS, m_deviceCtx.m_vkDevice, m_swapChain))
+	VK_CHECK_EXCEPT(enumerateEx(&vkGetSwapchainImagesKHR, images, VK_SUCCESS, m_deviceCtx.vkDevice, m_swapChain))
 
 	for (const VkImage img : images)
 	{
@@ -92,7 +92,7 @@ void EngineSwapChain::createImageBuffers()
 			}
 		};
 		VkImageViewCreateInfo colorAttachmentView = imageViewCreateInfo(parameters);
-		VK_CHECK_EXCEPT(vkCreateImageView(m_deviceCtx.m_vkDevice, &colorAttachmentView, nullptr, &imageView))
+		VK_CHECK_EXCEPT(vkCreateImageView(m_deviceCtx.vkDevice, &colorAttachmentView, nullptr, &imageView))
 		m_frames.emplace_back(SwapChainFrame{
 				img,
 				imageView
@@ -103,8 +103,8 @@ void EngineSwapChain::createImageBuffers()
 void EngineSwapChain::releaseSwapchain(VkSwapchainKHR a_oldSwapChain)
 {
 	for (const auto& img : m_frames)
-		vkDestroyImageView(m_deviceCtx.m_vkDevice, img.m_imageView, nullptr);
-	vkDestroySwapchainKHR(m_deviceCtx.m_vkDevice, a_oldSwapChain, nullptr);
+		vkDestroyImageView(m_deviceCtx.vkDevice, img.m_imageView, nullptr);
+	vkDestroySwapchainKHR(m_deviceCtx.vkDevice, a_oldSwapChain, nullptr);
 	m_frames.clear();
 }
 
@@ -113,10 +113,10 @@ void EngineSwapChain::createSwapChain(const uint32_t a_width, const uint32_t a_h
 	if (m_frames.empty())
 	{
 		// new swapchain
-		VK_CHECK_EXCEPT(vkGetPhysicalDeviceSurfaceCapabilitiesKHR(m_deviceCtx.m_vkPhysDevice, m_surface, &m_surfCaps))
+		VK_CHECK_EXCEPT(vkGetPhysicalDeviceSurfaceCapabilitiesKHR(m_deviceCtx.vkPhysDevice, m_surface, &m_surfCaps))
 
 		std::vector<VkPresentModeKHR> presentationModes;
-		enumerate(&vkGetPhysicalDeviceSurfacePresentModesKHR, presentationModes, m_deviceCtx.m_vkPhysDevice, m_surface);
+		enumerate(&vkGetPhysicalDeviceSurfacePresentModesKHR, presentationModes, m_deviceCtx.vkPhysDevice, m_surface);
 
 		// Determine the number of images in swapchain
 		const uint32_t desiredNumberOfSwapchainImages = EngineSwapChain::getImageCount(m_surfCaps);
@@ -124,7 +124,7 @@ void EngineSwapChain::createSwapChain(const uint32_t a_width, const uint32_t a_h
 		// The VK_PRESENT_MODE_FIFO_KHR mode must always be present as per spec
 		// This mode waits for the vertical blank ("v-sync")
 		VkPresentModeKHR swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;
-		VkSurfaceFormatKHR imageFormat = EngineSwapChain::findSurfaceFormat(m_deviceCtx.m_vkPhysDevice, m_surface);
+		VkSurfaceFormatKHR imageFormat = EngineSwapChain::findSurfaceFormat(m_deviceCtx.vkPhysDevice, m_surface);
 
 		VkImageUsageFlags usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | m_surfCaps.supportedUsageFlags;
 
@@ -135,14 +135,14 @@ void EngineSwapChain::createSwapChain(const uint32_t a_width, const uint32_t a_h
 			desiredNumberOfSwapchainImages, swapchainExtent, usage, m_surfCaps.currentTransform,
 			EngineSwapChain::findCompositeAlpha(m_surfCaps), swapchainPresentMode, VK_TRUE, m_swapChain);
 
-		VK_CHECK_EXCEPT(vkCreateSwapchainKHR(m_deviceCtx.m_vkDevice, &m_swapchainCI, nullptr, &m_swapChain))
+		VK_CHECK_EXCEPT(vkCreateSwapchainKHR(m_deviceCtx.vkDevice, &m_swapchainCI, nullptr, &m_swapChain))
 	}
 	else
 	{
 		auto oldSwapChain = m_swapChain;
 		m_swapchainCI.imageExtent = EngineSwapChain::getImageExtent(m_surfCaps, a_width, a_height);
 		m_swapchainCI.oldSwapchain = oldSwapChain;
-		VK_CHECK_EXCEPT(vkCreateSwapchainKHR(m_deviceCtx.m_vkDevice, &m_swapchainCI, nullptr, &m_swapChain))
+		VK_CHECK_EXCEPT(vkCreateSwapchainKHR(m_deviceCtx.vkDevice, &m_swapchainCI, nullptr, &m_swapChain))
 		releaseSwapchain(oldSwapChain);
 	}
 	createImageBuffers();
@@ -166,7 +166,7 @@ uint32_t EngineSwapChain::frameCount()const
 
 const EngineSwapChain::SwapChainFrame& EngineSwapChain::acquireNextImage(VkSemaphore a_presentCompleteSemaphore, VkFence a_fence, uint32_t& a_imageIndex)const
 {
-	VK_CHECK_LOG(vkAcquireNextImageKHR(m_deviceCtx.m_vkDevice, m_swapChain, UINT64_MAX, a_presentCompleteSemaphore, a_fence, &a_imageIndex))
+	VK_CHECK_LOG(vkAcquireNextImageKHR(m_deviceCtx.vkDevice, m_swapChain, UINT64_MAX, a_presentCompleteSemaphore, a_fence, &a_imageIndex))
 	return m_frames[a_imageIndex];
 }
 

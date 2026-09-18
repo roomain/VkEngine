@@ -76,6 +76,18 @@
     <Filter Include="Fichiers sources\components">
       <UniqueIdentifier>{e0995c0d-a725-4c63-bdee-fa59b6e73c77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\math">
+      <UniqueIdentifier>{1b773e0d-8cd6-460f-bcd8-76e46f424eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\math">
+      <UniqueIdentifier>{6ba1b6d3-1fba-43e9-9aa0-700a8779b773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\entities">
+      <UniqueIdentifier>{67d88b03-71e8-4863-b533-58024f720989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\entities">
+      <UniqueIdentifier>{71a3fef2-e65c-4acd-8457-91718fef7aa3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -98,9 +110,6 @@
     </ClInclude>
     <ClInclude Include="VkEnumToString.h">
       <Filter>Fichiers d%27en-tête\vkEnumVSstring</Filter>
-    </ClInclude>
-    <ClInclude Include="Transformation.h">
-      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="VulkanInitializers.h">
       <Filter>Fichiers d%27en-tête\initializers</Filter>
@@ -171,9 +180,6 @@
     <ClInclude Include="reflective_convert.h">
       <Filter>Fichiers d%27en-tête\reflective_convert</Filter>
     </ClInclude>
-    <ClInclude Include="EngineShaderDatabase.h">
-      <Filter>Fichiers d%27en-tête\shader</Filter>
-    </ClInclude>
     <ClInclude Include="EngineManagedQueue.h">
       <Filter>Fichiers d%27en-tête\Managers</Filter>
     </ClInclude>
@@ -200,6 +206,30 @@
     </ClInclude>
     <ClInclude Include="EngineViewport.h">
       <Filter>Fichiers d%27en-tête\Engine classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformation.h">
+      <Filter>Fichiers d%27en-tête\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Fichiers d%27en-tête\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Fichiers d%27en-tête\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineStagingBuffer.h">
+      <Filter>Fichiers d%27en-tête\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="GPUBuffers.h">
+      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectionInterface.h">
+      <Filter>Fichiers d%27en-tête\math</Filter>
+    </ClInclude>
+    <ClInclude Include="FrustumProjection.h">
+      <Filter>Fichiers d%27en-tête\math</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthoProjection.h">
+      <Filter>Fichiers d%27en-tête\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +272,6 @@
     <ClCompile Include="EngineBuffer.cpp">
       <Filter>Fichiers sources\memory</Filter>
     </ClCompile>
-    <ClCompile Include="EngineShaderDatabase.cpp">
-      <Filter>Fichiers sources\shader</Filter>
-    </ClCompile>
     <ClCompile Include="EngineManagedQueue.cpp">
       <Filter>Fichiers sources\Managers</Filter>
     </ClCompile>
@@ -256,6 +283,27 @@
     </ClCompile>
     <ClCompile Include="EngineComponent.cpp">
       <Filter>Fichiers sources\components</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineViewportManager.cpp">
+      <Filter>Fichiers sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePipeline.cpp">
+      <Filter>Fichiers sources\Engine classes</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineStagingBuffer.cpp">
+      <Filter>Fichiers sources\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="GPUBuffers.cpp">
+      <Filter>Fichiers sources\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Fichiers sources\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="FrustumProjection.cpp">
+      <Filter>Fichiers sources\math</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthoProjection.cpp">
+      <Filter>Fichiers d%27en-tête\math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

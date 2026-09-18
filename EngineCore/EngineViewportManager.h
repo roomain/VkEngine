@@ -12,6 +12,8 @@
 
 using EngineViewportPtr = std::shared_ptr<EngineViewport>;
 
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 
 class ENGINECORE_EXPORT EngineViewportManager
 {
@@ -21,11 +23,17 @@ private:
 	std::vector<EngineViewportPtr> m_viewports;
 
 public:
-	EngineViewportManager() = default;
+	EngineViewportManager() = delete;
+	explicit EngineViewportManager(const unsigned int a_resX, const unsigned int a_resY);
 	virtual ~EngineViewportManager() = default;
-	EngineViewportPtr getViewport(const unsigned int a_posX, const unsigned int a_Y)const;
+	EngineViewportPtr getViewport(const unsigned int a_posX, const unsigned int a_posY)const;
 	DEFINE_ITER(std::vector<EngineViewportPtr>, m_viewports)
 	DEFINE_CONST_ITER(std::vector<EngineViewportPtr>, m_viewports)
+	/*@brief update windows resolution*/
 	void update(const unsigned int a_resX, const unsigned int a_resY);	
-	void grab(const float a_resX, const float a_resY, std::vector<ViewportTransform>& a_grab)const;
+	void grab(const float a_posX, const float a_resY, std::vector<ViewportTransform>& a_grab)const;
+
+	// todo add/remove viewports
+	
 };
+#pragma warning(pop)

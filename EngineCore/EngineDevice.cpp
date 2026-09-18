@@ -27,30 +27,30 @@ void EngineDevice::createMemoryAllocator(DeviceContext& a_ctx)
 		.flags = VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT | VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT |
 		VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT | VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT
 		/* | VMA_ALLOCATOR_CREATE_KHR_EXTERNAL_MEMORY_WIN32_BIT*/,
-		.physicalDevice = a_ctx.m_vkPhysDevice,
-		.device = a_ctx.m_vkDevice,
+		.physicalDevice = a_ctx.vkPhysDevice,
+		.device = a_ctx.vkDevice,
 		.preferredLargeHeapBlockSize = 0,
 		.pAllocationCallbacks = &cpuAllocationCallbacks,
 		.pDeviceMemoryCallbacks = nullptr,
 		.pHeapSizeLimit = 0,
 		.pVulkanFunctions = &vulkanFunctions,
-		.instance = a_ctx.m_vkInstance,
+		.instance = a_ctx.vkInstance,
 		.vulkanApiVersion = apiVersion
 	};
 
-	VK_CHECK_EXCEPT(vmaCreateAllocator(&vmaInfo, &a_ctx.m_memAllocator))
+	VK_CHECK_EXCEPT(vmaCreateAllocator(&vmaInfo, &a_ctx.memAllocator))
 }
 
 EngineDevice::EngineDevice(const DeviceConfiguration& a_parameters, const DeviceContext& a_ctx) :
 	m_deviceIndex{ a_parameters.deviceIndex }, m_deviceCtx{ a_ctx }, 
-	m_queuesMng{ a_ctx.m_vkDevice, a_ctx.m_vkPhysDevice, a_parameters.queues }
+	m_queuesMng{ a_ctx.vkDevice, a_ctx.vkPhysDevice, a_parameters.queues }
 {
-	if (m_deviceCtx.m_memAllocator == VK_NULL_HANDLE)
+	if (m_deviceCtx.memAllocator == VK_NULL_HANDLE)
 		createMemoryAllocator(m_deviceCtx);
 }
 
-std::shared_ptr<EngineBuffer> EngineDevice::createBuffer()const
-{
-	// use new operator because ctor is private
-	return EngineBufferPtr(new EngineBuffer(m_deviceCtx));
-}
+//std::shared_ptr<EngineBuffer> EngineDevice::createBuffer()const
+//{
+//	// use new operator because ctor is private
+//	return EngineBufferPtr(new EngineBuffer(m_deviceCtx));
+//}

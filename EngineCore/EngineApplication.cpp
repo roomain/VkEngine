@@ -109,8 +109,8 @@ EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_con
 	{
 		DeviceContext ctx
 		{
-			.m_vkInstance = m_capabilities.instance,
-			.m_vkPhysDevice = m_capabilities.devices[a_configuration.deviceIndex].physDevice
+			.vkInstance = m_capabilities.instance,
+			.vkPhysDevice = m_capabilities.devices[a_configuration.deviceIndex].physDevice
 		};
 
 		std::vector<VkDeviceQueueCreateInfo> queueCreateInfo;
@@ -149,7 +149,7 @@ EngineDevicePtr EngineApplication::createDevice(const DeviceConfiguration& a_con
 			createInfo.pNext = &physicalDeviceFeatures2;
 		}
 
-		vkCreateDevice(m_capabilities.devices[a_configuration.deviceIndex].physDevice, &createInfo, nullptr, &ctx.m_vkDevice);
+		vkCreateDevice(m_capabilities.devices[a_configuration.deviceIndex].physDevice, &createInfo, nullptr, &ctx.vkDevice);
 		EngineDevicePtr newDevice (new EngineDevice(a_configuration, ctx));
 		m_deviceInstance.emplace_back(newDevice);
 		return newDevice;
