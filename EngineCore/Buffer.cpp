@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "EngineBuffer.h"
+#include "Buffer.h"
 
-void EngineBuffer::releaseBuffer(VMABuffer& a_buffer)
+void Buffer::releaseBuffer(VMABuffer& a_buffer)
 {
 	if (a_buffer.buffer != VK_NULL_HANDLE)
 	{
@@ -11,7 +11,7 @@ void EngineBuffer::releaseBuffer(VMABuffer& a_buffer)
 	}
 }
 
-void EngineBuffer::createBuffer(const VkBufferCreateInfo bufferInfo, VMABuffer& a_buffer)
+void Buffer::createBuffer(const VkBufferCreateInfo bufferInfo, VMABuffer& a_buffer)
 {
 	VmaAllocationCreateInfo allocCreateInfo{};
 	allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
@@ -19,11 +19,11 @@ void EngineBuffer::createBuffer(const VkBufferCreateInfo bufferInfo, VMABuffer& 
 	VK_CHECK_LOG(vmaCreateBuffer(m_devCtx.memAllocator, &bufferInfo, &allocCreateInfo, &a_buffer.buffer, &a_buffer.allocation, nullptr));
 }
 
-EngineBuffer::EngineBuffer(const DeviceContext& a_ctxt) : m_devCtx{ a_ctxt }
+Buffer::Buffer(const DeviceContext& a_ctxt) : m_devCtx{ a_ctxt }
 {
 }
 
-EngineBuffer::~EngineBuffer()
+Buffer::~Buffer()
 {
 	releaseBuffer(m_buffer);
 }

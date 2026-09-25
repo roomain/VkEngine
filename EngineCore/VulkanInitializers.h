@@ -101,6 +101,30 @@ template<typename ImageViewContainer>
 	};
 }
 
+[[nodiscard]] constexpr VkCommandBufferAllocateInfo initAllocCommandBufferInfo(const VkCommandPool a_pool,
+	const VkCommandBufferLevel a_level, const uint32_t a_count)
+{
+	return VkCommandBufferAllocateInfo{
+		.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
+		.pNext = nullptr,
+		.commandPool = a_pool,
+		.level = a_level,
+		.commandBufferCount = a_count
+	};
+}
+
+[[nodiscard]] constexpr VkCommandPoolCreateInfo initCommandPoolCreateInfo(const VkCommandPoolCreateFlags a_flags,
+	const uint32_t a_family)
+{
+	return VkCommandPoolCreateInfo{
+		.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
+		.pNext = nullptr,
+		.flags = a_flags,
+		.queueFamilyIndex = a_family
+	};
+}
+
+
 [[nodiscard]] constexpr VkSwapchainCreateInfoKHR swapChainCreateInfoKHR(const VkSurfaceKHR a_surface,
 	const VkSurfaceFormatKHR& a_format,
 	const uint32_t a_imageCount,
@@ -255,4 +279,5 @@ struct FrameBufferParameters
 		a_feature.variableMultisampleRate,
 		a_feature.inheritedQueries
 	};
+
 }

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "EngineDevice.h"
-#include "EngineBuffer.h"
+#include "StagingBuffer.h"
+#include "GPUBuffers.h"
 #include "vmaMemoryCallbacks.h"
 #include "vmaMemoryAllocator.h"
 
@@ -49,8 +50,28 @@ EngineDevice::EngineDevice(const DeviceConfiguration& a_parameters, const Device
 		createMemoryAllocator(m_deviceCtx);
 }
 
-//std::shared_ptr<EngineBuffer> EngineDevice::createBuffer()const
-//{
-//	// use new operator because ctor is private
-//	return EngineBufferPtr(new EngineBuffer(m_deviceCtx));
-//}
+
+std::shared_ptr<StagingBuffer> EngineDevice::createStagingBuffer()const
+{
+	// use new operator because ctor is private
+	return std::shared_ptr<StagingBuffer>(new StagingBuffer(m_deviceCtx));
+}
+
+std::shared_ptr<IndexBuffer> EngineDevice::createIndexBuffer()const
+{
+	// use new operator because ctor is private
+	return std::shared_ptr<IndexBuffer>(new IndexBuffer(m_deviceCtx));
+}
+
+std::shared_ptr<VertexBuffer> EngineDevice::createVertexBuffer()const
+{
+	// use new operator because ctor is private
+	return std::shared_ptr<VertexBuffer>(new VertexBuffer(m_deviceCtx));
+}
+
+
+std::shared_ptr<StorageBuffer> EngineDevice::createStorageBuffer()const
+{
+	// use new operator because ctor is private
+	return std::shared_ptr<StorageBuffer>(new StorageBuffer(m_deviceCtx));
+}

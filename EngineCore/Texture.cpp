@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "EngineTexture.h"
+#include "Texture.h"
 
-EngineTexture::EngineTexture(const DeviceContext& a_ctxt, const TextureParameters& a_params) : m_devCtx{ a_ctxt },
+Texture::Texture(const DeviceContext& a_ctxt, const TextureParameters& a_params) : m_devCtx{ a_ctxt },
     m_parameters{ a_params }
 {
     // to parametrize
@@ -28,7 +28,7 @@ EngineTexture::EngineTexture(const DeviceContext& a_ctxt, const TextureParameter
     VK_CHECK_LOG(vmaCreateImage(m_devCtx.memAllocator, &imageInfo, &allocationInfo, &m_image, &m_allocation, nullptr));
 }
 
-EngineTexture::~EngineTexture()
+Texture::~Texture()
 {
     if (m_image)
     {
@@ -38,7 +38,7 @@ EngineTexture::~EngineTexture()
     }
 }
 
-VkDeviceSize EngineTexture::pixelImageSize()const
+VkDeviceSize Texture::pixelImageSize()const
 {
     VkDeviceSize pixelSize = 4; // 4 char
     switch (m_parameters.format)
@@ -202,7 +202,7 @@ VkDeviceSize EngineTexture::pixelImageSize()const
     return pixelSize;
 }
 
-void EngineTexture::internalWrite(const void* a_data, const size_t& a_size)
+void Texture::internalWrite(const void* a_data, const size_t& a_size)
 {
     //
 }

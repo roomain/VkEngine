@@ -26,10 +26,18 @@ private:
 
 public:
 	EngineManagedQueueArray() = delete;
-	NOT_COPIABLE(EngineManagedQueueArray)
-	explicit EngineManagedQueueArray(EngineManagedQueueArray&& other)noexcept = default;
+	NOT_COPIABLE(EngineManagedQueueArray);
+	explicit EngineManagedQueueArray(EngineManagedQueueArray&& a_other)noexcept : m_queueFamily{ a_other.m_queueFamily },
+		m_queueArray{ std::move(a_other.m_queueArray) }, m_releaseSignal{ std::move(a_other.m_releaseSignal) }
+	{
+		a_other.m_queueFamily = -1;
+	}
+
 	virtual ~EngineManagedQueueArray()
 	{
+		if (m_queueFamily < 0)
+			return;
+
 		int index = 0;
 		std::array<uint32_t, Size> queueIndicies;
 		for (const auto [queueIndex, queue] : m_queueArray)

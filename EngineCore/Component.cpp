@@ -1,19 +1,19 @@
 #include "pch.h"
-#include "EngineComponent.h"
+#include "Component.h"
 #include <ranges>
 
-void EngineComponent::removeParent()
+void Component::removeParent()
 {
-    m_parent = std::weak_ptr<EngineComponent>();
+    m_parent = std::weak_ptr<Component>();
 }
 
-void EngineComponent::removeChild_internal(const EngineComponent* a_component)
+void Component::removeChild_internal(const Component* a_component)
 {
     if (auto iter = std::ranges::find_if(m_children, [a_component](auto& a_child) {return a_child.get() == a_component; }); iter != m_children.end())
         m_children.erase(iter);
 }
 
-void EngineComponent::setParent(const std::weak_ptr<EngineComponent>& a_parent)
+void Component::setParent(const std::weak_ptr<Component>& a_parent)
 {
     if (auto parent = m_parent.lock())
     {
@@ -29,7 +29,7 @@ void EngineComponent::setParent(const std::weak_ptr<EngineComponent>& a_parent)
     }
 }
 
-void EngineComponent::addChild(const std::shared_ptr<EngineComponent>& a_component)
+void Component::addChild(const std::shared_ptr<Component>& a_component)
 {
     if (auto iter = std::ranges::find(m_children, a_component); iter != m_children.end())
     {
@@ -38,10 +38,24 @@ void EngineComponent::addChild(const std::shared_ptr<EngineComponent>& a_compone
     }
 }
 
-void EngineComponent::removeChild(const std::shared_ptr<EngineComponent>& a_component)
+void Component::removeChild(const std::shared_ptr<Component>& a_component)
 {
     if (auto iter = std::ranges::find(m_children, a_component); iter != m_children.end())
     {
         m_children.erase(iter);
     }
+}
+
+void Component::update(const float a_time, const glm::dmat4& a_absoluteMat)
+{
+    if (!m_isEnabled)
+        return;
+
+    if (m_isRelative)
+        m_workingMatrix = a_absoluteMat * m_transform.matrix();
+
+    internalUpdate(a_time);
+
+    for (const auto& pChild : m_children)
+        pChild->update(a_time, workingMatrix());
 }

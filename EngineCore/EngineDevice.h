@@ -8,12 +8,18 @@
 #include "EngineQueueManager.h"
 #include "notCopiable.h"
 #include "EngineParallelWorker.h"
+#include "UniformBuffer.h"
 #include "enginecore_globals.h"
 
 #pragma warning(push)
 #pragma warning( disable : 4251 )
 
-class EngineBuffer;
+class Buffer;
+class StagingBuffer;
+class IndexBuffer;
+class VertexBuffer;
+class StorageBuffer;
+
 struct DeviceConfiguration;
 
 /*@brief Base class of device created by EngineApplication*/
@@ -36,13 +42,25 @@ public:
 
 	[[nodiscard]] const DeviceContext& deviceContext()const { return m_deviceCtx; }
 	[[nodiscard]] constexpr uint32_t deviceIndex()const { return m_deviceIndex; }
+	[[nodiscard]] inline EngineQueueManager& queueManager() { return m_queuesMng; }
 
 	template<size_t Size>
-	[[nodiscard]] EngineParallelWorker<Size> createParallelWorker(const VkQueueFlags a_flag)
+	[[nodiscard]] EngineParallelWorkerPtr<Size> createParallelWorker(const VkQueueFlags a_flag)
 	{
-		return EngineParallelWorker<Size>(m_deviceCtx, m_queuesMng.createArray<Size>(a_flag));
+		return EngineParallelWorkerPtr<Size>(new EngineParallelWorker<Size>(m_deviceCtx, std::move(m_queuesMng.createArray<Size>(a_flag))));
 	}
 
-	//[[nodiscard]] std::shared_ptr<EngineBuffer> createBuffer()const;
+	[[nodiscard]] std::shared_ptr<StagingBuffer> createStagingBuffer()const;
+	[[nodiscard]] std::shared_ptr<IndexBuffer> createIndexBuffer()const;
+	[[nodiscard]] std::shared_ptr<VertexBuffer> createVertexBuffer()const;
+
+	template<typename Type>
+	[[nodiscard]] std::shared_ptr<UniformBuffer<Type>> createUniformBuffer()const
+	{
+		// use new operator because ctor is private
+		return std::shared_ptr<UniformBuffer<Type>>(new UniformBuffer<Type>(m_deviceCtx));
+	}
+
+	[[nodiscard]] std::shared_ptr<StorageBuffer> createStorageBuffer()const;
 };
 #pragma warning(pop)

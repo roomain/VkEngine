@@ -30,28 +30,46 @@ bool processMouseWheelEvent(const SDL_MouseWheelEvent& a_buttonEvent)
     return false;
 }
 
-bool processEvent(const SDL_Event& event)
+bool processEvent(const SDL_Event& event, const std::shared_ptr<EngineRenderer>& a_renderer)
 {
 	switch (event.type)
 	{
-	case SDL_EVENT_QUIT:
-		return true;
-	case SDL_EVENT_WINDOW_MOVED:             
-    case SDL_EVENT_WINDOW_RESIZED:           
+	case SDL_EVENT_WINDOW_MOVED:
+        break;
+    case SDL_EVENT_WINDOW_RESIZED:
+    {        
+       a_renderer->resize(event.window.data1, event.window.data2);
+       return false;
+    }
+        break;
     case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
+        break;
     case SDL_EVENT_WINDOW_METAL_VIEW_RESIZED:
-    case SDL_EVENT_WINDOW_MINIMIZED:         
-    case SDL_EVENT_WINDOW_MAXIMIZED:         
-    case SDL_EVENT_WINDOW_RESTORED:          
-    case SDL_EVENT_WINDOW_MOUSE_ENTER:       
-    case SDL_EVENT_WINDOW_MOUSE_LEAVE:       
-    case SDL_EVENT_WINDOW_FOCUS_GAINED:      
-    case SDL_EVENT_WINDOW_FOCUS_LOST:        
-    case SDL_EVENT_WINDOW_CLOSE_REQUESTED:   
-    case SDL_EVENT_WINDOW_HIT_TEST:          
-    case SDL_EVENT_WINDOW_ICCPROF_CHANGED:   
-    case SDL_EVENT_WINDOW_DISPLAY_CHANGED:   
+        break;
+    case SDL_EVENT_WINDOW_MINIMIZED:
+        break;
+    case SDL_EVENT_WINDOW_MAXIMIZED:
+        break;
+    case SDL_EVENT_WINDOW_RESTORED:
+        break;
+    case SDL_EVENT_WINDOW_MOUSE_ENTER:
+        break;
+    case SDL_EVENT_WINDOW_MOUSE_LEAVE:
+        break;
+    case SDL_EVENT_WINDOW_FOCUS_GAINED:
+        break;
+    case SDL_EVENT_WINDOW_FOCUS_LOST:
+        break;
+    case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
+        break;
+    case SDL_EVENT_WINDOW_HIT_TEST:
+        break;
+    case SDL_EVENT_WINDOW_ICCPROF_CHANGED:
+        break;
+    case SDL_EVENT_WINDOW_DISPLAY_CHANGED:
+        break;
     case SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED:
+        break;
     case SDL_EVENT_WINDOW_SAFE_AREA_CHANGED: 
     case SDL_EVENT_WINDOW_OCCLUDED:          
     case SDL_EVENT_WINDOW_ENTER_FULLSCREEN:  
@@ -68,7 +86,10 @@ bool processEvent(const SDL_Event& event)
         return processMouseButtonEvent(event.button);
     case SDL_EVENT_MOUSE_WHEEL:
         return processMouseWheelEvent(event.wheel);
+    case SDL_EVENT_QUIT:
+        return true;
     default:
         return false;
 	}
+    return false;
 }

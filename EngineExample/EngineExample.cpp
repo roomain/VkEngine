@@ -10,7 +10,7 @@
 #include "EngineParameters.h"
 #include "EngineRenderer.h"
 #include "EngineDevice.h"
-#include "EngineBuffer.h"
+#include "StagingBuffer.h"
 #include "capabilitiesVisitorImpl.h"
 #include "VkEnumToString.h"
 #include <SDL3/SDL_vulkan.h>
@@ -119,8 +119,16 @@ int main(int argc, char* argv[])
     auto renderer = g_appEngine->createRenderer(renderConf);
     
     auto device = renderer->device();
-    auto buffer = device->createBuffer();
+    auto buffer = device->createStagingBuffer();
     auto worker = device->createParallelWorker<2>(VK_QUEUE_GRAPHICS_BIT);
+    auto& queueMng = device->queueManager();
+
+    auto families = queueMng.findFamilies(VK_QUEUE_GRAPHICS_BIT);
+    if(families.empty())
+        std::cout << "No queue for flag " << to_string(VK_QUEUE_GRAPHICS_BIT) << std::endl;
+
+    auto cmdBuffer = queueMng.createCommandBuffer(families[0], VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+
 
     std::vector<int> cpuBuffer(100, 5);
     buffer->writeData(cpuBuffer.data(), cpuBuffer.size());
@@ -134,7 +142,7 @@ int main(int argc, char* argv[])
     {
         while (SDL_PollEvent(&event))
         {
-            if (processEvent(event))
+            if (processEvent(event, renderer))
             {
                 quit = true;
                 break;

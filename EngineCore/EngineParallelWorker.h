@@ -64,7 +64,7 @@ private:
 	boost::asio::thread_pool m_workerPool;	/*!< thread pool*/
 
 	explicit EngineParallelWorker(const DeviceContext& a_ctx, EngineManagedQueueArray<Size>&& a_data) :
-		m_DeviceCtx{ a_ctx }, m_queue { std::move(a_data) }, m_workerPool(Size)
+		m_DeviceCtx{ a_ctx }, m_queue{ std::move(a_data) }, m_workerPool{ Size }
 	{
 		// nothing to do
 	}
@@ -73,11 +73,7 @@ public:
 	EngineParallelWorker() = delete;
 	NOT_COPIABLE(EngineParallelWorker)
 
-	~EngineParallelWorker()
-	{
-		//
-	}
-
+	~EngineParallelWorker() = default;
 
 	void postTask(ContextFun& a_fun)
 	{
@@ -93,3 +89,6 @@ public:
 		m_workerPool.wait();
 	}
 };
+
+template<size_t Size>
+using EngineParallelWorkerPtr = std::shared_ptr<EngineParallelWorker<Size>>;

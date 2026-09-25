@@ -88,6 +88,12 @@
     <Filter Include="Fichiers sources\entities">
       <UniqueIdentifier>{71a3fef2-e65c-4acd-8457-91718fef7aa3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\rendering">
+      <UniqueIdentifier>{b56f15bd-83c4-413f-b352-af96bb1a71ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\rendering">
+      <UniqueIdentifier>{b8c02fd2-95f6-4229-bf58-696c09dcdab9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -162,7 +168,7 @@
     <ClInclude Include="CheckParameters.h">
       <Filter>Fichiers d%27en-tête\parameters</Filter>
     </ClInclude>
-    <ClInclude Include="EngineBuffer.h">
+    <ClInclude Include="Buffer.h">
       <Filter>Fichiers d%27en-tête\memory</Filter>
     </ClInclude>
     <ClInclude Include="InternalConfiguration.h">
@@ -189,7 +195,7 @@
     <ClInclude Include="EngineManagedQueueArray.h">
       <Filter>Fichiers d%27en-tête\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="EngineTexture.h">
+    <ClInclude Include="Texture.h">
       <Filter>Fichiers d%27en-tête\memory</Filter>
     </ClInclude>
     <ClInclude Include="EngineRenderer.h">
@@ -198,7 +204,7 @@
     <ClInclude Include="EnginePipeline.h">
       <Filter>Fichiers d%27en-tête\Engine classes</Filter>
     </ClInclude>
-    <ClInclude Include="EngineComponent.h">
+    <ClInclude Include="Component.h">
       <Filter>Fichiers d%27en-tête\components</Filter>
     </ClInclude>
     <ClInclude Include="EngineViewportManager.h">
@@ -216,11 +222,8 @@
     <ClInclude Include="Entity.h">
       <Filter>Fichiers d%27en-tête\entities</Filter>
     </ClInclude>
-    <ClInclude Include="EngineStagingBuffer.h">
+    <ClInclude Include="StagingBuffer.h">
       <Filter>Fichiers d%27en-tête\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="GPUBuffers.h">
-      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
     </ClInclude>
     <ClInclude Include="ProjectionInterface.h">
       <Filter>Fichiers d%27en-tête\math</Filter>
@@ -230,6 +233,15 @@
     </ClInclude>
     <ClInclude Include="OrthoProjection.h">
       <Filter>Fichiers d%27en-tête\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GPUBuffers.h">
+      <Filter>Fichiers d%27en-tête\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformBuffer.h">
+      <Filter>Fichiers d%27en-tête\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderGroup.h">
+      <Filter>Fichiers d%27en-tête\rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,19 +281,19 @@
     <ClCompile Include="CheckParameters.cpp">
       <Filter>Fichiers sources\parameters</Filter>
     </ClCompile>
-    <ClCompile Include="EngineBuffer.cpp">
+    <ClCompile Include="Buffer.cpp">
       <Filter>Fichiers sources\memory</Filter>
     </ClCompile>
     <ClCompile Include="EngineManagedQueue.cpp">
       <Filter>Fichiers sources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="EngineTexture.cpp">
+    <ClCompile Include="Texture.cpp">
       <Filter>Fichiers sources\memory</Filter>
     </ClCompile>
     <ClCompile Include="EngineRenderer.cpp">
       <Filter>Fichiers sources\Engine classes</Filter>
     </ClCompile>
-    <ClCompile Include="EngineComponent.cpp">
+    <ClCompile Include="Component.cpp">
       <Filter>Fichiers sources\components</Filter>
     </ClCompile>
     <ClCompile Include="EngineViewportManager.cpp">
@@ -290,7 +302,7 @@
     <ClCompile Include="EnginePipeline.cpp">
       <Filter>Fichiers sources\Engine classes</Filter>
     </ClCompile>
-    <ClCompile Include="EngineStagingBuffer.cpp">
+    <ClCompile Include="StagingBuffer.cpp">
       <Filter>Fichiers sources\memory</Filter>
     </ClCompile>
     <ClCompile Include="GPUBuffers.cpp">
@@ -303,7 +315,10 @@
       <Filter>Fichiers sources\math</Filter>
     </ClCompile>
     <ClCompile Include="OrthoProjection.cpp">
-      <Filter>Fichiers d%27en-tête\math</Filter>
+      <Filter>Fichiers sources\math</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderGroup.cpp">
+      <Filter>Fichiers sources\rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

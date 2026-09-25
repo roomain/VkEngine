@@ -1,16 +1,16 @@
 #pragma once
 /***********************************************
-* @headerfile EngineStagingBuffer.h
+* @headerfile StagingBuffer.h
 * @date 16 / 09 / 2026
 * @author Roomain
 ************************************************/
-#include "EngineBuffer.h"
+#include "Buffer.h"
 
-class ENGINECORE_EXPORT EngineStagingBuffer : public EngineBuffer
+class ENGINECORE_EXPORT StagingBuffer : public Buffer
 {
 	friend class EngineDevice;
 private:
-	explicit EngineStagingBuffer(const DeviceContext& a_ctxt);
+	explicit StagingBuffer(const DeviceContext& a_ctxt);
 	void internalWrite(const void* a_data, const size_t& a_size);
 	void internalRead(void* a_data, const size_t& a_offset, const size_t& a_size)const;
 
@@ -33,5 +33,5 @@ public:
 		internalRead(a_buffer, 0, a_bufferByteSize * sizeof(Type));
 	}
 
-	void copyTo(VkCommandBuffer& a_cmdBuffer, EngineBuffer& a_other);
+	void copyTo(VkCommandBuffer& a_cmdBuffer, StagingBuffer& a_other);
 };

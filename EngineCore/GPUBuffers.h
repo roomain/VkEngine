@@ -4,42 +4,34 @@
 * @date 16 / 09 / 2026
 * @author Roomain
 ************************************************/
-#include "EngineBuffer.h"
+#include "Buffer.h"
 
-class ENGINECORE_EXPORT EngineIndexBuffer : public EngineBuffer
+class ENGINECORE_EXPORT IndexBuffer : public Buffer
 {
 	friend class EngineDevice;
 private:
-	explicit EngineIndexBuffer(const DeviceContext& a_ctxt);
+	explicit IndexBuffer(const DeviceContext& a_ctxt);
 public:
 	void allocate(const size_t& a_size);
 	void bind(VkCommandBuffer& a_cmdBuffer);
 };
 
-class ENGINECORE_EXPORT EngineVertexBuffer : public EngineBuffer
+class ENGINECORE_EXPORT VertexBuffer : public Buffer
 {
 	friend class EngineDevice;
 private:
-	explicit EngineVertexBuffer(const DeviceContext& a_ctxt);
+	explicit VertexBuffer(const DeviceContext& a_ctxt);
 public:
 	void allocate(const size_t& a_size);
 	void bind(VkCommandBuffer& a_cmdBuffer, uint32_t a_bind);
 };
 
-class ENGINECORE_EXPORT EngineUniformBuffer : public EngineBuffer
-{
-	friend class EngineDevice;
-private:
-	explicit EngineUniformBuffer(const DeviceContext& a_ctxt);
-public:
-	void allocate(const size_t& a_size);
-};
 
-class ENGINECORE_EXPORT EngineStorageBuffer : public EngineBuffer
+class ENGINECORE_EXPORT StorageBuffer : public Buffer
 {
 	friend class EngineDevice;
 private:
-	explicit EngineStorageBuffer(const DeviceContext& a_ctxt);
+	explicit StorageBuffer(const DeviceContext& a_ctxt);
 public:
 	void allocate(const size_t& a_size);
 };

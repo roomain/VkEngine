@@ -1,6 +1,6 @@
 #pragma once
 /***********************************************
-* @headerfile EngineTexture.h
+* @headerfile Texture.h
 * @date 09 / 08 / 2026
 * @author Roomain
 ************************************************/
@@ -21,7 +21,7 @@ struct TextureParameters
 };
 
 /*@brief class for using texture with vulkan*/
-class ENGINECORE_EXPORT EngineTexture
+class ENGINECORE_EXPORT Texture
 {
 	friend class EngineDevice;
 private:
@@ -31,13 +31,13 @@ private:
 	TextureParameters m_parameters;					/*!< texture parameters*/
 
 	// to parametrize
-	EngineTexture(const DeviceContext& a_ctxt, const TextureParameters& a_params);
+	Texture(const DeviceContext& a_ctxt, const TextureParameters& a_params);
 	void internalWrite(const void* a_data, const size_t& a_size);
 	[[nodiscard]] VkDeviceSize pixelImageSize()const;
 public:
-	NOT_COPIABLE(EngineTexture)
-	EngineTexture() = delete;
-	virtual ~EngineTexture();
+	NOT_COPIABLE(Texture)
+	Texture() = delete;
+	virtual ~Texture();
 	template<typename Type>
 	void writePixels()
 	{
@@ -50,6 +50,6 @@ public:
 
 };
 
-using EngineTexturePtr = std::shared_ptr<EngineTexture>;
+using EngineTexturePtr = std::shared_ptr<Texture>;
 
 #pragma warning(pop)

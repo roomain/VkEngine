@@ -6,14 +6,17 @@
 ************************************************/
 #include <memory>
 #include "EngineSwapChain.h"
+#include "enginecore_globals.h"
 
 struct SurfaceConfiguration;
 
 class EngineDevice;
 using EngineDevicePtr = std::shared_ptr<EngineDevice>;
 
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 /*@brief Renderer: for specific surface, shared device*/
-class EngineRenderer
+class ENGINECORE_EXPORT EngineRenderer
 {
 	friend class EngineApplication;
 private:
@@ -28,4 +31,5 @@ public:
 	void resize(const uint32_t a_width, const uint32_t a_height);
 	[[nodiscard]] EngineDevicePtr device()const { return m_device; }
 };
+#pragma warning(pop)
 

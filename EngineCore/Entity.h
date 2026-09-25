@@ -32,5 +32,9 @@ public:
 	{
 		return m_rootComponent;
 	}
+
+	/*@brief update function called at each frame*/
+	/*@param a_time: ms since last frame*/
+	virtual void update(const float a_time) = 0;
 };
 #pragma warning(pop)
