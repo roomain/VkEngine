@@ -30,7 +30,7 @@ bool processMouseWheelEvent(const SDL_MouseWheelEvent& a_buttonEvent)
     return false;
 }
 
-bool processEvent(const SDL_Event& event, const std::shared_ptr<EngineRenderer>& a_renderer)
+bool processEvent(const SDL_Event& event, const std::shared_ptr<Renderer>& a_renderer)
 {
 	switch (event.type)
 	{

@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "EngineSwapChain.h"
+#include "SwapChain.h"
 
-uint32_t EngineSwapChain::getImageCount(const VkSurfaceCapabilitiesKHR& a_surfCaps)
+uint32_t SwapChain::getImageCount(const VkSurfaceCapabilitiesKHR& a_surfCaps)
 {
 	uint32_t desiredNumberOfSwapchainImages = a_surfCaps.minImageCount + 1;
 	if ((a_surfCaps.maxImageCount > 0) && (desiredNumberOfSwapchainImages > a_surfCaps.maxImageCount))
@@ -11,7 +11,7 @@ uint32_t EngineSwapChain::getImageCount(const VkSurfaceCapabilitiesKHR& a_surfCa
 	return desiredNumberOfSwapchainImages;
 }
 
-VkSurfaceFormatKHR EngineSwapChain::findSurfaceFormat(const VkPhysicalDevice& a_physDev, const VkSurfaceKHR a_surf)
+VkSurfaceFormatKHR SwapChain::findSurfaceFormat(const VkPhysicalDevice& a_physDev, const VkSurfaceKHR a_surf)
 {
 	std::vector<VkSurfaceFormatKHR> surfaceFormats;
 	enumerate(&vkGetPhysicalDeviceSurfaceFormatsKHR, surfaceFormats, a_physDev, a_surf);
@@ -36,7 +36,7 @@ VkSurfaceFormatKHR EngineSwapChain::findSurfaceFormat(const VkPhysicalDevice& a_
 	return surfaceFormat;
 }
 
-VkCompositeAlphaFlagBitsKHR EngineSwapChain::findCompositeAlpha(const VkSurfaceCapabilitiesKHR& a_surfCaps)
+VkCompositeAlphaFlagBitsKHR SwapChain::findCompositeAlpha(const VkSurfaceCapabilitiesKHR& a_surfCaps)
 {
 	VkCompositeAlphaFlagBitsKHR compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
 	static constexpr std::array<VkCompositeAlphaFlagBitsKHR, 4>  compositeAlphaFlags = {
@@ -56,7 +56,7 @@ VkCompositeAlphaFlagBitsKHR EngineSwapChain::findCompositeAlpha(const VkSurfaceC
 	return compositeAlpha;
 }
 
-VkExtent2D EngineSwapChain::getImageExtent(const VkSurfaceCapabilitiesKHR& a_surfCaps, const uint32_t a_width, const uint32_t a_height)
+VkExtent2D SwapChain::getImageExtent(const VkSurfaceCapabilitiesKHR& a_surfCaps, const uint32_t a_width, const uint32_t a_height)
 {
 	VkExtent2D extent = a_surfCaps.currentExtent;
 	if (a_surfCaps.currentExtent.width == (uint32_t)-1)
@@ -69,7 +69,7 @@ VkExtent2D EngineSwapChain::getImageExtent(const VkSurfaceCapabilitiesKHR& a_sur
 	return extent;
 }
 
-void EngineSwapChain::createImageBuffers()
+void SwapChain::createImageBuffers()
 {
 	std::vector<VkImage> images;
 	VK_CHECK_EXCEPT(enumerateEx(&vkGetSwapchainImagesKHR, images, VK_SUCCESS, m_deviceCtx.vkDevice, m_swapChain))
@@ -100,7 +100,7 @@ void EngineSwapChain::createImageBuffers()
 	}
 }
 
-void EngineSwapChain::releaseSwapchain(VkSwapchainKHR a_oldSwapChain)
+void SwapChain::releaseSwapchain(VkSwapchainKHR a_oldSwapChain)
 {
 	for (const auto& img : m_frames)
 		vkDestroyImageView(m_deviceCtx.vkDevice, img.m_imageView, nullptr);
@@ -108,7 +108,7 @@ void EngineSwapChain::releaseSwapchain(VkSwapchainKHR a_oldSwapChain)
 	m_frames.clear();
 }
 
-void EngineSwapChain::createSwapChain(const uint32_t a_width, const uint32_t a_height)
+void SwapChain::createSwapChain(const uint32_t a_width, const uint32_t a_height)
 {
 	if (m_frames.empty())
 	{
@@ -119,28 +119,28 @@ void EngineSwapChain::createSwapChain(const uint32_t a_width, const uint32_t a_h
 		enumerate(&vkGetPhysicalDeviceSurfacePresentModesKHR, presentationModes, m_deviceCtx.vkPhysDevice, m_surface);
 
 		// Determine the number of images in swapchain
-		const uint32_t desiredNumberOfSwapchainImages = EngineSwapChain::getImageCount(m_surfCaps);
+		const uint32_t desiredNumberOfSwapchainImages = SwapChain::getImageCount(m_surfCaps);
 
 		// The VK_PRESENT_MODE_FIFO_KHR mode must always be present as per spec
 		// This mode waits for the vertical blank ("v-sync")
 		VkPresentModeKHR swapchainPresentMode = VK_PRESENT_MODE_FIFO_KHR;
-		VkSurfaceFormatKHR imageFormat = EngineSwapChain::findSurfaceFormat(m_deviceCtx.vkPhysDevice, m_surface);
+		VkSurfaceFormatKHR imageFormat = SwapChain::findSurfaceFormat(m_deviceCtx.vkPhysDevice, m_surface);
 
 		VkImageUsageFlags usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | m_surfCaps.supportedUsageFlags;
 
-		const VkExtent2D swapchainExtent = EngineSwapChain::getImageExtent(m_surfCaps, a_width, a_height);
+		const VkExtent2D swapchainExtent = SwapChain::getImageExtent(m_surfCaps, a_width, a_height);
 
 		// create info with the current swapchain
 		m_swapchainCI = swapChainCreateInfoKHR(m_surface, imageFormat,
 			desiredNumberOfSwapchainImages, swapchainExtent, usage, m_surfCaps.currentTransform,
-			EngineSwapChain::findCompositeAlpha(m_surfCaps), swapchainPresentMode, VK_TRUE, m_swapChain);
+			SwapChain::findCompositeAlpha(m_surfCaps), swapchainPresentMode, VK_TRUE, m_swapChain);
 
 		VK_CHECK_EXCEPT(vkCreateSwapchainKHR(m_deviceCtx.vkDevice, &m_swapchainCI, nullptr, &m_swapChain))
 	}
 	else
 	{
 		auto oldSwapChain = m_swapChain;
-		m_swapchainCI.imageExtent = EngineSwapChain::getImageExtent(m_surfCaps, a_width, a_height);
+		m_swapchainCI.imageExtent = SwapChain::getImageExtent(m_surfCaps, a_width, a_height);
 		m_swapchainCI.oldSwapchain = oldSwapChain;
 		VK_CHECK_EXCEPT(vkCreateSwapchainKHR(m_deviceCtx.vkDevice, &m_swapchainCI, nullptr, &m_swapChain))
 		releaseSwapchain(oldSwapChain);
@@ -148,35 +148,35 @@ void EngineSwapChain::createSwapChain(const uint32_t a_width, const uint32_t a_h
 	createImageBuffers();
 }
 
-void EngineSwapChain::resize(const uint32_t a_width, const uint32_t a_height)
+void SwapChain::resize(const uint32_t a_width, const uint32_t a_height)
 {
 	createSwapChain(a_width, a_height);
 }
 
-EngineSwapChain::EngineSwapChain(const DeviceContext& a_ctx, const SurfaceConfiguration& a_surfConf) :
+SwapChain::SwapChain(const DeviceContext& a_ctx, const SurfaceConfiguration& a_surfConf) :
 	m_deviceCtx{ a_ctx }, m_surface{ a_surfConf.surface }
 {
 	createSwapChain(a_surfConf.width, a_surfConf.height);
 }
 
-uint32_t EngineSwapChain::frameCount()const
+uint32_t SwapChain::frameCount()const
 {
 	return static_cast<uint32_t>(m_frames.size());
 }
 
-const EngineSwapChain::SwapChainFrame& EngineSwapChain::acquireNextImage(VkSemaphore a_presentCompleteSemaphore, VkFence a_fence, uint32_t& a_imageIndex)const
+const SwapChain::SwapChainFrame& SwapChain::acquireNextImage(VkSemaphore a_presentCompleteSemaphore, VkFence a_fence, uint32_t& a_imageIndex)const
 {
 	VK_CHECK_LOG(vkAcquireNextImageKHR(m_deviceCtx.vkDevice, m_swapChain, UINT64_MAX, a_presentCompleteSemaphore, a_fence, &a_imageIndex))
 	return m_frames[a_imageIndex];
 }
 
-void EngineSwapChain::present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, VkSemaphore a_waitSemaphore)const
+void SwapChain::present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, VkSemaphore a_waitSemaphore)const
 {
 	auto presentCI = presentationKHR(1, &a_waitSemaphore, 1, &m_swapChain, &a_imageIndex);
 	VK_CHECK_LOG(vkQueuePresentKHR(a_presentationQueue, &presentCI))
 }
 
-void EngineSwapChain::present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, std::vector<VkSemaphore>& a_waitSemaphore)const
+void SwapChain::present(VkQueue a_presentationQueue, const uint32_t a_imageIndex, std::vector<VkSemaphore>& a_waitSemaphore)const
 {
 	auto presentCI = presentationKHR(static_cast<uint32_t>(a_waitSemaphore.size()),
 		a_waitSemaphore.data(), 1, &m_swapChain, &a_imageIndex);

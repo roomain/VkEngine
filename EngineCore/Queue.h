@@ -1,6 +1,6 @@
 #pragma once
 /***********************************************
-* @headerfile EngineQueue.h
+* @headerfile Queue.h
 * @date 08 / 08 / 2026
 * @author Roomain
 ************************************************/
@@ -16,7 +16,7 @@ using ReleasQueueListCallback = std::function<void(int, const size_t&, const uin
 using ReleaseQueueManaged = boost::signals2::signal<void(int, const uint32_t)>;
 using ReleaseQueueListManaged = boost::signals2::signal<void(int, const size_t&, const uint32_t*)>;
 
-struct EngineQueue
+struct Queue
 {
 	uint32_t queueIndex = 0;		/*!< index of queue in family*/
 	VkQueue queue = VK_NULL_HANDLE;	/*!< vulkan queue*/

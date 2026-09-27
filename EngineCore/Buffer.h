@@ -10,7 +10,7 @@
 
 class ENGINECORE_EXPORT Buffer
 {
-	friend class EngineDevice;
+	friend class Device;
 
 protected:
 	struct VMABuffer

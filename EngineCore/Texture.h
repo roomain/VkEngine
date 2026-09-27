@@ -23,7 +23,7 @@ struct TextureParameters
 /*@brief class for using texture with vulkan*/
 class ENGINECORE_EXPORT Texture
 {
-	friend class EngineDevice;
+	friend class Device;
 private:
 	DeviceContext m_devCtx;							/*!< device context*/
 	VmaAllocation m_allocation = VK_NULL_HANDLE;	/*!< vma allocation*/

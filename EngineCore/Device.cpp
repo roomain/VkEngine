@@ -1,11 +1,11 @@
 #include "pch.h"
-#include "EngineDevice.h"
+#include "Device.h"
 #include "StagingBuffer.h"
 #include "GPUBuffers.h"
 #include "vmaMemoryCallbacks.h"
 #include "vmaMemoryAllocator.h"
 
-void EngineDevice::createMemoryAllocator(DeviceContext& a_ctx)
+void Device::createMemoryAllocator(DeviceContext& a_ctx)
 {
 	static const VkAllocationCallbacks cpuAllocationCallbacks = {
 		nullptr,				// pUserData
@@ -42,7 +42,7 @@ void EngineDevice::createMemoryAllocator(DeviceContext& a_ctx)
 	VK_CHECK_EXCEPT(vmaCreateAllocator(&vmaInfo, &a_ctx.memAllocator))
 }
 
-EngineDevice::EngineDevice(const DeviceConfiguration& a_parameters, const DeviceContext& a_ctx) :
+Device::Device(const DeviceConfiguration& a_parameters, const DeviceContext& a_ctx) :
 	m_deviceIndex{ a_parameters.deviceIndex }, m_deviceCtx{ a_ctx }, 
 	m_queuesMng{ a_ctx.vkDevice, a_ctx.vkPhysDevice, a_parameters.queues }
 {
@@ -51,26 +51,26 @@ EngineDevice::EngineDevice(const DeviceConfiguration& a_parameters, const Device
 }
 
 
-std::shared_ptr<StagingBuffer> EngineDevice::createStagingBuffer()const
+std::shared_ptr<StagingBuffer> Device::createStagingBuffer()const
 {
 	// use new operator because ctor is private
 	return std::shared_ptr<StagingBuffer>(new StagingBuffer(m_deviceCtx));
 }
 
-std::shared_ptr<IndexBuffer> EngineDevice::createIndexBuffer()const
+std::shared_ptr<IndexBuffer> Device::createIndexBuffer()const
 {
 	// use new operator because ctor is private
 	return std::shared_ptr<IndexBuffer>(new IndexBuffer(m_deviceCtx));
 }
 
-std::shared_ptr<VertexBuffer> EngineDevice::createVertexBuffer()const
+std::shared_ptr<VertexBuffer> Device::createVertexBuffer()const
 {
 	// use new operator because ctor is private
 	return std::shared_ptr<VertexBuffer>(new VertexBuffer(m_deviceCtx));
 }
 
 
-std::shared_ptr<StorageBuffer> EngineDevice::createStorageBuffer()const
+std::shared_ptr<StorageBuffer> Device::createStorageBuffer()const
 {
 	// use new operator because ctor is private
 	return std::shared_ptr<StorageBuffer>(new StorageBuffer(m_deviceCtx));

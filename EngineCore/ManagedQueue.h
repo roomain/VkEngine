@@ -1,10 +1,10 @@
 #pragma once
 /***********************************************
-* @headerfile EngineManagedQueue.h
+* @headerfile ManagedQueue.h
 * @date 08 / 08 / 2026
 * @author Roomain
 ************************************************/
-#include "EngineQueue.h"
+#include "Queue.h"
 #include "enginecore_globals.h"
 #include "notCopiable.h"
 
@@ -12,22 +12,22 @@
 #pragma warning( disable : 4251 )
 
 /*@brief represents a managed queue*/
-class ENGINECORE_EXPORT EngineManagedQueue
+class ENGINECORE_EXPORT ManagedQueue
 {
-	friend class EngineQueueManager;
+	friend class QueueManager;
 private:
 	int m_queueFamily;					/*!< vulkan queue family index*/
-	EngineQueue m_queue;				/*!< managed queue*/
+	Queue m_queue;				/*!< managed queue*/
 	ReleaseQueueManaged m_releaseSignal;/*!< release signal*/
 
 	/*@brief queue ctor*/
-	explicit EngineManagedQueue(const int a_family, EngineQueue&& a_queue, ReleaseQueueCallback a_callback);
+	explicit ManagedQueue(const int a_family, Queue&& a_queue, ReleaseQueueCallback a_callback);
 
 public:
-	EngineManagedQueue() = delete;
-	NOT_COPIABLE(EngineManagedQueue)
-	explicit EngineManagedQueue(EngineManagedQueue&& other)noexcept = default;
-	virtual ~EngineManagedQueue();
+	ManagedQueue() = delete;
+	NOT_COPIABLE(ManagedQueue)
+	explicit ManagedQueue(ManagedQueue&& other)noexcept = default;
+	virtual ~ManagedQueue();
 	constexpr [[nodiscard]] int familyIndex()const { return m_queueFamily; }
 	inline [[nodiscard]] VkQueue& get() { return m_queue.queue; }
 	inline [[nodiscard]] const VkQueue& get()const { return m_queue.queue; }

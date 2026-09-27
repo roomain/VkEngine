@@ -1,13 +1,13 @@
 #pragma once
 /***********************************************
-* @headerfile EngineDevice.h
+* @headerfile Device.h
 * @date 13 / 03 / 2026
 * @author Roomain
 ************************************************/
 #include "DeviceContext.h"
-#include "EngineQueueManager.h"
+#include "QueueManager.h"
 #include "notCopiable.h"
-#include "EngineParallelWorker.h"
+#include "ParallelWorker.h"
 #include "UniformBuffer.h"
 #include "enginecore_globals.h"
 
@@ -22,32 +22,32 @@ class StorageBuffer;
 
 struct DeviceConfiguration;
 
-/*@brief Base class of device created by EngineApplication*/
-class ENGINECORE_EXPORT EngineDevice
+/*@brief Base class of device created by Application*/
+class ENGINECORE_EXPORT Device
 {
-	friend class EngineApplication;
+	friend class Application;
 protected:
 	uint32_t m_deviceIndex;			/*!< device index in instance*/
 	DeviceContext m_deviceCtx;		/*!< device context: device handle + instance handle + memory */
-	EngineQueueManager m_queuesMng;	/*!< queue manager */
+	QueueManager m_queuesMng;	/*!< queue manager */
 
 	/*@brief create memory allocator for DeviceContext*/
 	static void createMemoryAllocator(DeviceContext& a_ctx);
 
-	explicit EngineDevice(const DeviceConfiguration& a_parameters, const DeviceContext& a_ctx);
+	explicit Device(const DeviceConfiguration& a_parameters, const DeviceContext& a_ctx);
 
 public:
-	EngineDevice() = delete;
-	NOT_COPIABLE(EngineDevice)
+	Device() = delete;
+	NOT_COPIABLE(Device)
 
 	[[nodiscard]] const DeviceContext& deviceContext()const { return m_deviceCtx; }
 	[[nodiscard]] constexpr uint32_t deviceIndex()const { return m_deviceIndex; }
-	[[nodiscard]] inline EngineQueueManager& queueManager() { return m_queuesMng; }
+	[[nodiscard]] inline QueueManager& queueManager() { return m_queuesMng; }
 
 	template<size_t Size>
-	[[nodiscard]] EngineParallelWorkerPtr<Size> createParallelWorker(const VkQueueFlags a_flag)
+	[[nodiscard]] ParallelWorkerPtr<Size> createParallelWorker(const VkQueueFlags a_flag)
 	{
-		return EngineParallelWorkerPtr<Size>(new EngineParallelWorker<Size>(m_deviceCtx, std::move(m_queuesMng.createArray<Size>(a_flag))));
+		return ParallelWorkerPtr<Size>(new ParallelWorker<Size>(m_deviceCtx, std::move(m_queuesMng.createArray<Size>(a_flag))));
 	}
 
 	[[nodiscard]] std::shared_ptr<StagingBuffer> createStagingBuffer()const;

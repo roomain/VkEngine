@@ -1,6 +1,6 @@
 #pragma once
 /***********************************************
-* @headerfile EngineParallelWorker.h
+* @headerfile ParallelWorker.h
 * @date 01 / 03 / 2026
 * @author Roomain
 ************************************************/
@@ -14,14 +14,14 @@
 #include <boost/asio/post.hpp>
 #include "notCopiable.h"
 #include "DeviceContext.h"
-#include "EngineManagedQueueArray.h"
+#include "ManagedQueueArray.h"
 #include "ScopedLink.h"
 
 using ContextFun = std::function<void(const DeviceContext&, VkQueue&)>;
 
 /*@brief extension used to manage used queues in command threads*/
 template<size_t Size>
-class QueuePoolArray : public EngineManagedQueueArray<Size>
+class QueuePoolArray : public ManagedQueueArray<Size>
 {
 private:
 	std::array<bool, Size> m_inUse;	/*!< use flag*/
@@ -29,7 +29,7 @@ private:
 public:
 	QueuePoolArray() = delete;
 	NOT_COPIABLE(QueuePoolArray)
-	explicit QueuePoolArray(EngineManagedQueueArray<Size>&& a_managed) : EngineManagedQueueArray<Size>(std::move(a_managed))
+	explicit QueuePoolArray(ManagedQueueArray<Size>&& a_managed) : ManagedQueueArray<Size>(std::move(a_managed))
 	{
 		for (auto& inUse : m_inUse)
 			inUse = false;
@@ -54,26 +54,26 @@ public:
 * using common device and memory
 */
 template<size_t Size>
-class EngineParallelWorker
+class ParallelWorker
 {
-	friend class EngineDevice;
+	friend class Device;
 
 private:
 	DeviceContext m_DeviceCtx;				/*!< vulkan device context*/
 	QueuePoolArray<Size> m_queue;			/*!< working queues*/
 	boost::asio::thread_pool m_workerPool;	/*!< thread pool*/
 
-	explicit EngineParallelWorker(const DeviceContext& a_ctx, EngineManagedQueueArray<Size>&& a_data) :
+	explicit ParallelWorker(const DeviceContext& a_ctx, ManagedQueueArray<Size>&& a_data) :
 		m_DeviceCtx{ a_ctx }, m_queue{ std::move(a_data) }, m_workerPool{ Size }
 	{
 		// nothing to do
 	}
 
 public:
-	EngineParallelWorker() = delete;
-	NOT_COPIABLE(EngineParallelWorker)
+	ParallelWorker() = delete;
+	NOT_COPIABLE(ParallelWorker)
 
-	~EngineParallelWorker() = default;
+	~ParallelWorker() = default;
 
 	void postTask(ContextFun& a_fun)
 	{
@@ -91,4 +91,4 @@ public:
 };
 
 template<size_t Size>
-using EngineParallelWorkerPtr = std::shared_ptr<EngineParallelWorker<Size>>;
+using ParallelWorkerPtr = std::shared_ptr<ParallelWorker<Size>>;

@@ -24,37 +24,37 @@ enum class LogSeverity
     Critical = 1 << 3
 };
 
-class ENGINECORE_EXPORT EngineException : public std::exception
+class ENGINECORE_EXPORT Exception : public std::exception
 {
 private:
     std::source_location m_location = std::source_location::current();  /*!< log location*/
 
 public:
-    EngineException() = delete;
-    explicit EngineException(const std::source_location a_location, const char* a_what);
-    ~EngineException()override = default;
+    Exception() = delete;
+    explicit Exception(const std::source_location a_location, const char* a_what);
+    ~Exception()override = default;
     std::source_location location()const { return m_location; }
 };
 
 
-class ENGINECORE_EXPORT EngineVulkanException : public EngineException
+class ENGINECORE_EXPORT VulkanException : public Exception
 {
 public:
-    EngineVulkanException() = delete;
-    explicit EngineVulkanException(const std::source_location a_location, const char* a_what);
-    ~EngineVulkanException()override = default;
+    VulkanException() = delete;
+    explicit VulkanException(const std::source_location a_location, const char* a_what);
+    ~VulkanException()override = default;
 };
 
-class ENGINECORE_EXPORT EngineManageException : public EngineException
+class ENGINECORE_EXPORT ManageException : public Exception
 {
 public:
-    EngineManageException() = delete;
-    explicit EngineManageException(const std::source_location a_location, const char* a_what);
-    ~EngineManageException()override = default;
+    ManageException() = delete;
+    explicit ManageException(const std::source_location a_location, const char* a_what);
+    ~ManageException()override = default;
 };
 
 #define VK_CHECK_EXCEPT(vkCall) \
 if (const VkResult result = vkCall; result != VK_SUCCESS) \
-	throw EngineVulkanException(std::source_location::current(), (#vkCall##": " + to_string(result)).c_str());
+	throw VulkanException(std::source_location::current(), (#vkCall##": " + to_string(result)).c_str());
 
 #pragma warning(pop)

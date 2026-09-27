@@ -1,11 +1,11 @@
 #include "pch.h"
 #include <filesystem>
-#include "EngineLog.h"
+#include "Log.h"
 #include <boost/log/utility/setup.hpp>
 
-std::string EngineLog::s_logFile;
+std::string Log::s_logFile;
 
-bool EngineLog::initLog(const std::string& a_logFilePath)
+bool Log::initLog(const std::string& a_logFilePath)
 {
 	initLog();
 	std::filesystem::path path = std::filesystem::path(a_logFilePath).parent_path();
@@ -24,7 +24,7 @@ bool EngineLog::initLog(const std::string& a_logFilePath)
 	return false;
 }
 
-void EngineLog::initLog()
+void Log::initLog()
 {
 	boost::log::add_console_log(
 		std::cout,
@@ -34,7 +34,7 @@ void EngineLog::initLog()
 	boost::log::add_common_attributes();
 }
 
-VkBool32 EngineLog::vulkanDebug(VkDebugUtilsMessageSeverityFlagBitsEXT a_messageSeverity,
+VkBool32 Log::vulkanDebug(VkDebugUtilsMessageSeverityFlagBitsEXT a_messageSeverity,
 	VkDebugUtilsMessageTypeFlagsEXT /*a_messageTypes*/,
 	const VkDebugUtilsMessengerCallbackDataEXT* a_pCallbackData,
 	void*)
@@ -43,13 +43,13 @@ VkBool32 EngineLog::vulkanDebug(VkDebugUtilsMessageSeverityFlagBitsEXT a_message
 	{
 	case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
 	case VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
-		EngineLog::info("vulkan info: {} ", a_pCallbackData->pMessage);
+		Log::info("vulkan info: {} ", a_pCallbackData->pMessage);
 		break;
 	case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
-		EngineLog::warning("vulkan warning: {} ", a_pCallbackData->pMessage);
+		Log::warning("vulkan warning: {} ", a_pCallbackData->pMessage);
 		break;
 	case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
-		EngineLog::error("vulkan error: {} ", a_pCallbackData->pMessage);
+		Log::error("vulkan error: {} ", a_pCallbackData->pMessage);
 		break;
 	default:
 		break;
@@ -57,7 +57,7 @@ VkBool32 EngineLog::vulkanDebug(VkDebugUtilsMessageSeverityFlagBitsEXT a_message
 	return true;
 }
 
-void EngineLog::reflectLog(const std::source_location& a_loc, const std::string_view message)
+void Log::reflectLog(const std::source_location& a_loc, const std::string_view message)
 {
-	EngineLog::info("File {} - line {}: {}", a_loc.file_name(), a_loc.line(), message);
+	Log::info("File {} - line {}: {}", a_loc.file_name(), a_loc.line(), message);
 }

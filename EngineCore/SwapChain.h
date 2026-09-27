@@ -1,6 +1,6 @@
 #pragma once
 /***********************************************
-* @headerfile EngineSwapChain.h
+* @headerfile SwapChain.h
 * @date 15 / 03 / 2026
 * @author Roomain
 ************************************************/
@@ -8,13 +8,13 @@
 #include <vulkan/vulkan.hpp>
 #include "DeviceContext.h"
 #include "notCopiable.h"
-#include "internalConfiguration.h"
+#include "InternalConfiguration.h"
 #include "enginecore_globals.h"
 
 #pragma warning(push)
 #pragma warning( disable : 4251 )
 /*@brief represents swapchain of rendering*/
-class ENGINECORE_EXPORT EngineSwapChain
+class ENGINECORE_EXPORT SwapChain
 {
 private:
 
@@ -43,9 +43,9 @@ private:
 	void createSwapChain(const uint32_t a_width, const uint32_t a_height);	
 
 public:
-	EngineSwapChain(const DeviceContext& a_ctx, const SurfaceConfiguration& a_surfConf);
-	EngineSwapChain() = delete;
-	NOT_COPIABLE(EngineSwapChain)
+	SwapChain(const DeviceContext& a_ctx, const SurfaceConfiguration& a_surfConf);
+	SwapChain() = delete;
+	NOT_COPIABLE(SwapChain)
 	void resize(const uint32_t a_width, const uint32_t a_height);
 	[[nodiscard]] uint32_t frameCount()const;
 

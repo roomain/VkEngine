@@ -8,14 +8,14 @@
 #include <vector>
 #include <vulkan/vulkan.hpp>
 
-class EnginePipeline;
+class Pipeline;
 class Component;
 
 /*@brief Group for rendering: regroup all component width same pipeline*/
 class RenderGroup
 {
 private:
-	std::unique_ptr<EnginePipeline> m_pPipeline;			/*!< common pipeline*/
+	std::unique_ptr<Pipeline> m_pPipeline;			/*!< common pipeline*/
 	std::vector<std::shared_ptr<Component>> m_components;	/*!< list of component*/
 
 public:

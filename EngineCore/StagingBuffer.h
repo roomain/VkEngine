@@ -8,7 +8,7 @@
 
 class ENGINECORE_EXPORT StagingBuffer : public Buffer
 {
-	friend class EngineDevice;
+	friend class Device;
 private:
 	explicit StagingBuffer(const DeviceContext& a_ctxt);
 	void internalWrite(const void* a_data, const size_t& a_size);

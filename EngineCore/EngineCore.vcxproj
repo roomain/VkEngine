@@ -201,32 +201,34 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="EngineManagedQueueArray.h" />
+    <ClInclude Include="ManagedCommandBufferArray.h" />
+    <ClInclude Include="ManagedCommandBuffer.h" />
+    <ClInclude Include="ManagedQueueArray.h" />
     <ClInclude Include="EngineParameters.h" />
-    <ClInclude Include="EngineApplication.h" />
-    <ClInclude Include="EngineDevice.h" />
-    <ClInclude Include="EngineExceptions.h" />
-    <ClInclude Include="EngineLog.h" />
-    <ClInclude Include="EngineParallelWorker.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Device.h" />
+    <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="Log.h" />
+    <ClInclude Include="ParallelWorker.h" />
     <ClInclude Include="enginecore_globals.h" />
-    <ClInclude Include="EnginePipeline.h" />
-    <ClInclude Include="EngineQueue.h" />
-    <ClInclude Include="EngineRenderer.h" />
+    <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderGroup.h" />
     <ClInclude Include="StagingBuffer.h" />
-    <ClInclude Include="EngineSwapChain.h" />
+    <ClInclude Include="SwapChain.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="EngineViewport.h" />
-    <ClInclude Include="EngineViewportManager.h" />
+    <ClInclude Include="Viewport.h" />
+    <ClInclude Include="ViewportManager.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FrustumProjection.h" />
     <ClInclude Include="GPUBuffers.h" />
     <ClInclude Include="InternalConfiguration.h" />
-    <ClInclude Include="EngineManagedQueue.h" />
+    <ClInclude Include="ManagedQueue.h" />
     <ClInclude Include="OrthoProjection.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="EngineQueueManager.h" />
+    <ClInclude Include="QueueManager.h" />
     <ClInclude Include="ProjectionInterface.h" />
     <ClInclude Include="reflective_convert.h" />
     <ClInclude Include="reflect_convert_from_string.h" />
@@ -243,6 +245,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="VulkanBufferInitializers.h" />
     <ClInclude Include="VulkanCapabilities.h" />
     <ClInclude Include="VulkanInitializers.h" />
+    <ClInclude Include="VulkanPipelineInitializer.h" />
     <ClInclude Include="VulkanShaderInitializers.h" />
   </ItemGroup>
   <ItemGroup>
@@ -250,20 +253,21 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClCompile Include="CapabilitiesVisitor.cpp" />
     <ClCompile Include="CheckParameters.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="EngineApplication.cpp" />
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="EngineDevice.cpp" />
-    <ClCompile Include="EngineExceptions.cpp" />
-    <ClCompile Include="EngineLog.cpp" />
-    <ClCompile Include="EngineManagedQueue.cpp" />
-    <ClCompile Include="EnginePipeline.cpp" />
-    <ClCompile Include="EngineRenderer.cpp" />
+    <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Exceptions.cpp" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="ManagedCommandBuffer.cpp" />
+    <ClCompile Include="ManagedQueue.cpp" />
+    <ClCompile Include="Pipeline.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderGroup.cpp" />
     <ClCompile Include="StagingBuffer.cpp" />
-    <ClCompile Include="EngineSwapChain.cpp" />
+    <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="EngineViewportManager.cpp" />
+    <ClCompile Include="ViewportManager.cpp" />
     <ClCompile Include="FrustumProjection.cpp" />
     <ClCompile Include="GPUBuffers.cpp" />
     <ClCompile Include="OrthoProjection.cpp" />
@@ -273,7 +277,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="EngineQueuesManager.cpp" />
+    <ClCompile Include="QueuesManager.cpp" />
     <ClCompile Include="vmaMemoryCallbacks.cpp" />
     <ClCompile Include="VulkanCapabilities.cpp" />
   </ItemGroup>

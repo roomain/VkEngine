@@ -4,7 +4,7 @@
 * @date 20 / 09 / 2026
 * @author Roomain
 ************************************************/
-#include "EngineLog.h"
+#include "Log.h"
 #include "Buffer.h"
 #include "vk_mem_alloc.h"
 #include "VulkanBufferInitializers.h"
@@ -12,7 +12,7 @@
 template<typename Type>
 class UniformBuffer : public Buffer
 {
-	friend class EngineDevice;
+	friend class Device;
 private:
 	explicit UniformBuffer(const DeviceContext& a_ctxt);
 

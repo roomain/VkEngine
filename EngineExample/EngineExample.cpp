@@ -6,10 +6,10 @@
 #include <filesystem>
 #include <memory>
 #include "events.h"
-#include "EngineApplication.h"
+#include "Application.h"
 #include "EngineParameters.h"
-#include "EngineRenderer.h"
-#include "EngineDevice.h"
+#include "Renderer.h"
+#include "Device.h"
 #include "StagingBuffer.h"
 #include "capabilitiesVisitorImpl.h"
 #include "VkEnumToString.h"
@@ -17,12 +17,12 @@
 
 SDL_Window* g_window = nullptr;
 SDL_Renderer* g_renderer = nullptr;
-std::shared_ptr<EngineApplication> g_appEngine;
+std::shared_ptr<Application> g_appEngine;
 
 int g_width = 800;
 int g_height = 600;
 
-EngineApplicationParameters g_appParam
+ApplicationParameters g_appParam
 {
     "EngineExample",
     "profileTest.json",		/*!< parameters file*/
@@ -43,11 +43,11 @@ int main(int argc, char* argv[])
     
 
     CapabilitiesConsoleVisitorImpl visitor;
-    visitor.visit(EngineApplication::hostCapabilities());
+    visitor.visit(Application::hostCapabilities());
 
     g_appParam.parametersFilename = std::filesystem::current_path().string() + "\\" + g_appParam.parametersFilename;
 
-    g_appEngine = std::make_shared<EngineApplication>(g_appParam); 
+    g_appEngine = std::make_shared<Application>(g_appParam); 
     auto& caps = g_appEngine->capabilities();
     VkSurfaceKHR surface;
     if (!SDL_Vulkan_CreateSurface(g_window, caps.instance, nullptr, &surface))

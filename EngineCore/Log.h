@@ -1,6 +1,6 @@
 #pragma once
 /***********************************************
-* @headerfile EngineLog.h
+* @headerfile Log.h
 * @date 15 / 03 / 2026
 * @author Roomain
 ************************************************/
@@ -13,7 +13,7 @@
 
 
 /*@brief Log configuration*/
-class EngineLog
+class Log
 {
 private:
 	static std::string s_logFile;
@@ -69,4 +69,4 @@ public:
 
 #define VK_CHECK_LOG(vkCall) \
 if (const VkResult result = vkCall; result != VK_SUCCESS) \
-	EngineLog::warning("{}: {}", #vkCall, to_string(result));
+	Log::warning("{}: {}", #vkCall, to_string(result));

@@ -16,8 +16,8 @@
 #include "VulkanInitializers.h"
 #include "VulkanShaderInitializers.h"
 #include "VulkanBufferInitializers.h"
-#include "EngineLog.h"
-#include "EngineExceptions.h"
+#include "Log.h"
+#include "Exceptions.h"
 #include "EngineParameters.h"
 #include "CheckParameters.h"
 

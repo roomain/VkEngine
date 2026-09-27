@@ -6,7 +6,7 @@
 ************************************************/
 #include <memory>
 #include <SDL3/SDL.h>
-#include "EngineRenderer.h"
+#include "Renderer.h"
 
 /*@brief process sdl events return true if quit*/
-bool processEvent(const SDL_Event& event, const std::shared_ptr<EngineRenderer>& a_renderer);
+bool processEvent(const SDL_Event& event, const std::shared_ptr<Renderer>& a_renderer);

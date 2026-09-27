@@ -1,23 +1,23 @@
 #pragma once
 /***********************************************
-* @headerfile EngineManagedQueueArray.h
+* @headerfile ManagedQueueArray.h
 * @date 08 / 08 / 2026
 * @author Roomain
 ************************************************/
 #include <array>
-#include "EngineQueue.h"
+#include "Queue.h"
 #include "notCopiable.h"
 
 template<size_t Size>
-class EngineManagedQueueArray
+class ManagedQueueArray
 {
-	friend class EngineQueueManager;
+	friend class QueueManager;
 private:
 	int m_queueFamily;							/*!< vulkan queue family index*/
-	std::array<EngineQueue, Size> m_queueArray;	/*!< managed queue*/
+	std::array<Queue, Size> m_queueArray;	/*!< managed queue*/
 	ReleaseQueueListManaged m_releaseSignal;	/*!< release signal*/
 
-	explicit EngineManagedQueueArray(const int a_familyIndex, std::array<EngineQueue, Size>&& a_queues, ReleasQueueListCallback a_releaseCallback) :
+	explicit ManagedQueueArray(const int a_familyIndex, std::array<Queue, Size>&& a_queues, ReleasQueueListCallback a_releaseCallback) :
 		m_queueFamily{ a_familyIndex }, m_queueArray{ a_queues }
 	{
 		if (a_releaseCallback)
@@ -25,15 +25,15 @@ private:
 	}
 
 public:
-	EngineManagedQueueArray() = delete;
-	NOT_COPIABLE(EngineManagedQueueArray);
-	explicit EngineManagedQueueArray(EngineManagedQueueArray&& a_other)noexcept : m_queueFamily{ a_other.m_queueFamily },
+	ManagedQueueArray() = delete;
+	NOT_COPIABLE(ManagedQueueArray);
+	explicit ManagedQueueArray(ManagedQueueArray&& a_other)noexcept : m_queueFamily{ a_other.m_queueFamily },
 		m_queueArray{ std::move(a_other.m_queueArray) }, m_releaseSignal{ std::move(a_other.m_releaseSignal) }
 	{
 		a_other.m_queueFamily = -1;
 	}
 
-	virtual ~EngineManagedQueueArray()
+	virtual ~ManagedQueueArray()
 	{
 		if (m_queueFamily < 0)
 			return;
@@ -50,8 +50,9 @@ public:
 	constexpr [[nodiscard]] int familyIndex()const { return m_queueFamily; }
 	constexpr [[nodiscard]] VkQueue operator [] (const uint32_t a_index) { return m_queueArray[a_index].queue; }
 	constexpr [[nodiscard]] const VkQueue operator [] (const uint32_t a_index)const { return m_queueArray[a_index].queue; }
+	constexpr [[nodiscard]] size_t size()const noexcept { return Size; }
 
-	using const_iterator = std::array<EngineQueue, Size>::const_iterator;
+	using const_iterator = std::array<Queue, Size>::const_iterator;
 	[[nodiscard]] const_iterator cbegin() const { return m_queueArray.cbegin(); }
 	[[nodiscard]] const_iterator cend() const { return m_queueArray.cend(); }
 };

@@ -2,7 +2,7 @@
 #include <ranges>
 #include "RenderGroup.h"
 #include "Component.h"
-#include "EnginePipeline.h"
+#include "Pipeline.h"
 
 
 void RenderGroup::registerComponent(const std::shared_ptr<Component>& a_component)

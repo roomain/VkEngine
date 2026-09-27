@@ -8,7 +8,7 @@
 
 class ENGINECORE_EXPORT IndexBuffer : public Buffer
 {
-	friend class EngineDevice;
+	friend class Device;
 private:
 	explicit IndexBuffer(const DeviceContext& a_ctxt);
 public:
@@ -18,7 +18,7 @@ public:
 
 class ENGINECORE_EXPORT VertexBuffer : public Buffer
 {
-	friend class EngineDevice;
+	friend class Device;
 private:
 	explicit VertexBuffer(const DeviceContext& a_ctxt);
 public:
@@ -29,7 +29,7 @@ public:
 
 class ENGINECORE_EXPORT StorageBuffer : public Buffer
 {
-	friend class EngineDevice;
+	friend class Device;
 private:
 	explicit StorageBuffer(const DeviceContext& a_ctxt);
 public:

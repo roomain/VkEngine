@@ -1,6 +1,6 @@
 #pragma once
 /***********************************************
-* @headerfile EngineViewport.h
+* @headerfile Viewport.h
 * @date 09 / 09 / 2026
 * @author Roomain
 ************************************************/
@@ -13,7 +13,7 @@
 /*@brief viewport transformation callback*/
 using ViewportTransform = std::function<bool(const float)>;
 
-class EngineViewport
+class Viewport
 {
 private:
 	VkViewport m_viewport;
@@ -23,14 +23,14 @@ private:
 
 
 public:
-	EngineViewport() = delete;
-	EngineViewport(const float a_posX, const float a_posY, const float a_width, const float a_height) :
+	Viewport() = delete;
+	Viewport(const float a_posX, const float a_posY, const float a_width, const float a_height) :
 		m_viewport{ a_posX, a_posY, a_width, a_height, .0f, 1.0f }
 	{
 		//
 	}
 
-	virtual ~EngineViewport() = default;
+	virtual ~Viewport() = default;
 	
 	inline void setDepth(const float a_min, const float a_max)
 	{

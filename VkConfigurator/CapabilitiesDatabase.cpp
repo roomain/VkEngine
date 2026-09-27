@@ -1,11 +1,11 @@
 #include "CapabilitiesDatabase.h"
-#include "EngineApplication.h"
+#include "Application.h"
 #include "EngineParameters.h"
 
 
 CapabilitiesDatabase::CapabilitiesDatabase()
 {
-	m_capabilities = EngineApplication::hostCapabilities();
+	m_capabilities = Application::hostCapabilities();
 }
 
 CapabilitiesDatabase& CapabilitiesDatabase::instance()
