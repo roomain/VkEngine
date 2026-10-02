@@ -2,6 +2,7 @@
 #include "Device.h"
 #include "StagingBuffer.h"
 #include "GPUBuffers.h"
+#include "Texture.h"
 #include "vmaMemoryCallbacks.h"
 #include "vmaMemoryAllocator.h"
 
@@ -50,7 +51,6 @@ Device::Device(const DeviceConfiguration& a_parameters, const DeviceContext& a_c
 		createMemoryAllocator(m_deviceCtx);
 }
 
-
 std::shared_ptr<StagingBuffer> Device::createStagingBuffer()const
 {
 	// use new operator because ctor is private
@@ -69,9 +69,14 @@ std::shared_ptr<VertexBuffer> Device::createVertexBuffer()const
 	return std::shared_ptr<VertexBuffer>(new VertexBuffer(m_deviceCtx));
 }
 
-
 std::shared_ptr<StorageBuffer> Device::createStorageBuffer()const
 {
 	// use new operator because ctor is private
 	return std::shared_ptr<StorageBuffer>(new StorageBuffer(m_deviceCtx));
+}
+
+std::shared_ptr<Texture> Device::createTexture(const TextureParameters& a_texParam)const
+{
+	// use new operator because ctor is private
+	return std::shared_ptr<Texture>(new Texture(m_deviceCtx, a_texParam));
 }

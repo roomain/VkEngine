@@ -17,9 +17,9 @@ class Compiler;
 /*@brief use for callback*/
 struct CheckerCallbacks
 {
-	LogCallback logCallback;				/*!< log compiler errors and warnings*/
-	RangeCallback rangeCallback;			/*!< set range*/
-	CounterCallback errorCounterCallback;	/*!< set error count*/
+	ResourceLogCallback logCallback;				/*!< log compiler errors and warnings*/
+	ResourceRangeCallback rangeCallback;			/*!< set range*/
+	ResourceCounterCallback errorCounterCallback;	/*!< set error count*/
 };
 
 struct CheckerParameters
@@ -37,7 +37,6 @@ private:
 
 	static uint32_t computeSrc(const std::string& a_filename);
 
-	void addTo(BinHeader&& a_header, const Binary&& a_bin, Resources& a_other);
 public:
 	ResourceChecker() = delete;
 	explicit ResourceChecker(const CheckerParameters& a_parameters);

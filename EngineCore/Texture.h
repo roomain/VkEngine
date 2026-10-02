@@ -32,17 +32,12 @@ private:
 
 	// to parametrize
 	Texture(const DeviceContext& a_ctxt, const TextureParameters& a_params);
-	void internalWrite(const void* a_data, const size_t& a_size);
 	[[nodiscard]] VkDeviceSize pixelImageSize()const;
 public:
 	NOT_COPIABLE(Texture)
 	Texture() = delete;
 	virtual ~Texture();
 	template<typename Type>
-	void writePixels()
-	{
-		//
-	}
 	constexpr [[nodiscard]] VkFormat format()const { return m_parameters.format; }
 	constexpr [[nodiscard]] uint32_t width()const { return m_parameters.width; }
 	constexpr [[nodiscard]] uint32_t height()const { return m_parameters.height; }

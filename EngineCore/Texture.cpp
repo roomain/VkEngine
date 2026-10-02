@@ -201,8 +201,3 @@ VkDeviceSize Texture::pixelImageSize()const
     }
     return pixelSize;
 }
-
-void Texture::internalWrite(const void* a_data, const size_t& a_size)
-{
-    //
-}

@@ -90,6 +90,7 @@
     <Import Project="..\props\libbson.props" />
     <Import Project="..\props\slang.props" />
     <Import Project="..\props\rtti.props" />
+    <Import Project="..\props\engineResource.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -104,6 +105,7 @@
     <Import Project="..\props\libbson.props" />
     <Import Project="..\props\slang.props" />
     <Import Project="..\props\rtti.props" />
+    <Import Project="..\props\engineResource.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -215,6 +217,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderGroup.h" />
+    <ClInclude Include="ShaderDatabase.h" />
     <ClInclude Include="StagingBuffer.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="Texture.h" />
@@ -264,6 +267,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderGroup.cpp" />
+    <ClCompile Include="ShaderDatabase.cpp" />
     <ClCompile Include="StagingBuffer.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="Texture.cpp" />

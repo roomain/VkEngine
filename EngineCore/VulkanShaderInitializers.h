@@ -143,13 +143,13 @@ template<typename BindingContainer>
 	.pSetLayouts = a_pSetLayouts };
 }
 
-[[nodiscard]] inline VkShaderModuleCreateInfo initShaderModuleCreateInfo(std::vector<char>& a_shaderCode)
+[[nodiscard]] inline VkShaderModuleCreateInfo initShaderModuleCreateInfo(const std::vector<char>& a_shaderCode)
 {
 	return VkShaderModuleCreateInfo{
 	.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
 	.pNext = nullptr,
 	.codeSize = a_shaderCode.size(),
-	.pCode = reinterpret_cast<uint32_t*>(a_shaderCode.data()) };
+	.pCode = reinterpret_cast<const uint32_t*>(a_shaderCode.data()) };
 }
 
 [[nodiscard]] constexpr VkPushConstantRange initPushConstantRange(
@@ -205,4 +205,16 @@ template<typename BindingContainer>
 	return VkAccelerationStructureGeometryKHR{
 	.sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR,
 	.pNext = nullptr };
+}
+
+[[nodiscard]] constexpr VkPipelineShaderStageCreateInfo initShaderStageCreateInfo(const VkShaderStageFlagBits a_stage, VkShaderModule a_shaderModule)
+{
+	return VkPipelineShaderStageCreateInfo{
+	.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
+	.pNext = nullptr,
+	.stage = a_stage,
+	.module = a_shaderModule,
+	.pName = "main",
+	.pSpecializationInfo = nullptr
+	};
 }

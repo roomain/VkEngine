@@ -27,6 +27,7 @@ void Resources::emplace(BinHeader&& a_header, const Binary& a_binary)
     }
 
     m_binaryMap[std::string(a_header.filename.data())] = a_binary;
+    m_isModified = true;
 }
 
 void Resources::emplace(const BinHeader& a_header, const Binary& a_binary)
@@ -43,6 +44,7 @@ void Resources::emplace(const BinHeader& a_header, const Binary& a_binary)
     }
 
     m_binaryMap[std::string(a_header.filename.data())] = a_binary;
+    m_isModified = true;
 }
 
 void Resources::emplace(BinHeader&& a_header, Binary&& a_binary)
@@ -59,6 +61,7 @@ void Resources::emplace(BinHeader&& a_header, Binary&& a_binary)
     }
 
     m_binaryMap[std::string(a_header.filename.data())] = a_binary;
+    m_isModified = true;
 }
 
 void Resources::clear()
@@ -129,6 +132,11 @@ void Resources::merge(const Resources& a_other)
 Resources::const_binaryIterator Resources::findBinary(const std::string& a_binaryName)const
 {
     return m_binaryMap.find(a_binaryName);
+}
+
+Resources::const_binaryIterator Resources::binaryBegin()const
+{
+    return m_binaryMap.cbegin();
 }
 
 Resources::const_binaryIterator Resources::binaryEnd()const

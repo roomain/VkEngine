@@ -10,13 +10,7 @@
 #include "enginecore_globals.h"
 
 class Device;
-class Shader;
-
-struct ShaderParameters
-{
-	VkShaderModule shader;
-	VkShaderStageFlagBits shaderFlag;
-};
+class ShaderDatabase;
 
 
 #pragma warning(push)
@@ -34,6 +28,7 @@ public:
 	Pipeline() = delete;
 	explicit Pipeline(const std::string& a_name, std::weak_ptr<Device> a_device);
 	virtual ~Pipeline();
+	virtual void setup(ShaderDatabase& a_database) = 0;
 	constexpr VkPipeline pipeline()const { return m_pipeline; }
 	[[nodiscard]] const std::string& name()const;
 };

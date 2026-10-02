@@ -252,6 +252,9 @@
     <ClInclude Include="VulkanPipelineInitializer.h">
       <Filter>Fichiers d%27en-tête\initializers</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderDatabase.h">
+      <Filter>Fichiers d%27en-tête\shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -331,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="ManagedCommandBuffer.cpp">
       <Filter>Fichiers sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderDatabase.cpp">
+      <Filter>Fichiers sources\shader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

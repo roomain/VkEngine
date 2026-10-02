@@ -51,6 +51,7 @@ public:
 	virtual ~Compiler() = default;
 	NOT_COPIABLE(Compiler)
 	NOT_MOVABLE(Compiler)
+	/*@brief compile shader to spirv*/
 	virtual std::expected<Binary, CompilerError> compile(const std::string& a_filename) = 0;
 };
 

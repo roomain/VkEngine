@@ -18,7 +18,7 @@ private:
 
 public:
 	ShaderResourceCompiler() = default;
-	virtual ~ShaderResourceCompiler() = default;
+	~ShaderResourceCompiler()final = default;
 	std::expected<Binary, CompilerError> compile(const std::string& a_filename)override;
 };
 

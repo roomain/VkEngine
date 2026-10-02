@@ -19,6 +19,8 @@ class StagingBuffer;
 class IndexBuffer;
 class VertexBuffer;
 class StorageBuffer;
+class Texture;
+struct TextureParameters;
 
 struct DeviceConfiguration;
 
@@ -27,8 +29,8 @@ class ENGINECORE_EXPORT Device
 {
 	friend class Application;
 protected:
-	uint32_t m_deviceIndex;			/*!< device index in instance*/
-	DeviceContext m_deviceCtx;		/*!< device context: device handle + instance handle + memory */
+	uint32_t m_deviceIndex;		/*!< device index in instance*/
+	DeviceContext m_deviceCtx;	/*!< device context: device handle + instance handle + memory */
 	QueueManager m_queuesMng;	/*!< queue manager */
 
 	/*@brief create memory allocator for DeviceContext*/
@@ -53,6 +55,7 @@ public:
 	[[nodiscard]] std::shared_ptr<StagingBuffer> createStagingBuffer()const;
 	[[nodiscard]] std::shared_ptr<IndexBuffer> createIndexBuffer()const;
 	[[nodiscard]] std::shared_ptr<VertexBuffer> createVertexBuffer()const;
+	[[nodiscard]] std::shared_ptr<Texture> createTexture(const TextureParameters& a_texParam)const;
 
 	template<typename Type>
 	[[nodiscard]] std::shared_ptr<UniformBuffer<Type>> createUniformBuffer()const

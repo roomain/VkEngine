@@ -16,7 +16,6 @@ struct BinHeader
 {
     std::array<char, NAME_MAX_SIZE> filename;   /*!< file name*/
     uint32_t crc;                               /*!< crc to detect file modifications*/
-
     BinHeader();
     BinHeader(const std::string& a_filename, const uint32_t a_crc);
 };
@@ -33,11 +32,12 @@ enum class DeltaType
 };
 
 
-/*@brief base class for resource sara*/
+/*@brief base class for resource*/
 class Resources
 {
     friend class ResourceChecker;
 protected:
+    bool m_isModified = false;
     HeaderList m_headings;                                  /*!< file headers*/
     std::unordered_map<std::string, Binary> m_binaryMap;    /*!< binaries by header names*/
 
@@ -59,7 +59,7 @@ public:
         BinHeader heading;
         DeltaType type;
     };
-
+    constexpr [[nodiscard]] bool modified()const noexcept { return m_isModified; }
     std::vector<Delta> diff(const Resources& a_resources)const;
     void merge(const Resources& a_other);
 
@@ -68,6 +68,7 @@ public:
 
     using const_binaryIterator = std::unordered_map<std::string, Binary>::const_iterator;
     const_binaryIterator findBinary(const std::string& a_binaryName)const;
+    const_binaryIterator binaryBegin()const;
     const_binaryIterator binaryEnd()const;
     const Binary& binaryAt(const std::string& a_binaryName);
 
