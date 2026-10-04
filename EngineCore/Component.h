@@ -94,7 +94,7 @@ public:
     constexpr size_t childCount()const { return m_children.size(); }
     void addChild(const std::shared_ptr<Component>& a_component);
     void removeChild(const std::shared_ptr<Component>& a_component);
-
+    virtual bool castShadow()const = 0;
     /*@brief update function called at each frame*/
     /*@param a_time: ms since last frame*/
     virtual void update(const float a_time, const glm::dmat4& a_absoluteMat);
