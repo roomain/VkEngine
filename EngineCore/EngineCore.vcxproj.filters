@@ -94,6 +94,12 @@
     <Filter Include="Fichiers sources\rendering">
       <UniqueIdentifier>{b8c02fd2-95f6-4229-bf58-696c09dcdab9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Pipeline">
+      <UniqueIdentifier>{e7b83e90-b0b1-45d0-a962-438f9196d287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Pipeline">
+      <UniqueIdentifier>{58b5eb2b-e71b-48bd-8848-314463567b27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -201,9 +207,6 @@
     <ClInclude Include="Renderer.h">
       <Filter>Fichiers d%27en-tête\Engine classes</Filter>
     </ClInclude>
-    <ClInclude Include="Pipeline.h">
-      <Filter>Fichiers d%27en-tête\Engine classes</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Fichiers d%27en-tête\components</Filter>
     </ClInclude>
@@ -254,6 +257,12 @@
     </ClInclude>
     <ClInclude Include="ShaderDatabase.h">
       <Filter>Fichiers d%27en-tête\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipeline.h">
+      <Filter>Fichiers d%27en-tête\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshPipeline.h">
+      <Filter>Fichiers d%27en-tête\Pipeline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -311,9 +320,6 @@
     <ClCompile Include="ViewportManager.cpp">
       <Filter>Fichiers sources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Pipeline.cpp">
-      <Filter>Fichiers sources\Engine classes</Filter>
-    </ClCompile>
     <ClCompile Include="StagingBuffer.cpp">
       <Filter>Fichiers sources\memory</Filter>
     </ClCompile>
@@ -337,6 +343,12 @@
     </ClCompile>
     <ClCompile Include="ShaderDatabase.cpp">
       <Filter>Fichiers sources\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipeline.cpp">
+      <Filter>Fichiers sources\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshPipeline.cpp">
+      <Filter>Fichiers sources\Pipeline</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

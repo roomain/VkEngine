@@ -211,6 +211,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClInclude Include="Device.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="StaticMeshPipeline.h" />
     <ClInclude Include="ParallelWorker.h" />
     <ClInclude Include="enginecore_globals.h" />
     <ClInclude Include="Pipeline.h" />
@@ -264,6 +265,7 @@ genEnum.py $(VULKAN_INC)\vulkan\vulkan_core.h $(ProjectDir)VkEnumMacros.h</Comma
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="ManagedCommandBuffer.cpp" />
     <ClCompile Include="ManagedQueue.cpp" />
+    <ClCompile Include="StaticMeshPipeline.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderGroup.cpp" />

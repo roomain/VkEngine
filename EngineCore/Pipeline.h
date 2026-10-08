@@ -19,7 +19,7 @@ class ShaderDatabase;
 /*@brief base  class of vulkan pipeline encapsulation*/
 class ENGINECORE_EXPORT Pipeline
 {
-private:
+protected:
 	std::string m_pipelineName;
 	std::weak_ptr<Device> m_device;
 	VkPipeline m_pipeline{ VK_NULL_HANDLE };
@@ -35,18 +35,5 @@ public:
 
 
 
-//class ENGINECORE_EXPORT EngineMeshPipeline : public EnginePipeline
-//{
-//private:
-//	std::string m_pipelineName;
-//	std::weak_ptr<Device> m_device;
-//	VkPipeline m_pipeline{ VK_NULL_HANDLE };
-//
-//public:
-//	EngineMeshPipeline() = delete;
-//	explicit EngineMeshPipeline(const std::string& a_name, std::weak_ptr<Device> a_device);
-//	virtual ~EngineMeshPipeline();
-//	constexpr VkPipeline pipeline()const { return m_pipeline; }
-//	[[nodiscard]] const std::string& name()const;
-//};
+
 #pragma warning(pop)
