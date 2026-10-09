@@ -11,6 +11,7 @@
 #include "enginecore_globals.h"
 
 class Device;
+class ShaderResourceCompiler;
 
 #pragma warning(push)
 #pragma warning( disable : 4251 )
@@ -19,6 +20,7 @@ class ENGINECORE_EXPORT ShaderDatabase
 private:
 	std::weak_ptr<Device> m_device;								/*!< device*/
 	std::unordered_map<std::string, VkShaderModule> m_database;	/*!< module database*/
+	std::unique_ptr<ShaderResourceCompiler> m_compiler;
 
 public:
 	ShaderDatabase(const std::string& a_resourceFilename, std::shared_ptr<Device>& a_device, const std::string& a_shaderpath);

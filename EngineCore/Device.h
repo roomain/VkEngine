@@ -20,6 +20,7 @@ class IndexBuffer;
 class VertexBuffer;
 class StorageBuffer;
 class Texture;
+class ShaderDatabase;
 struct TextureParameters;
 
 struct DeviceConfiguration;
