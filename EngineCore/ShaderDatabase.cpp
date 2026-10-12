@@ -6,7 +6,7 @@
 #include "ResourceFile.h"
 #include "Device.h"
 
-std::vector<std::string> g_shaderExt = {
+const std::vector<std::string> g_shaderExt = {
 				".slang",
 				".vert",
 				".tesc",
@@ -77,10 +77,10 @@ bool ShaderDatabase::addShader(const std::string& a_file)
 		auto expectedBin = m_compiler->compile(a_file);
 		if (expectedBin.has_value())
 		{
-			auto moduleCreateInfo = initShaderModuleCreateInfo(a_file);
+			auto moduleCreateInfo = initShaderModuleCreateInfo(expectedBin.value());
 			VkShaderModule shaderModule = VK_NULL_HANDLE;
 			VK_CHECK_LOG(vkCreateShaderModule(pDevice->deviceContext().vkDevice, &moduleCreateInfo, nullptr, &shaderModule))
-			if (shaderModule != VK_NULL_HANDLE && m_database.try_emplace(std::filesystem::path(a_file).filename(), shaderModule).second)
+			if (shaderModule != VK_NULL_HANDLE && m_database.try_emplace(std::filesystem::path(a_file).filename().string(), shaderModule).second)
 			{
 				// 2 copy if not present in shader path
 				// to test no overwrite
