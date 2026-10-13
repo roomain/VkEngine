@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "ShaderDatabase.h"
 #include "ResourceChecker.h"
+#include "ShaderResourceCompiler.h"
 #include "ResourceFile.h"
 #include "Device.h"
 

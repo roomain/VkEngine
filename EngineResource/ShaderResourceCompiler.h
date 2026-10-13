@@ -12,13 +12,15 @@ class SlangResourceCompiler;
 
 class ShaderResourceCompiler : public Compiler
 {
-private:
-	std::unique_ptr<GLSLResourceCompiler> m_pGlslCompiler;
-	std::unique_ptr<SlangResourceCompiler> m_pSlangCompiler;
 
 public:
-	ShaderResourceCompiler() = default;
-	~ShaderResourceCompiler()final = default;
+	ShaderResourceCompiler();
+	~ShaderResourceCompiler()final;
 	std::expected<Binary, CompilerError> compile(const std::string& a_filename)override;
+
+private:
+	/*Must be declared after ctor for forwar declare*/
+	std::unique_ptr<GLSLResourceCompiler> m_pGlslCompiler;
+	std::unique_ptr<SlangResourceCompiler> m_pSlangCompiler;
 };
 
