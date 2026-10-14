@@ -6,11 +6,17 @@
 ************************************************/
 #include <memory>
 #include "Compiler.h"
+#include "Resource_globals.h"
+
+
+#pragma warning(push)
+#pragma warning( disable : 4251 )
+#pragma warning( disable : 4275 )
 
 class GLSLResourceCompiler;
 class SlangResourceCompiler;
 
-class ShaderResourceCompiler : public Compiler
+class RESOURCES_EXPORT ShaderResourceCompiler : public Compiler
 {
 
 public:
@@ -24,3 +30,4 @@ private:
 	std::unique_ptr<SlangResourceCompiler> m_pSlangCompiler;
 };
 
+#pragma warning(pop)

@@ -10,8 +10,11 @@
 #include <type_traits>
 #include "Resources.h"
 #include "Callbacks.h"
+#include "Resource_globals.h"
 
 
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 class Compiler;
 
 /*@brief use for callback*/
@@ -29,7 +32,7 @@ struct CheckerParameters
 };
 
 /*@brief Resource checker*/
-class ResourceChecker : public Resources
+class RESOURCES_EXPORT ResourceChecker : public Resources
 {
 private:
 	CheckerParameters m_parameters;				/*!< parameters*/
@@ -88,3 +91,5 @@ public:
 		}
 	}
 };
+
+#pragma warning(pop)

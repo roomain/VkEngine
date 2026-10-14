@@ -8,6 +8,10 @@
 #include <array>
 #include <unordered_map>
 #include <string>
+#include "Resource_globals.h"
+
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 
 constexpr size_t NAME_MAX_SIZE = 64;
 
@@ -33,7 +37,7 @@ enum class DeltaType
 
 
 /*@brief base class for resource*/
-class Resources
+class RESOURCES_EXPORT Resources
 {
     friend class ResourceChecker;
 protected:
@@ -81,3 +85,5 @@ public:
     const_iterator cbegin()const { return m_headings.cbegin(); }
     const_iterator cend()const { return m_headings.cend(); }
 };
+
+#pragma warning(pop)

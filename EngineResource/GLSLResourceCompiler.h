@@ -15,7 +15,7 @@ private:
 public:
 	static bool isFileAvailable(const std::string& a_filename);
 	GLSLResourceCompiler();
-	virtual ~GLSLResourceCompiler();
+	~GLSLResourceCompiler() final;
 	NOT_COPIABLE(GLSLResourceCompiler)
 	NOT_MOVABLE(GLSLResourceCompiler)
 

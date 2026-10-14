@@ -6,8 +6,12 @@
 ************************************************/
 
 #include <string>
-#include "Resources.h"
 #include <fstream>
+#include "Resources.h"
+#include "Resource_globals.h"
+
+#pragma warning(push)
+#pragma warning( disable : 4251 )
 
 /*File resouces*/
 /* goal is to find and check file modification fast*/
@@ -37,7 +41,7 @@
 */
 
 /*@brief Class used to load/save binary resources like compiled shaders*/
-class ResourceFile : public Resources
+class RESOURCES_EXPORT ResourceFile : public Resources
 {
 private:
     std::ifstream m_loader;
@@ -71,5 +75,4 @@ public:
     void emplace(const std::string& a_filename, const uint32_t a_crc, Binary&& a_binary);
 };
 
-
-
+#pragma warning(pop)
