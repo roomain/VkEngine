@@ -2,9 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />  
   <PropertyGroup Label="UserMacros">
-    <CRC_DIR>$(SolutionDir)thirdparty\install_crc32</CRC_DIR>
-    <CRC_INC>$(CRC_DIR)\include</CRC_INC>
-    <CRC_LIB>$(CRC_DIR)\lib\$(Configuration)</CRC_LIB>
+    <CRC_DIR>$(SolutionDir)thirdparty\sources\install_crc32c</CRC_DIR>
+    <CRC_INC>$(CRC_DIR)\$(Configuration)\include</CRC_INC>
+    <CRC_BIN>$(CRC_DIR)\$(Configuration)\bin</CRC_BIN>
+    <CRC_LIB>$(CRC_DIR)\$(Configuration)\lib</CRC_LIB>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -17,7 +18,7 @@
     <PostBuildEvent>
       <Command></Command>
     </PostBuildEvent>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="CRC_DIR">
       <Value>$(CRC_DIR)</Value>
@@ -27,6 +28,9 @@
     </BuildMacro>
     <BuildMacro Include="CRC_LIB">
       <Value>$(CRC_LIB)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CRC_BIN">
+      <Value>$(CRC_BIN)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

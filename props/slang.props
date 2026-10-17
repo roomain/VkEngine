@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <SLANG_DIR>$(SolutionDir)thirdparty\install_slang</SLANG_DIR>
-    <SLANG_INC>$(SLANG_DIR)\include</SLANG_INC>
-    <SLANG_LIB>$(SLANG_DIR)\lib\$(Configuration)</SLANG_LIB>
-    <SLANG_BIN>$(SLANG_DIR)\bin\$(Configuration)</SLANG_BIN>
+    <SLANG_DIR>$(SolutionDir)thirdparty\sources\install_slang</SLANG_DIR>
+    <SLANG_INC>$(SLANG_DIR)\$(Configuration)\include</SLANG_INC>
+    <SLANG_LIB>$(SLANG_DIR)\$(Configuration)\lib</SLANG_LIB>
+    <SLANG_BIN>$(SLANG_DIR)\$(Configuration)\bin</SLANG_BIN>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

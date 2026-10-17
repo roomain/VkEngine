@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />  
   <PropertyGroup Label="UserMacros">
-    <GLSLANG_DIR>$(SolutionDir)thirdparty\glslang</GLSLANG_DIR>
-    <GLSLANG_INC>$(GLSLANG_DIR)\include</GLSLANG_INC>
-    <GLSLANG_LIB>$(GLSLANG_DIR)\lib\$(Configuration)</GLSLANG_LIB>
-    <GLSLANG_BIN>$(GLSLANG_DIR)\bin\$(Configuration)</GLSLANG_BIN>
+    <GLSLANG_DIR>$(SolutionDir)thirdparty\sources\install_glslang</GLSLANG_DIR>
+    <GLSLANG_INC>$(GLSLANG_DIR)\$(Configuration)\include</GLSLANG_INC>
+    <GLSLANG_LIB>$(GLSLANG_DIR)\$(Configuration)\lib</GLSLANG_LIB>
+    <GLSLANG_BIN>$(GLSLANG_DIR)\$(Configuration)\bin</GLSLANG_BIN>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -13,8 +13,8 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(GLSLANG_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">glslangd.lib;SPIRVd.lib;SPIRV-Toolsd.lib;SPIRV-Toolsd.lib;SPIRV-Tools-diffd.lib;SPIRV-Tools-linkd.lib;SPIRV-Tools-lintd.lib;SPIRV-Tools-optd.lib;SPIRV-Tools-reduced.lib;SPIRV-Tools-sharedd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">glslang.lib;SPIRV.lib;SPIRV-Tools.lib;SPIRV-Tools.lib;SPIRV-Tools-diff.lib;SPIRV-Tools-link.lib;SPIRV-Tools-lint.lib;SPIRV-Tools-opt.lib;SPIRV-Tools-reduce.lib;SPIRV-Tools-shared.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Debug'">glslangd.lib;glslang-default-resource-limitsd.lib;SPIRVd.lib;SPIRV-Toolsd.lib;SPIRV-Toolsd.lib;SPIRV-Tools-diffd.lib;SPIRV-Tools-linkd.lib;SPIRV-Tools-lintd.lib;SPIRV-Tools-optd.lib;SPIRV-Tools-reduced.lib;SPIRV-Tools-sharedd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)' == 'Release'">glslang.lib;glslang-default-resource-limits.lib;SPIRV.lib;SPIRV-Tools.lib;SPIRV-Tools.lib;SPIRV-Tools-diff.lib;SPIRV-Tools-link.lib;SPIRV-Tools-lint.lib;SPIRV-Tools-opt.lib;SPIRV-Tools-reduce.lib;SPIRV-Tools-shared.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command></Command>
