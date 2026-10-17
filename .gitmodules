@@ -4,3 +4,21 @@
 [submodule "thirdparty/imgui"]
 	path = thirdparty/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "thirdparty/sources/slang"]
+	path = thirdparty/sources/slang
+	url = https://github.com/shader-slang/slang.git
+[submodule "thirdparty/sources/crc32c"]
+	path = thirdparty/sources/crc32c
+	url = https://github.com/google/crc32c.git
+[submodule "thirdparty/sources/asyncplusplus"]
+	path = thirdparty/sources/asyncplusplus
+	url = https://github.com/Amanieu/asyncplusplus.git
+[submodule "thirdparty/sources/glslang"]
+	path = thirdparty/sources/glslang
+	url = https://github.com/KhronosGroup/glslang.git
+[submodule "thirdparty/sources/libbson"]
+	path = thirdparty/sources/libbson
+	url = https://github.com/mongodb/libbson.git
+[submodule "thirdparty/sources/glm"]
+	path = thirdparty/sources/glm
+	url = https://github.com/g-truc/glm.git
