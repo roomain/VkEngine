@@ -350,6 +350,7 @@ Win32/
 thirdparty/build/
 thirdparty/install/
 thirdparty/VS2026/
+thirdparty/sources/install_*
 
 #cpp check
 vkEngineCheck-cppcheck-build-dir/
