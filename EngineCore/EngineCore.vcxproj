@@ -87,7 +87,6 @@
     <Import Project="..\props\asyncplusplus.props" />
     <Import Project="..\props\VMA.props" />
     <Import Project="..\props\crc32c.props" />
-    <Import Project="..\props\libbson.props" />
     <Import Project="..\props\rtti.props" />
     <Import Project="..\props\engineResource.props" />
   </ImportGroup>

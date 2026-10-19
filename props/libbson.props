@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <LIBSON_DIR>$(SolutionDir)thirdparty\install_libbson</LIBSON_DIR>
+    <LIBSON_DIR>$(SolutionDir)thirdparty\sources\install_libbson</LIBSON_DIR>
     <LIBSON_INC>$(LIBSON_DIR)\include</LIBSON_INC>
-    <LIBSON_LIB>$(LIBSON_DIR)\lib\$(Configuration)</LIBSON_LIB>
-    <LIBSON_BIN>$(LIBSON_DIR)\bin\$(Configuration)</LIBSON_BIN>
+    <LIBSON_LIB>$(LIBSON_DIR)\$(Configuration)\lib</LIBSON_LIB>
+    <LIBSON_BIN>$(LIBSON_DIR)\$(Configuration)\bin</LIBSON_BIN>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

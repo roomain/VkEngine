@@ -2,9 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <GLM_DIR>$(SolutionDir)thirdparty\install_glm</GLM_DIR>
-    <GLM_INC>$(GLM_DIR)\include</GLM_INC>
-    <GLM_LIB>$(GLM_DIR)\lib\$(Configuration)</GLM_LIB>
+    <GLM_DIR>$(SolutionDir)thirdparty\sources\install_GLM</GLM_DIR>
+    <GLM_INC>$(GLM_DIR)\$(Configuration)\include</GLM_INC>
+    <GLM_LIB>$(GLM_DIR)\$(Configuration)\lib</GLM_LIB>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>

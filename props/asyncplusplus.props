@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <ASYNC_DIR>$(SolutionDir)thirdparty\install_asyncplusplus</ASYNC_DIR>
+    <ASYNC_DIR>$(SolutionDir)thirdparty\sources\install_asyncplusplus</ASYNC_DIR>
     <ASYNC_INC>$(ASYNC_DIR)\include</ASYNC_INC>
-    <ASYNC_LIB>$(ASYNC_DIR)\lib\$(Configuration)</ASYNC_LIB>
-    <ASYNC_BIN>$(ASYNC_DIR)\bin\$(Configuration)</ASYNC_BIN>
+    <ASYNC_LIB>$(ASYNC_DIR)\$(Configuration)\lib</ASYNC_LIB>
+    <ASYNC_BIN>$(ASYNC_DIR)\$(Configuration)\bin</ASYNC_BIN>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
