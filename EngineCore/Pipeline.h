@@ -16,6 +16,12 @@ class ShaderDatabase;
 #pragma warning(push)
 #pragma warning( disable : 4251 )
 
+struct ShaderInfo
+{
+	VkShaderStageFlagBits shderType;
+	VkShaderModule shaderModule;
+};
+
 /*@brief base  class of vulkan pipeline encapsulation*/
 class ENGINECORE_EXPORT Pipeline
 {

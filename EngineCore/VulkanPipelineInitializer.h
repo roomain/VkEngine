@@ -129,13 +129,13 @@ constexpr [[nodiscard]] VkPipelineDynamicStateCreateInfo createPipeline(
 
 template<typename StageContainer>
 constexpr [[nodiscard]] VkGraphicsPipelineCreateInfo createGraphicPipeline(
-	const VkPipelineCreateFlags a_flags,
-	const StageContainer& a_stages)
+	const StageContainer& a_stages,
+	const VkPipelineCreateFlags a_flags = 0)
 {
 	return VkGraphicsPipelineCreateInfo {
 		.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
 		.pNext = nullptr,
-		.flags = a_flags;
+		.flags = a_flags,
 		.stageCount = static_cast<uint32_t>(a_stages.size()),
 		.pStages = a_stages.data(),
 		.pVertexInputState = nullptr,

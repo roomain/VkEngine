@@ -15,6 +15,7 @@
 #include "VkEnumToString.h"
 #include "VulkanInitializers.h"
 #include "VulkanShaderInitializers.h"
+#include "VulkanPipelineInitializer.h"
 #include "VulkanBufferInitializers.h"
 #include "Log.h"
 #include "Exceptions.h"
