@@ -3,9 +3,11 @@
 #include <algorithm>
 #include "ShaderDatabase.h"
 #include "ResourceChecker.h"
+#include "spirv_reflect.h"
 #include "ShaderResourceCompiler.h"
 #include "ResourceFile.h"
 #include "Device.h"
+#include "enumerate.h"
 
 const std::vector<std::string> g_shaderExt = {
 				".slang",
@@ -18,6 +20,34 @@ const std::vector<std::string> g_shaderExt = {
 				".task",
 				".mesh"
 		};
+
+void inspectSpirV(const std::string& a_shaderName, const Binary& a_shaderCode)
+{
+	SpvReflectShaderModule reflectModule;
+	SpvReflectResult result = spvReflectCreateShaderModule(
+		a_shaderCode.size(), a_shaderCode.data(), &reflectModule);
+
+	if (result != SPV_REFLECT_RESULT_SUCCESS)
+	{
+		Log::warning("Can't reflect shader {}", a_shaderName);
+	}
+	else
+	{
+		std::vector<SpvReflectDescriptorBinding*> bindingReflect;// (bindCount);
+		if (SPV_REFLECT_RESULT_SUCCESS != enumerateEx(&spvReflectEnumerateDescriptorBindings, bindingReflect, SPV_REFLECT_RESULT_SUCCESS, &reflectModule))
+		{
+			Log::warning("Can't reflect shader bindings {}", a_shaderName);
+		}
+		
+		for (auto pBindingReflect : bindingReflect)
+		{
+			// todo
+		}
+	}
+
+
+	spvReflectDestroyShaderModule(&reflectModule);
+}
 
 ShaderDatabase::ShaderDatabase(const std::string& a_resourceFilename, std::shared_ptr<Device>& a_device, const std::string& a_shaderpath) : m_device{ a_device },
 	m_shadersDirectory{ a_shaderpath }
