@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <SPIRV_REFLECT>$(SolutionDir)thirdparty\sources\install_slang</SPIRV_REFLECT>
+    <SPIRV_REFLECT_INC>$(SPIRV_REFLECT)\$(Configuration)\include</SPIRV_REFLECT_INC>
+    <SPIRV_REFLECT_LIB>$(SPIRV_REFLECT)\$(Configuration)\lib</SPIRV_REFLECT_LIB>
+    <SPIRV_REFLECT_BIN>$(SPIRV_REFLECT)\$(Configuration)\bin</SPIRV_REFLECT_BIN>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SPIRV_REFLECT_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SPIRV_REFLECT_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>spirv-reflect.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>     
+  </ItemDefinitionGroup>
+  <Target Name="CopySlangDll" AfterTargets="Build">
+    <Copy SourceFiles="$(SPIRV_REFLECT_BIN)\spirv-reflect.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+  <ItemGroup>
+    <BuildMacro Include="SPIRV_REFLECT">
+      <Value>$(SPIRV_REFLECT)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SPIRV_REFLECT_INC">
+      <Value>$(SPIRV_REFLECT_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SPIRV_REFLECT_LIB">
+      <Value>$(SPIRV_REFLECT_LIB)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SPIRV_REFLECT_BIN">
+      <Value>$(SPIRV_REFLECT_BIN)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

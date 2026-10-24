@@ -13,6 +13,6 @@ class ENGINECORE_EXPORT StaticMeshPipeline : public Pipeline
 {
 public:
 	StaticMeshPipeline() = delete;
-	explicit StaticMeshPipeline(const std::string& a_name, std::weak_ptr<Device> a_device, const std::vector<ShaderInfo>& a_shaders);
+	explicit StaticMeshPipeline(const std::string& a_name, const std::weak_ptr<Device>& a_device, const std::vector<ShaderInfo>& a_shaders);
 	~StaticMeshPipeline()final = default;
 };

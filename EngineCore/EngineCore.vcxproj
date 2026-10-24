@@ -89,6 +89,7 @@
     <Import Project="..\props\crc32c.props" />
     <Import Project="..\props\rtti.props" />
     <Import Project="..\props\engineResource.props" />
+    <Import Project="..\props\spirv_reflect.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -103,6 +104,7 @@
     <Import Project="..\props\libbson.props" />
     <Import Project="..\props\rtti.props" />
     <Import Project="..\props\engineResource.props" />
+    <Import Project="..\props\spirv_reflect.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

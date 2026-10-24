@@ -18,3 +18,7 @@ START cmd /c cmake_bat.bat ./libbson release libbson "-DCMAKE_POLICY_VERSION_MIN
 
 START cmd /c cmake_bat.bat ./slang debug slang "-DBUILD_EXAMPLE=OFF" "-DENABLE_HLSL=OFF"
 START cmd /c cmake_bat.bat ./slang release slang "-DBUILD_EXAMPLE=OFF" "-DENABLE_HLSL=OFF"
+
+
+START cmd /c cmake_bat.bat ./SPIRV-Reflect debug sprivReflect "-DSPIRV_REFLECT_SHARED_LIB=ON"
+START cmd /c cmake_bat.bat ./SPIRV-Reflect release sprivReflect "-DSPIRV_REFLECT_SHARED_LIB=ON"

@@ -2,7 +2,7 @@
 #include "Device.h"
 #include "Pipeline.h"
 
-Pipeline::Pipeline(const std::string& a_name, std::weak_ptr<Device> a_device) : 
+Pipeline::Pipeline(const std::string& a_name, const std::weak_ptr<Device>& a_device) : 
 	m_pipelineName{ a_name }, m_device { a_device }
 {
 	// todo 

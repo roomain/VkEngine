@@ -2,7 +2,7 @@
 #include "StaticMeshPipeline.h"
 #include "Device.h"
 
-StaticMeshPipeline::StaticMeshPipeline(const std::string& a_name, std::weak_ptr<Device> a_device, const std::vector<ShaderInfo>& a_shaders) : Pipeline(a_name, a_device)
+StaticMeshPipeline::StaticMeshPipeline(const std::string& a_name, const std::weak_ptr<Device>& a_device, const std::vector<ShaderInfo>& a_shaders) : Pipeline(a_name, a_device)
 {
 	if (auto pDevice = m_device.lock())
 	{
