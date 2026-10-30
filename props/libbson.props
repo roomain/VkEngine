@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <LIBSON_DIR>$(SolutionDir)thirdparty\sources\install_libbson</LIBSON_DIR>
-    <LIBSON_INC>$(LIBSON_DIR)\include</LIBSON_INC>
+    <LIBSON_INC>$(LIBSON_DIR)\$(Configuration)\include</LIBSON_INC>
     <LIBSON_LIB>$(LIBSON_DIR)\$(Configuration)\lib</LIBSON_LIB>
     <LIBSON_BIN>$(LIBSON_DIR)\$(Configuration)\bin</LIBSON_BIN>
   </PropertyGroup>

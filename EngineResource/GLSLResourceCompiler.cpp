@@ -38,18 +38,18 @@ bool GLSLResourceCompiler::isFileAvailable(const std::string& a_filename)
 
 GLSLResourceCompiler::GLSLResourceCompiler() : Compiler{ }
 {
-	m_bIsInittialized = glslang::InitializeProcess();
+	m_bIsInitialized = glslang::InitializeProcess();
 }
 
 GLSLResourceCompiler::~GLSLResourceCompiler()
 {
-	if(m_bIsInittialized)
+	if(m_bIsInitialized)
 		glslang::FinalizeProcess();
 }
 
 std::expected<Binary, CompilerError> GLSLResourceCompiler::compile(const std::string& a_filename)
 {
-	if (!m_bIsInittialized)
+	if (!m_bIsInitialized)
 		return std::unexpected(CompilerError{ CompilerError::Type::InitError,  "GLSLANG not initialized" });
 
 	std::ifstream file(a_filename, std::ios::ate);
@@ -61,9 +61,27 @@ std::expected<Binary, CompilerError> GLSLResourceCompiler::compile(const std::st
 	std::vector<char> code(fileSize);
 	file.read(code.data(), fileSize);
 
-	glslang::TShader shader(EShLangVertex);
+	const auto glslType = static_cast<EShLanguage>(getShaderTypeFromFile(a_filename));
+	glslang::TShader shader(glslType);
 	const char* src = code.data();
 	shader.setStrings(&src, 1);
+
+	shader.setEnvInput(
+		glslang::EShSourceGlsl,
+		glslType,
+		glslang::EShClientVulkan,
+		450
+	);
+
+	shader.setEnvClient(
+		glslang::EShClientVulkan,
+		glslang::EShTargetVulkan_1_2
+	);
+
+	shader.setEnvTarget(
+		glslang::EShTargetSpv,
+		glslang::EShTargetSpv_1_5
+	);
 
 	// Options GLSL → SPIR-V
 	const auto msgTypes = static_cast<EShMessages>(EShMsgSpvRules | EShMsgVulkanRules);
@@ -93,9 +111,12 @@ std::expected<Binary, CompilerError> GLSLResourceCompiler::compile(const std::st
 	};
 	
 	spv::SpvBuildLogger logger;
-	const auto glslType = static_cast<EShLanguage>(getShaderTypeFromFile(a_filename));
+	auto intermediate = program.getIntermediate(glslType);
+	if (intermediate == nullptr)
+		return std::unexpected(CompilerError{ CompilerError::Type::SpirvGen, "No intermediate" });
+
 	glslang::GlslangToSpv(
-		*program.getIntermediate(glslType),
+		*intermediate,
 		spirv,
 		&logger,
 		&spvOptions

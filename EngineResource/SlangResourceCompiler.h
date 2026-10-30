@@ -23,7 +23,6 @@ public:
 	virtual ~SlangResourceCompiler();
 	NOT_COPIABLE(SlangResourceCompiler)
 	NOT_MOVABLE(SlangResourceCompiler)
-
-		std::expected<Binary, CompilerError> compile(const std::string& a_filename) override;
+	std::expected<Binary, CompilerError> compile(const std::string& a_filename) override;
 };
 

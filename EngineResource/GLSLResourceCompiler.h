@@ -9,7 +9,7 @@
 class GLSLResourceCompiler : public Compiler
 {
 private:
-	bool m_bIsInittialized = false;
+	bool m_bIsInitialized = false;
 	static int getShaderTypeFromFile(const std::string& a_filename);
 
 public:

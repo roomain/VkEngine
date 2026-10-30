@@ -3,7 +3,11 @@
 #include "SlangResourceCompiler.h"
 
 /* ne declared default due for forward declare => must be in cpp*/
-ShaderResourceCompiler::ShaderResourceCompiler() {}
+ShaderResourceCompiler::ShaderResourceCompiler() :
+	m_pGlslCompiler{ std::make_unique<GLSLResourceCompiler>() },
+	m_pSlangCompiler{ std::make_unique<SlangResourceCompiler>() }
+{}
+
 ShaderResourceCompiler::~ShaderResourceCompiler() {}
 
 std::expected<Binary, CompilerError> ShaderResourceCompiler::compile(const std::string& a_filename)

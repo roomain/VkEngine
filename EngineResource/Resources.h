@@ -75,7 +75,12 @@ public:
     const_binaryIterator binaryBegin()const;
     const_binaryIterator binaryEnd()const;
     const Binary& binaryAt(const std::string& a_binaryName);
-
+    template<typename Type>
+    void foreachBinary(Type& a_func)const
+    {
+        for (const auto& [name, binary] : m_binaryMap)
+            a_func(name, binary);
+    }
     virtual void clear();
 
     using iterator = HeaderList::iterator;
