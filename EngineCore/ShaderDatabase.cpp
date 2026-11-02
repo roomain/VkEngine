@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "ShaderDatabase.h"
 #include "ResourceChecker.h"
-#include "spirv_reflect.h"
+#include "Shader.h"
 #include "ShaderResourceCompiler.h"
 #include "ResourceFile.h"
 #include "Device.h"
@@ -22,6 +22,30 @@ const std::vector<std::string> g_shaderExt = {
 		};
 
 
+VkShaderStageFlags shaderTypeFromExtension(const std::string_view a_shaderName)
+{
+	VkShaderStageFlags flag = 0;
+	if (a_shaderName.contains(".vert"))
+		flag |= VK_SHADER_STAGE_VERTEX_BIT;
+	if (a_shaderName.contains(".tesc"))
+		flag |= VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT;
+	if (a_shaderName.contains(".tese"))
+		flag |= VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT;
+	if (a_shaderName.contains(".geom"))
+		flag |= VK_SHADER_STAGE_GEOMETRY_BIT;
+	if (a_shaderName.contains(".frag"))
+		flag |= VK_SHADER_STAGE_FRAGMENT_BIT;
+	if (a_shaderName.contains(".comp"))
+		flag |= VK_SHADER_STAGE_COMPUTE_BIT;
+	if (a_shaderName.contains(".task"))
+		flag |= VK_SHADER_STAGE_TASK_BIT_EXT;
+	if (a_shaderName.contains(".mesh"))
+		flag |= VK_SHADER_STAGE_MESH_BIT_EXT;
+
+	return flag;
+}
+
+
 ShaderDatabase::ShaderDatabase(const std::string& a_resourceFilename, std::shared_ptr<Device>& a_device, const std::string& a_shaderpath) : m_device{ a_device },
 	m_shadersDirectory{ a_shaderpath }
 {
@@ -29,7 +53,7 @@ ShaderDatabase::ShaderDatabase(const std::string& a_resourceFilename, std::share
 	std::replace(m_shadersDirectory.begin(), m_shadersDirectory.end(), '/', '\\');
 	if (a_device)
 	{
-		CheckerParameters checkerParam{
+		const CheckerParameters checkerParam{
 			.callbacks {
 				.logCallback = [](const std::string& a_log) { Log::error("{}", a_log); },
 				.rangeCallback = nullptr,
@@ -41,13 +65,7 @@ ShaderDatabase::ShaderDatabase(const std::string& a_resourceFilename, std::share
 		file.loadAllFile(a_resourceFilename);
 		ResourceChecker checker(checkerParam, a_shaderpath);
 		for (auto iter = file.binaryBegin(); iter != file.binaryEnd(); iter++)
-		{
-			auto moduleCreateInfo = initShaderModuleCreateInfo(iter->second);
-			VkShaderModule shaderModule = VK_NULL_HANDLE;
-			VK_CHECK_LOG(vkCreateShaderModule(a_device->deviceContext().vkDevice, &moduleCreateInfo, nullptr, &shaderModule))
-			if (shaderModule != VK_NULL_HANDLE)
-				m_database.emplace(iter->first, shaderModule);
-		}
+			m_database.emplace(iter->first, std::make_shared<Shader>(iter->first, a_device->deviceContext().vkDevice, shaderTypeFromExtension(iter->first), iter->second));
 
 		if (file.modified())
 			file.save();
@@ -56,11 +74,7 @@ ShaderDatabase::ShaderDatabase(const std::string& a_resourceFilename, std::share
 
 ShaderDatabase::~ShaderDatabase()
 {
-	if (auto pDevice = m_device.lock())
-	{
-		for (auto& [name, shaderModule] : m_database)
-			vkDestroyShaderModule(pDevice->deviceContext().vkDevice, shaderModule, nullptr);
-	}
+	//
 }
 
 bool ShaderDatabase::addShaders(const std::vector<std::string>& a_files)
@@ -81,15 +95,10 @@ bool ShaderDatabase::addShader(const std::string& a_file)
 		auto expectedBin = m_compiler->compile(a_file);
 		if (expectedBin.has_value())
 		{
-			auto moduleCreateInfo = initShaderModuleCreateInfo(expectedBin.value());
-			VkShaderModule shaderModule = VK_NULL_HANDLE;
-			VK_CHECK_LOG(vkCreateShaderModule(pDevice->deviceContext().vkDevice, &moduleCreateInfo, nullptr, &shaderModule))
-			if (shaderModule != VK_NULL_HANDLE && m_database.try_emplace(std::filesystem::path(a_file).filename().string(), shaderModule).second)
-			{
-				// 2 copy if not present in shader path
-				// to test no overwrite
-				return std::filesystem::copy_file(std::filesystem::path(a_file), std::filesystem::path(m_shadersDirectory));
-			}
+			auto file = std::filesystem::path(a_file).filename().string();
+			m_database.emplace(file, std::make_shared<Shader>(file, pDevice->deviceContext().vkDevice, shaderTypeFromExtension(file), expectedBin.value()));
+			// to test no overwrite
+			return std::filesystem::copy_file(std::filesystem::path(a_file), std::filesystem::path(m_shadersDirectory));
 		}
 	}
 	return false;

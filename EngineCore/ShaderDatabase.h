@@ -13,6 +13,9 @@
 
 class Device;
 class ShaderResourceCompiler;
+class Shader;
+
+using ShaderPtr = std::shared_ptr<Shader>;
 
 #pragma warning(push)
 #pragma warning( disable : 4251 )
@@ -23,14 +26,14 @@ public:
 	ShaderDatabase(const std::string& a_resourceFilename, std::shared_ptr<Device>& a_device, const std::string& a_shaderpath);
 	ShaderDatabase() = delete;
 	virtual ~ShaderDatabase();
-	[[nodiscard]] inline VkShaderModule operator[] (const std::string& a_name) { return m_database[a_name]; }
+	[[nodiscard]] inline ShaderPtr operator[] (const std::string& a_name) { return m_database[a_name]; }
 	bool addShaders(const std::vector<std::string>& a_files);
 	bool addShader(const std::string& a_file);
 
 private:
 	std::string m_shadersDirectory;								/*<! shader directory*/
 	std::weak_ptr<Device> m_device;								/*!< device*/
-	std::unordered_map<std::string, VkShaderModule> m_database;	/*!< module database*/
+	std::unordered_map<std::string, ShaderPtr> m_database;		/*!< shader database*/
 	std::unique_ptr<ShaderResourceCompiler> m_compiler;			/*!< must be declare after destructor for forward declare*/
 };
 #pragma warning(pop)
