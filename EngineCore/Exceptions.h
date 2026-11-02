@@ -53,8 +53,18 @@ public:
     ~ManageException()override = default;
 };
 
+class ENGINECORE_EXPORT ShaderException : public Exception
+{
+public:
+    ShaderException() = delete;
+    explicit ShaderException(const std::source_location a_location, const std::string& a_shaderName, const char* a_what);
+    ~ShaderException()override = default;
+};
+
 #define VK_CHECK_EXCEPT(vkCall) \
 if (const VkResult result = vkCall; result != VK_SUCCESS) \
 	throw VulkanException(std::source_location::current(), (#vkCall##": " + to_string(result)).c_str());
+
+#define SHADER_EXCEPT(name, message) throw ShaderException(std::source_location::current(), name, message);
 
 #pragma warning(pop)

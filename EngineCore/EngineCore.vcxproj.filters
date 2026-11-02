@@ -264,6 +264,9 @@
     <ClInclude Include="StaticMeshPipeline.h">
       <Filter>Fichiers d%27en-tête\Pipeline</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Fichiers d%27en-tête\shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -349,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="StaticMeshPipeline.cpp">
       <Filter>Fichiers sources\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Fichiers sources\shader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

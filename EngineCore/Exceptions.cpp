@@ -18,3 +18,9 @@ ManageException::ManageException(const std::source_location a_location, const ch
 {
 	//
 }
+
+ShaderException::ShaderException(const std::source_location a_location, const std::string& a_shaderName,  const char* a_what) :
+	Exception{ a_location, std::format("{} {}",a_what, a_shaderName).c_str()}
+{
+	//
+}
