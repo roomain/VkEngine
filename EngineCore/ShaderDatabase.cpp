@@ -46,8 +46,8 @@ VkShaderStageFlags shaderTypeFromExtension(const std::string_view a_shaderName)
 }
 
 
-ShaderDatabase::ShaderDatabase(const std::string& a_resourceFilename, std::shared_ptr<Device>& a_device, const std::string& a_shaderpath) : m_device{ a_device },
-	m_shadersDirectory{ a_shaderpath }
+ShaderDatabase::ShaderDatabase(const std::string& a_resourceFilename, const std::shared_ptr<Device>& a_device, const std::string& a_shaderpath) :
+	m_shadersDirectory{ a_shaderpath }, m_device{ a_device }
 {
 	m_compiler = std::make_unique<ShaderResourceCompiler>();
 	std::replace(m_shadersDirectory.begin(), m_shadersDirectory.end(), '/', '\\');
@@ -65,7 +65,7 @@ ShaderDatabase::ShaderDatabase(const std::string& a_resourceFilename, std::share
 		file.loadAllFile(a_resourceFilename);
 		ResourceChecker checker(checkerParam, a_shaderpath);
 		for (auto iter = file.binaryBegin(); iter != file.binaryEnd(); iter++)
-			m_database.emplace(iter->first, std::make_shared<Shader>(iter->first, a_device->deviceContext().vkDevice, shaderTypeFromExtension(iter->first), iter->second));
+			m_database.try_emplace(iter->first, std::make_shared<Shader>(iter->first, a_device->deviceContext().vkDevice, shaderTypeFromExtension(iter->first), iter->second));
 
 		if (file.modified())
 			file.save();
@@ -96,7 +96,7 @@ bool ShaderDatabase::addShader(const std::string& a_file)
 		if (expectedBin.has_value())
 		{
 			auto file = std::filesystem::path(a_file).filename().string();
-			m_database.emplace(file, std::make_shared<Shader>(file, pDevice->deviceContext().vkDevice, shaderTypeFromExtension(file), expectedBin.value()));
+			m_database.try_emplace(file, std::make_shared<Shader>(file, pDevice->deviceContext().vkDevice, shaderTypeFromExtension(file), expectedBin.value()));
 			// to test no overwrite
 			return std::filesystem::copy_file(std::filesystem::path(a_file), std::filesystem::path(m_shadersDirectory));
 		}

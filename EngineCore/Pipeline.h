@@ -9,10 +9,10 @@
 #include <vulkan/vulkan.hpp>
 #include "enginecore_globals.h"
 
-class Device;
 class ShaderDatabase;
+class Shader;
 
-
+using ShaderPtr = std::shared_ptr<Shader>;
 #pragma warning(push)
 #pragma warning( disable : 4251 )
 
@@ -27,12 +27,12 @@ class ENGINECORE_EXPORT Pipeline
 {
 protected:
 	std::string m_pipelineName;
-	std::weak_ptr<Device> m_device;
+	VkDevice m_device;
 	VkPipeline m_pipeline{ VK_NULL_HANDLE };
 
 public:
 	Pipeline() = delete;
-	explicit Pipeline(const std::string& a_name, const std::weak_ptr<Device>& a_device);
+	explicit Pipeline(const std::string& a_name, const std::vector<ShaderPtr>& a_shaders);
 	virtual ~Pipeline();
 	virtual void setup(ShaderDatabase& a_database) = 0;
 	constexpr VkPipeline pipeline()const { return m_pipeline; }

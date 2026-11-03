@@ -31,9 +31,10 @@ public:
 	explicit Shader(const std::string& a_name, const VkDevice a_device, const VkShaderStageFlags a_flags, const Binary& a_shader);
 	~Shader();
 	NOT_COPIABLE(Shader)
-	constexpr VkShaderStageFlagBits type()const noexcept { return m_shaderType; }
-	constexpr VkShaderModule shaderModule()const noexcept { return m_shaderModule; }
-	inline const std::vector<VkDescriptorSetLayoutBinding>& layoutBindings()const noexcept { return m_layoutBindings; }
-	inline const std::vector<VkVertexInputAttributeDescription>& inputDesc()const noexcept { return m_inputDesc; }
+	constexpr [[nodiscard]] VkDevice device();
+	constexpr [[nodiscard]] VkShaderStageFlagBits type()const noexcept { return m_shaderType; }
+	constexpr [[nodiscard]] VkShaderModule shaderModule()const noexcept { return m_shaderModule; }
+	inline [[nodiscard]] const std::vector<VkDescriptorSetLayoutBinding>& layoutBindings()const noexcept { return m_layoutBindings; }
+	inline [[nodiscard]] const std::vector<VkVertexInputAttributeDescription>& inputDesc()const noexcept { return m_inputDesc; }
 };
 #pragma warning(pop)

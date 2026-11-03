@@ -1,17 +1,25 @@
 #include "pch.h"
-#include "Device.h"
+#include "Shader.h"
 #include "Pipeline.h"
 
-Pipeline::Pipeline(const std::string& a_name, const std::weak_ptr<Device>& a_device) : 
-	m_pipelineName{ a_name }, m_device { a_device }
+Pipeline::Pipeline(const std::string& a_name, const std::vector<ShaderPtr>& a_shaders) :
+	m_pipelineName{ a_name }
 {
-	// todo 
+	if (!a_shaders.empty())
+	{
+		//VkPipelineLayoutCreateInfo pipelineLayoutCreateInfo;
+		m_device = a_shaders[0]->device();
+		for (const auto& pShader : a_shaders)
+		{
+			//
+		}
+	}
 }
 
 Pipeline::~Pipeline()
 {
-	if (auto device = m_device.lock(); device && m_pipeline != VK_NULL_HANDLE)
-		vkDestroyPipeline(device->deviceContext().vkDevice, m_pipeline, nullptr);
+	if (m_pipeline != VK_NULL_HANDLE)
+		vkDestroyPipeline(m_device, m_pipeline, nullptr);
 }
 
 const std::string& Pipeline::name()const

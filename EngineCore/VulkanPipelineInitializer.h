@@ -6,6 +6,31 @@
 ************************************************/
 #include <vulkan/vulkan.hpp>
 
+template<typename DescSetLayoutContainer>
+constexpr [[nodiscard]] VkPipelineLayoutCreateInfo createPipelineLayoutInfo(const DescSetLayoutContainer& a_descSets)
+{
+	return VkPipelineLayoutCreateInfo{
+		.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
+		.pNext = nullptr,
+		.setLayoutCount = static_cast<uint32_t>(a_descSets.size()),
+		.pSetLayouts = a_descSets.data()
+	};
+}
+
+template<typename DescSetLayoutContainer, typename PushConstContainer>
+constexpr [[nodiscard]] VkPipelineLayoutCreateInfo createPipelineLayoutInfo(const DescSetLayoutContainer& a_descSets,
+	const PushConstContainer& a_pushConst)
+{
+	return VkPipelineLayoutCreateInfo{
+		.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
+		.pNext = nullptr,
+		.setLayoutCount = static_cast<uint32_t>(a_descSets.size()),
+		.pSetLayouts = a_descSets.data(),
+		.pushConstantRangeCount = static_cast<uint32_t>(a_pushConst.size()),
+		.pPushConstantRanges = a_pushConst.data()
+	};
+}
+
 constexpr [[nodiscard]] VkPipelineVertexInputStateCreateInfo createPipelineVertexInputState()
 {
 	return VkPipelineVertexInputStateCreateInfo{

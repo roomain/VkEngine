@@ -23,7 +23,7 @@ class ENGINECORE_EXPORT ShaderDatabase
 {
 
 public:
-	ShaderDatabase(const std::string& a_resourceFilename, std::shared_ptr<Device>& a_device, const std::string& a_shaderpath);
+	ShaderDatabase(const std::string& a_resourceFilename, const std::shared_ptr<Device>& a_device, const std::string& a_shaderpath);
 	ShaderDatabase() = delete;
 	virtual ~ShaderDatabase();
 	[[nodiscard]] inline ShaderPtr operator[] (const std::string& a_name) { return m_database[a_name]; }
